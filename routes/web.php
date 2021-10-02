@@ -1,7 +1,9 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostulateController;
+use App\Http\Controllers\EnterpriseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +23,4 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('postular', PostulateController::class);
+Route::resource('empresa', EnterpriseController::class);

@@ -38,7 +38,7 @@
                          <a class="nav-link" href="{{ route('login') }}">{{ __('Empresas') }}</a>
                     </li>    
                     <li class="nav-item">
-                         <a class="nav-link" href="{{ route('postular.create') }}">{{ __('Postularse') }}</a>
+                         <a class="nav-link" href="{{ route('empresa.create') }}">{{ __('Postularse') }}</a>
                     </li> 
                     </ul>
 

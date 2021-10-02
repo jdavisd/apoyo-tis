@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Postulate;
+use App\Models\ProjectEnterprise;
 use Illuminate\Http\Request;
 
-class PostulateController extends Controller
+class ProjectEnterpriseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,6 @@ class PostulateController extends Controller
     public function index()
     {
         //
-        //return "hola";
-        return view('postular.index');
     }
 
     /**
@@ -27,7 +25,6 @@ class PostulateController extends Controller
     public function create()
     {
         //
-        return view('postular.create');
     }
 
     /**
@@ -39,18 +36,15 @@ class PostulateController extends Controller
     public function store(Request $request)
     {
         //
-        $request=Postulate::create($request->all());
-        //$request=Postulate::create($request->all());
-        return $request->all();
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Postulate  $postulate
+     * @param  \App\Models\ProjectEnterprise  $projectEnterprise
      * @return \Illuminate\Http\Response
      */
-    public function show(Postulate $postulate)
+    public function show(ProjectEnterprise $projectEnterprise)
     {
         //
     }
@@ -58,10 +52,10 @@ class PostulateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Postulate  $postulate
+     * @param  \App\Models\ProjectEnterprise  $projectEnterprise
      * @return \Illuminate\Http\Response
      */
-    public function edit(Postulate $postulate)
+    public function edit(ProjectEnterprise $projectEnterprise)
     {
         //
     }
@@ -70,10 +64,10 @@ class PostulateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Postulate  $postulate
+     * @param  \App\Models\ProjectEnterprise  $projectEnterprise
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Postulate $postulate)
+    public function update(Request $request, ProjectEnterprise $projectEnterprise)
     {
         //
     }
@@ -81,10 +75,10 @@ class PostulateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Postulate  $postulate
+     * @param  \App\Models\ProjectEnterprise  $projectEnterprise
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Postulate $postulate)
+    public function destroy(ProjectEnterprise $projectEnterprise)
     {
         //
     }
