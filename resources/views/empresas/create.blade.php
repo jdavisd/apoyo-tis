@@ -10,7 +10,7 @@
     ">
 <h4>Postular</h4>
 
-<form method="POST" action="{{route('postular.store')}}">
+<form method="POST" action="{{route('empresa.store')}}">
     @csrf
     <div class="mb-3">
       <label for="" class="form-label">Nombre Corto</label>
