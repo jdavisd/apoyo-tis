@@ -16,15 +16,16 @@
     <div class="mb-3">
       <label for="" class="form-label">Nombre Corto</label>
       <input type="text"
-        class="form-control" name="name" id="" aria-describedby="helpId" placeholder="">
+        class="form-control" name="short_name" id="" aria-describedby="helpId" placeholder="">
      
     </div>
     <div class="mb-3">
       <label for="" class="form-label">Proyecto</label>
       <input type="text"
-        class="form-control" name="proyects" id="" >
+        class="form-control" name="logo" id="" >
    
     </div>
+    <!--
     <div class="mb-3">
       <label for="" class="form-label">Consultor</label>
       <select class="form-control" name="adviser" id="">
@@ -34,6 +35,7 @@
       </select>
    
     </div>
+-->
     <div class="mb-3">
       <label for="" class="form-label">Telefono</label>
       <input type="number"
@@ -51,7 +53,7 @@
     <div class="mb-3">
       <label for="" class="form-label">Nombre largo</label>
       <input type="text"
-        class="form-control" name="longname" id="" aria-describedby="helpId" placeholder="">
+        class="form-control" name="long_name" id="" aria-describedby="helpId" placeholder="">
    
     </div>
     <div class="mb-3">
@@ -60,16 +62,18 @@
         class="form-control" name="address" id="" aria-describedby="helpId" placeholder="">
    
     </div>
+<!--
     <div class="mb-3">
       <label for="" class="form-label">Socios</label>
       <input type="text"
         class="form-control" name="partners" id="" aria-describedby="helpId" placeholder="">
    
     </div>
+-->
     <div class="mb-3">
       <label for="" class="form-label">tipo sociedad</label>
       <input type="text"
-        class="form-control" name="typeofcompany" id="" aria-describedby="helpId" placeholder="">
+        class="form-control" name="type" id="" aria-describedby="helpId" placeholder="">
    
     </div>
     <!--

@@ -38,7 +38,7 @@ class EnterpriseController extends Controller
         //
                 //
                 $request=Enterprise::create($request->all());
-                //$request=Postulate::create($request->all());
+                 //$request=Postulate::create($request->all());
                 return $request->all();
     }
 

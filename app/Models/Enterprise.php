@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Enterprise extends Model
 {
     use HasFactory;
+    protected $guarded=['status'];
 
     public function projectEnterprises(){
         return $this->hasMany(ProjectEnterprise::class);
