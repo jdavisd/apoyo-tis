@@ -24,7 +24,7 @@ class EnterpriseController extends Controller
      */
     public function create()
     {
-        //
+        return view('enterprises.create');
     }
 
     /**
@@ -35,12 +35,13 @@ class EnterpriseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request=Enterprise::create($request->all());
+        return $request->all();
     }
 
     /**
      * Display the specified resource.
-     *
+     *s
      * @param  \App\Models\Enterprise  $enterprise
      * @return \Illuminate\Http\Response
      */

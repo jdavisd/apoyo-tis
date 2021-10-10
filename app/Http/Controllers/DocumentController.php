@@ -2,15 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
+use App\Models\Document;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class DocumentController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +24,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('projects.create');
+        //
     }
 
     /**
@@ -39,18 +35,16 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $request=Project::create($request->all());
-        return $request->all();
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show(Document $document)
     {
         //
     }
@@ -58,10 +52,10 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit(Document $document)
     {
         //
     }
@@ -70,10 +64,10 @@ class ProjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, Document $document)
     {
         //
     }
@@ -81,10 +75,10 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy(Document $document)
     {
         //
     }
