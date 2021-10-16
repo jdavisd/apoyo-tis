@@ -22,9 +22,9 @@ use App\Http\Controllers\ProjectController;
 
 Auth::routes(['reset'=>false]);
 Route::get('/', function () {
-    return view('auth.login');
+    return route('login');
 });
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
