@@ -21,9 +21,9 @@ use App\Http\Controllers\ProjectController;
 //});
 
 Auth::routes(['reset'=>false]);
-Route::get('/', function () {
-    return route('login');
-});
+//Route::get('/', function () {
+//    return route('login');
+//});
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
