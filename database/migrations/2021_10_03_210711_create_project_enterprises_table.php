@@ -18,7 +18,7 @@ class CreateProjectEnterprisesTable extends Migration
             $table->enum('status',[1,2,3,4,5])->default(1);
             $table->timestamps();
 
-            $table->unsignedBigInteger('adviser_id');
+           $table->unsignedBigInteger('adviser_id');
             $table->unsignedBigInteger('enterprise_id');
             $table->unsignedBigInteger('project_id');
             

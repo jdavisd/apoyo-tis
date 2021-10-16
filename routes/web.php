@@ -2,8 +2,8 @@
 
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostulateController;
 use App\Http\Controllers\EnterpriseController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,12 +16,15 @@ use App\Http\Controllers\EnterpriseController;
 |
 */
 
+//Route::get('/', function () {
+ //   return view('welcome');
+//});
+
+Auth::routes(['reset'=>false]);
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('empresa', EnterpriseController::class);
-Route::resource('proyecto', ProyectsController::class);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
+Route::resource('empresa', EnterpriseController::class)->names('empresa');
+Route::resource('proyecto', ProjectController::class);

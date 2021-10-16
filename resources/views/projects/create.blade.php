@@ -14,7 +14,6 @@
     background-color: #6cb2eb;
     max-width: 120rem;
     width: 90%;
-    higth: 90%;
     margin: 1rem auto;
     ">
 <form method="POST" action="{{route('proyecto.store')}}">
