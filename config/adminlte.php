@@ -237,7 +237,20 @@ return [
         ],
 
         // Sidebar items:
+        ['header' => 'USUARIOS'],
         [
+            'text' => 'Lista de usuarios',
+            'route'  => 'admin.users.index',
+            'icon' => 'fas fa-fw fa-user',
+            'can'=>'admin.roles',
+        ],
+        [
+            'text' => 'Roles',
+            'route'  => 'admin.roles.index',
+            'icon' => 'fas fa-fw fa-user-cog',
+            'can'=>'admin.roles',
+        ],
+       /* [
             'type' => 'sidebar-menu-search',
             'text' => 'search',
         ],
@@ -317,7 +330,7 @@ return [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
-        ],
+        ],*/
     ],
 
     /*
@@ -471,6 +484,6 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Other-Configuration
     |
     */
-
+  /* NO ESTA MOSTRANDO EN LAS PLANTILLAS SOLO COMO LETRAAS NO SIRVE BUSCAR ERROR  */
     'livewire' => false,
 ];
