@@ -15,6 +15,10 @@ class CreateAdvisersTable extends Migration
     {
         Schema::create('advisers', function (Blueprint $table) {
             $table->id();
+<<<<<<< HEAD
+=======
+            $table->string('name');
+>>>>>>> registerEnterpriseJdch
             $table->timestamps();
         });
     }

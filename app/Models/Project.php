@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory;
-
+    protected $guarded=['status'];
     public function projectEnterprises(){
-        return $this->hasMany(ProjectEnterprise::class);
+        return $this->hasMany(Enterprise::class,'project_enterprises');
     }
 }
