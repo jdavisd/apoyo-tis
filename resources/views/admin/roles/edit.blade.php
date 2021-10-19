@@ -12,7 +12,7 @@
         <strong>{{session('info')}}</strong>
     </div>
 @endif
-    {!! Form::model($role, ['route'=>['admin.roles.update',$role].'method'=>'put']) !!}
+    {!! Form::model($role, ['route'=>['admin.roles.update',$role],'method'=>'put']) !!}
     
     @include('admin.roles.partials.form')
     {!! Form::submit('Editar rol', ['class'=>'btn btn-primary']) !!}

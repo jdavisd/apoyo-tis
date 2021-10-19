@@ -3,21 +3,25 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Imports\UserImport;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Role;
 
 
-class UserController extends Controller
+
+class ImportuserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        return view ('admin.users.index');
-      }
+    public function index()
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,9 +30,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        
+        $roles=Role::all();
+        return view('admin.users.import',compact('roles'));
     }
-    
 
     /**
      * Store a newly created resource in storage.
@@ -38,7 +42,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Excel::import(new UserImport($request->roles),$request->file);
+        return  $request;
     }
 
     /**
@@ -58,11 +63,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        $roles=Role::all();
-        return view('admin.users.edit',compact('user','roles'));
-
+        //
     }
 
     /**
@@ -72,10 +75,9 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
-        $user->roles()->sync($request->roles);
-        return redirect()->route('admin.users.edit',$user)->with('info','Rol asignado correctamente');
+        //
     }
 
     /**
