@@ -4,6 +4,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +30,5 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
+Route::resource('anuncio', AnnouncementController::class);
+Route::get('enviar',[MailController::class,'sendMail']);
