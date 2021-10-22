@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEnterprise;
+use App\Models\Adviser;
 use App\Models\Enterprise;
+
+use App\Models\Project;
 use Illuminate\Http\Request;
+
+
 
 class EnterpriseController extends Controller
 {
@@ -24,7 +30,13 @@ class EnterpriseController extends Controller
      */
     public function create()
     {
-        return view('enterprises.create');
+     // return view('enterprises.create');
+       $project = Project::pluck('name','id');
+       //return  $project;
+       $adviser = Adviser::pluck('name','id');
+       return view('enterprises.create',compact('project','adviser'));
+       
+     
     }
 
     /**
@@ -33,9 +45,26 @@ class EnterpriseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreEnterprise $request)
     {
-        $request=Enterprise::create($request->all());
+
+        $enterprise=Enterprise::create([
+            'short_name'=>$request->short_name,
+            'long_name'=>$request->long_name,
+            'address'=>$request->address,
+            'phone'=>$request->phone,
+            'email'=>$request->email,
+            'type'=>$request->type,
+            'logo'=>$request->logo          
+        ]);
+       // $project=Project::findById($request->id_project);
+        $enterprise->projectEnterprises1()->create([
+            'adviser_id'=>$request->adviser_id,
+            'project_id'=>$request->project_id    
+        ]
+        );
+  
+        //$nuevo->projectEnterprises1()->attach($request->id_project); 
         return $request->all();
     }
 

@@ -18,7 +18,6 @@ class AnnouncementController extends Controller
     {
         //$documents = Document::all()->where('imageable_type', 'App\Models\Announcemens');
         $documents = Document::OfType('App\Models\Announcement')->join('announcements', 'announcements.id', '=', 'imageable_id')->get();
-
         //return $documents;
         return view('announcements.index',compact('documents'));
     }
@@ -46,10 +45,7 @@ class AnnouncementController extends Controller
         $announcement->title = $request->title;
         $announcement->code= $request->code;
         $announcement->period = $request->period;
-        $announcement->description = $request->description;
-        // $adviser = new Adviser();
-        // $adviser->id = 1;
-        // $adviser->save();
+        $announcement->description = $request->description;  
         $announcement->adviser_id=1;
 
         if($request->hasFile('document')){
@@ -66,8 +62,7 @@ class AnnouncementController extends Controller
             $announcement->save();
         }
         
-
-        return redirect()->route('login');
+        return redirect()->route('anuncio.index');
     }
 
     /**
