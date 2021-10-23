@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AnnouncementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnterpriseController;
@@ -21,7 +22,7 @@ use App\Http\Controllers\MailController;
  //   return view('welcome');
 //});
 
-Auth::routes(['reset'=>false]);
+Auth::routes(['reset'=>true]);
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -30,4 +31,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
 Route::resource('anuncio', AnnouncementController::class);
+Route::resource('usuario', UserController::class);
 //Route::get('enviar',[MailController::class,'sendMail']);

@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Http\Controllers\MailController;
 use App\Mail\SendMail;
 use App\Models\User;
+use Illuminate\Notifications\Messages\MailMessage;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
