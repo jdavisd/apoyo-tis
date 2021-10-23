@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Imports\UserImport;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use Spatie\Permission\Models\Role;
 
-
-
-class ImportuserController extends Controller
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
+class UserController extends Controller
 {
+
+    public function __construct()
+    {
+    }
     /**
      * Display a listing of the resource.
      *
@@ -30,9 +30,7 @@ class ImportuserController extends Controller
      */
     public function create()
     {
-        
-        $roles=Role::all();
-        return view('admin.users.import',compact('roles'));
+        //
     }
 
     /**
@@ -43,20 +41,7 @@ class ImportuserController extends Controller
      */
     public function store(Request $request)
     {
-  
-        $request->validate([
-            'file'=>['required','mimes:xlsx,csv'],
-          ]);
-          $import=new UserImport($request->roles,$request->send);
-          Excel::import( $import,$request->file);
-          //$import->rules();
-          if($import->failures()->isNotEmpty()){
-              return back()->withFailures($import->failures());
-          }
-
-         // dd($import->failures()); 
-        
-        return  back()->with('info','Usuarios registrados correctamente');
+        //
     }
 
     /**
@@ -78,7 +63,10 @@ class ImportuserController extends Controller
      */
     public function edit($id)
     {
-        //
+       
+        $user=User::find($id);
+       // return view ('users2',compact('user'));
+       return view('users',compact('user'));
     }
 
     /**
@@ -88,10 +76,25 @@ class ImportuserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user)
     {
-        //
-    }
+        $request->validate([
+            'password' => ['required', 'string', 'min:8' ],
+            'password_confirmation' => ['required', 'string', 'min:8'],
+        ]);
+if($request->password==$request->password_confirmation){
+    $user=User::find($user);
+    $user->password=Hash::make($request->password); 
+    $user->save();
+    return back()->with('message-sucess','Se actualizo su contraseña');
+  // return "error";
+}
+
+return back()->with('message-fail','contraseña no coincide');
+//return $user;
+}
+        
+
 
     /**
      * Remove the specified resource from storage.

@@ -146,6 +146,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name'=>'nombre',
+        'email'=>'correo electronico',
+        'file'=>'archivo'
+    ],
 
 ];

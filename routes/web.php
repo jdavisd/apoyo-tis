@@ -1,9 +1,13 @@
 <?php
 
-
+use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +24,8 @@ use App\Http\Controllers\ProjectController;
  //   return view('welcome');
 //});
 
-Auth::routes(['reset'=>false]);
+Auth::routes(['reset'=>true,]);
+//if(){}
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -28,3 +33,7 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
+Route::resource('anuncio', AnnouncementController::class);
+Route::resource('editar-usuario', UserController::class)->names('user.password');
+//Route::get('editar'/ Auth::user()->id(),UserController::class,'edit')->name('user.password');
+//Route::get('enviar',[MailController::class,'sendMail']);

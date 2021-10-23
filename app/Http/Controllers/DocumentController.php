@@ -1,17 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Imports\UserImport;
-use App\Models\User;
+use App\Models\Document;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use Spatie\Permission\Models\Role;
 
-
-
-class ImportuserController extends Controller
+class DocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -30,9 +24,7 @@ class ImportuserController extends Controller
      */
     public function create()
     {
-        
-        $roles=Role::all();
-        return view('admin.users.import',compact('roles'));
+        //
     }
 
     /**
@@ -43,29 +35,16 @@ class ImportuserController extends Controller
      */
     public function store(Request $request)
     {
-  
-        $request->validate([
-            'file'=>['required','mimes:xlsx,csv'],
-          ]);
-          $import=new UserImport($request->roles,$request->send);
-          Excel::import( $import,$request->file);
-          //$import->rules();
-          if($import->failures()->isNotEmpty()){
-              return back()->withFailures($import->failures());
-          }
-
-         // dd($import->failures()); 
-        
-        return  back()->with('info','Usuarios registrados correctamente');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Document $document)
     {
         //
     }
@@ -73,10 +52,10 @@ class ImportuserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Document $document)
     {
         //
     }
@@ -85,10 +64,10 @@ class ImportuserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Document $document)
     {
         //
     }
@@ -96,10 +75,10 @@ class ImportuserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Document $document)
     {
         //
     }

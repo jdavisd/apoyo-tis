@@ -45,6 +45,16 @@
                         <a class="nav-link" href="{{ route('empresa.create') }}">{{ __('Postularse') }}</a>
                    </li> 
                     @endcan  
+                    @can('anuncio.create')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('anuncio.create') }}">{{ __('Anuncios') }}</a>
+                   </li>
+                   @endcan 
+                   @can('anuncio.create')
+                   <li class="nav-item">
+                    <a class="nav-link" href="{{ route('anuncio.index') }}">{{ __('Ver Anuncios') }}</a>
+                    </li>
+                    @endcan
                 
                     </ul>
 
@@ -54,13 +64,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Inciar sesion') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
                                 </li>
                             @endif
                         @else
@@ -82,8 +92,11 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                               
-
+                                    <a class="dropdown-item" href="{{ route('user.password.edit',Auth::user()->id) }}">
+                                   
+                                        {{ __('cambiar') }}
+                                    </a>
+                                  
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
