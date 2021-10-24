@@ -86,20 +86,17 @@
                                         {{ __('Administracion') }}
                                     </a>
                                     @endcan
-                                    <a class="dropdown-item" href="{{ route('usuario.edit',Auth::user()->id)}}">
-                                    
-                                        {{ __('Cambiar Contraseña') }}
+                              
+                                    <a class="dropdown-item" href="{{ route('user.password.edit',Auth::user()->id) }}">
+                                   
+                                        {{ __('cambiar') }}
                                     </a>
-                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('user.password.edit',Auth::user()->id) }}">
-                                   
-                                        {{ __('cambiar') }}
-                                    </a>
+                                  
                                   
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf

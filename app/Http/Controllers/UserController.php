@@ -82,16 +82,13 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8' ],
             'password_confirmation' => ['required', 'string', 'min:8'],
         ]);
-if($request->password==$request->password_confirmation){
+   if($request->password==$request->password_confirmation){
     $user=User::find($user);
     $user->password=Hash::make($request->password); 
     $user->save();
     return back()->with('message-sucess','Se actualizo su contraseña');
-  // return "error";
-}
-
-return back()->with('message-fail','contraseña no coincide');
-//return $user;
+  }
+   return back()->with('message-fail','contraseña no coincide');
 }
         
 
