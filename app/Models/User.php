@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Notifications\ResetPassword as ResetPasswordNotification;
 class User extends Authenticatable
 {    use HasRoles;
     use HasApiTokens, HasFactory, Notifiable;
@@ -22,6 +23,12 @@ class User extends Authenticatable
         'email',
         'password',
     ];
+
+    public function sendPasswordResetNotification($token)
+    {
+        // Your your own implementation.
+        $this->notify(new ResetPasswordNotification($token));
+    }
 
     /**
      * The attributes that should be hidden for serialization.
