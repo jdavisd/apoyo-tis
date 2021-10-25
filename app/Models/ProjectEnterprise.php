@@ -8,11 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectEnterprise extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
-
-=======
     protected $fillable=['adviser_id','project_id'];
->>>>>>> registerEnterpriseJdch
     public function announcement(){
         return $this->belongsTo(Announcement::class);
     }

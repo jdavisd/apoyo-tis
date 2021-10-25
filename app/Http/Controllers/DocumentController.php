@@ -1,23 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Document;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 
-
-class UserController extends Controller
+class DocumentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        return view ('admin.users.index');
-      }
+    public function index()
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,9 +24,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        
+        //
     }
-    
 
     /**
      * Store a newly created resource in storage.
@@ -44,10 +41,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Document $document)
     {
         //
     }
@@ -55,35 +52,33 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Document $document)
     {
-        $roles=Role::all();
-        return view('admin.users.edit',compact('user','roles'));
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Document $document)
     {
-        $user->roles()->sync($request->roles);
-        return redirect()->route('admin.users.edit',$user)->with('info','Rol asignado correctamente');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Document  $document
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Document $document)
     {
         //
     }

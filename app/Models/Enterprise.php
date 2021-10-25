@@ -8,12 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Enterprise extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
-
-    public function projectEnterprises(){
-        return $this->hasMany(ProjectEnterprise::class);
-    }
-=======
 protected $fillable=['short_name','long_name','address','phone','email','type','logo','project_id','adviser_id'];
    //s protected $guarded=['status'];
 
@@ -22,5 +16,4 @@ protected $fillable=['short_name','long_name','address','phone','email','type','
        // return $this->belongsToMany(Project::class,'project_enterprises','enterprise_id','project_id');  
     }
     
->>>>>>> registerEnterpriseJdch
 }

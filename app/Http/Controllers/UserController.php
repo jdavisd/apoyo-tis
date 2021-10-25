@@ -1,23 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 
-
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        return view ('admin.users.index');
-      }
+    public function index()
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,9 +30,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        
+        //
     }
-    
 
     /**
      * Store a newly created resource in storage.
@@ -58,10 +61,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        $roles=Role::all();
-        return view('admin.users.edit',compact('user','roles'));
+       
+        $user=User::find($id);
+       // return view ('users2',compact('user'));
+       return view('users',compact('user'));
     }
 
     /**
@@ -71,11 +76,22 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $user)
     {
-        $user->roles()->sync($request->roles);
-        return redirect()->route('admin.users.edit',$user)->with('info','Rol asignado correctamente');
-    }
+        $request->validate([
+            'password' => ['required', 'string', 'min:8' ],
+            'password_confirmation' => ['required', 'string', 'min:8'],
+        ]);
+   if($request->password==$request->password_confirmation){
+    $user=User::find($user);
+    $user->password=Hash::make($request->password); 
+    $user->save();
+    return back()->with('message-sucess','Se actualizo su contraseña');
+  }
+   return back()->with('message-fail','contraseña no coincide');
+}
+        
+
 
     /**
      * Remove the specified resource from storage.
