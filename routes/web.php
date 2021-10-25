@@ -27,6 +27,7 @@ use App\Http\Controllers\UserController;
 
 Auth::routes(['reset'=>true]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
