@@ -25,19 +25,10 @@ use App\Http\Controllers\UserController;
  //   return view('welcome');
 //});
 
-<<<<<<< HEAD
-Auth::routes(['reset'=>false]);
-//Route::get('/', function () {
-//    return route('login');
-//});
-
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
-=======
 Auth::routes(['reset'=>true]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
->>>>>>> registerEnterpriseJdch
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
 Route::resource('anuncio', AnnouncementController::class);
