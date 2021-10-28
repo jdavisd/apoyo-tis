@@ -14,11 +14,13 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        $admin=Role::create(['name'=>'Admin']);
-        $consultor=Role::create(['name'=>'Consultor']);
+        Role::create(['name'=>'Admin']);
+        Role::create(['name'=>'Consultor']);
+        Role::create(['name'=>'Estudiante']);
         Permission::create(['name'=>'admin.home','description'=>'administracion ventana principal'])->syncRoles(['Admin', 'Consultor']);
-        Permission::create(['name'=>'user.home','description'=>'administracion de usuarios'])->syncRoles(['Admin']);
+        Permission::create(['name'=>'user.home','description'=>'pagina principal anuncios'])->syncRoles(['Admin','Consultor','Estudiante']);
         Permission::create(['name'=>'empresa','description'=>'registrar y administrar empresas'])->syncRoles(['Admin']);
+        Permission::create(['name'=>'user.password.edit','description'=>'Editar contraseña de usuario'])->syncRoles(['Admin','Consultor']);
        /* Permission::create(['name'=>'admin.roles.create','description'=>'registrar y administrar empresas']);
         Permission::create(['name'=>'admin.roles.destroy','description'=>'registrar y administrar empresas']);
         Permission::create(['name'=>'admin.roles.destroy','description'=>'registrar y administrar empresas']);

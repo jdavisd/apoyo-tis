@@ -17,9 +17,9 @@
        <div class="row">
           <div class="col-md-6 offset-md3">
               <div class="card">
-                  <div class="card-header">
-                      <!--<h3>Importar usuarios</h3>-->
-                  </div>
+                 <!-- <div class="card-header">
+                     <h3>Importar usuarios</h3>
+                  </div>-->
                   <div class="card-body">
                     <form method="POST" enctype="multipart/form-data" action="{{route('admin.usersimport.store')}}">
 
@@ -28,14 +28,12 @@
                           <label for="file">
                              Subir archivo 
                           </label>
-                          <br>
-                          <input style="form-control" id="file" type="file" name="file" id="file" value="subir archivo">
-                    @error('file')
-                    <div class="alert alert-danger">
-                        *{{$message}}
-                    </div>
-                    @enderror
-                       
+                          
+                          <input class="form-control @error('file') is-invalid @enderror" id="file" type="file" name="file" id="file" value="subir archivo" accept=".csv,.xlsx">
+                            
+                          @error('file')
+                          <div class="row"><small class="text-danger" style="font-weight: bold;"">{{$message}}</small></div>         
+                        @enderror
                     
                         @if (session()->has('failures'))
                             <table class="table table-danger">

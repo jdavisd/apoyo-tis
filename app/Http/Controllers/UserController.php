@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Password;
@@ -12,6 +13,8 @@ class UserController extends Controller
 
     public function __construct()
     {
+        $this->middleware('auth');
+        $this->middleware('can:user.password.edit');
     }
     /**
      * Display a listing of the resource.
@@ -63,10 +66,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-       
         $user=User::find($id);
-       // return view ('users2',compact('user'));
-       return view('users',compact('user'));
+        // return view ('users2',compact('user'));
+        return view('users.password.edit',compact('user'));
     }
 
     /**
@@ -82,13 +84,13 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8' ],
             'password_confirmation' => ['required', 'string', 'min:8'],
         ]);
-   if($request->password==$request->password_confirmation){
-    $user=User::find($user);
-    $user->password=Hash::make($request->password); 
-    $user->save();
-    return back()->with('message-sucess','Se actualizo su contraseña');
-  }
-   return back()->with('message-fail','contraseña no coincide');
+        if($request->password==$request->password_confirmation){
+           $user=User::find($user);
+           $user->password=Hash::make($request->password); 
+           $user->save();
+           return back()->with('message-sucess','Se actualizo su contraseña');
+        }
+        return back()->with('message-fail','contraseña no coincide');
 }
         
 

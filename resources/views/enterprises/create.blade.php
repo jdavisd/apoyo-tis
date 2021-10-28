@@ -1,34 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid" style="
-    background-color: #6cb2eb;
-    max-width: 120rem;
-    width:  75%;
-    margin: 2rem auto;
+<div class="row justify-content-center">
+  <div class="col-md-8">
+      <div class="card">
+          <div class="card-header"><strong class="h5">Postular</strong></div>
 
 
-    ">
-<h4>Postular</h4>
-
-<div style="
-    background-color: #6cb2eb;
-    max-width: 120rem;
-    width: 90%;
-    margin: 1rem auto;
-    ">
+<div class="card-body">
 <form method="POST" action="{{route('empresa.store')}}">
     @csrf
-    <div class="mb-3">
-      <label for="" class="form-label">Nombre Corto</label>
+    <div class="row my-3">
+      <label for=""class="col-md-4 text-md-right">Nombre Corto</label>
+      <div class="col-md-6">
       <input type="text"
-        class="form-control" name="short_name"  value="{{old('short_name')}}"  id="" aria-describedby="helpId" placeholder="">
-     @error('short_name')
-         <br>
-         <small style="color: rgb(255, 4, 54);">*{{$message}}</small>
-         <br>
-
-     @enderror
+      class="form-control  @error('short_name') is-invalid @enderror" name="short_name"  value="{{old('short_name')}}"  id="" aria-describedby="helpId" placeholder="">
+      @error('short_name')
+      <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                        @enderror
+    </div>
     </div>
 
     <!--
@@ -43,86 +33,73 @@
     </div>
     
 -->
-<div class="mb-3">
-  <label for="" class="form-label">Logo</label>
-  <input type="text"
-    class="form-control" name="logo" value="{{old('logo')}}"  id="" aria-describedby="helpId" placeholder="">
-    @error('logo')
-    <br>
-    <small style="color: rgb(255, 4, 54);">*{{$message}}</small>
-    <br>
-
-@enderror
+<div class="row my-3">
+  <label for="" class="col-md-4 text-md-right">Logo</label>
+  <div class="col-md-6">
+  <input type="text" class="form-control @error('logo') is-invalid @enderror " name="logo" value="{{old('logo')}}"  id="" aria-describedby="helpId" placeholder="">
+  @error('logo')
+                          <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                        @enderror
+                        </div>
 </div>
-<div class="mb-3">{!! Form::label('project_id', 'Proyecto') !!}
-  {!! Form::select ('project_id', $project, null, ['class'=>'form-control']) !!}
+<div class="row my-3">{!! Form::label('project_id', 'Proyecto', ['class' => 'col-md-4 text-md-right']) !!}
+  <div class="col-md-6">
+  {!! Form::select ('project_id', $project, null, ['class' => 'form-control ' . ($errors->has('project_id') ? ' is-invalid' : null)]) !!}
   @error('project_id')
-  <br>
-  <small style="color: rgb(255, 4, 54);">*{{$message}}</small>
-  <br>
-
+  <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
 @enderror
+  </div>
     </div>
-<div class="mb-3">
-   
+
+    <div class="row my-3">
+      <label for=""class="col-md-4 text-md-right">Telefono</label>
+      <div class="col-md-6">
+      <input type="number"class="form-control   @error('phone') is-invalid @enderror" name="phone" value=" {{old('phone')}}" id="" aria-describedby="helpId" placeholder="">        
+      @error('phone')
+      <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+    @enderror
     </div>
-    <div class="mb-3">
-      <label for="" class="form-label">Telefono</label>
-      <input type="number"
-        class="form-control" name="phone" value=" {{old('phone')}}" id="" aria-describedby="helpId" placeholder="">
-        @error('phone')
-        <br>
-        <small style="color: rgb(255, 4, 54);">*{{$message}}</small>
-        <br>
-      
-      @enderror
     </div>
-    <div class="mb-3">
-      <label for="" class="form-label">Correo Electronico</label>
+    <div class="row my-3">
+      <label for=""class="col-md-4 text-md-right">Correo Electronico</label>
+      <div class="col-md-6">
       <input type="email"
-        class="form-control" name="email" value="{{old('email')}}" id="" aria-describedby="helpId" placeholder="">
-        @error('email')
-        <br>
-        <small style="color: rgb(255, 4, 54);">*{{$message}}</small>
-        <br>
-      
-      @enderror
+      class="form-control  @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" id="" aria-describedby="helpId" placeholder="">
+      @error('email')
+      <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+    @enderror
+    </div>
     </div>
  
-   
-    <div class="mb-3">
-      <label for="" class="form-label">Nombre largo</label>
+    <div class="row my-3">
+      <label for=""class="col-md-4 text-md-right">Nombre largo</label>
+      <div class="col-md-6">
       <input type="text"
-        class="form-control" name="long_name"  value=" {{old('long_name')}}" id="" aria-describedby="helpId" placeholder="">
-        @error('long_name')
-        <br>
-        <small style="color: rgb(255, 4, 54);">*{{$message}}</small>
-        <br>
-      
-      @enderror
+      class="form-control   @error('long_name') is-invalid @enderror" name="long_name"  value=" {{old('long_name')}}" id="" aria-describedby="helpId" placeholder="">
+      @error('long_name')
+      <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+    @enderror
     </div>
-    <div class="mb-3">
-      <label for="" class="form-label">Direccion</label>
+    </div>
+    <div class="row my-3">
+      <label for=""class="col-md-4 text-md-right">Direccion</label>
+      <div class="col-md-6">
       <input type="text"
-        class="form-control" name="address" value=" {{old('long_name')}}" id="" aria-describedby="helpId" placeholder="">
-        @error('address')
-        <br>
-        <small style="color: rgb(255, 4, 54);">*{{$message}}</small>
-        <br>
-      
-      @enderror
-   
+      class="form-control  @error('address') is-invalid @enderror" name="address" value=" {{old('long_name')}}" id="" aria-describedby="helpId" placeholder="">
+      @error('address')
+      <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+    @enderror
+   </div>
     </div>
-    <div class="mb-3">{!! Form::label('adviser_id', 'Consultor') !!}
-      {!! Form::select ('adviser_id', $adviser, null, ['class'=>'form-control']) !!}
-        </div>
+    <div class="row my-3">{!! Form::label('adviser_id', 'Consultor',['class' => 'col-md-4 text-md-right']) !!}
+      <div class="col-md-6">
+      {!! Form::select ('adviser_id', $adviser, null, ['class' => 'form-control ' . ($errors->has('adviser_id') ? ' is-invalid' : null)]) !!}
+        
         @error('adviser_id')
-        <br>
-        <small style="color: rgb(255, 4, 54);">*{{$message}}</small>
-        <br>
-      
+        <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
       @enderror
-    <div class="mb-3">
+      </div>
+    </div>
 <!--
     <div class="mb-3">
       <label for="" class="form-label">Socios</label>
@@ -131,19 +108,18 @@
    
     </div>
 -->
-    <div class="mb-3">
-      <label for="" class="form-label">tipo sociedad</label>
+    <div class="row my-3">
+      <label for=""class="col-md-4 text-md-right">tipo sociedad</label>
+      <div class="col-md-6">
       <input type="text"
-        class="form-control" name="type" value="{{old('type')}}" id="" aria-describedby="helpId" placeholder="">
-        @error('type')
-        <br>
-        
-        <small style="color: rgb(255, 4, 54);">*{{$message}}</small>
-        <br>
-      
-      @enderror
+      class="form-control  @error('type') is-invalid @enderror" name="type" value="{{old('type')}}" id="" aria-describedby="helpId" placeholder="" >
+      @error('type')
+      <div class=""><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+    @enderror
+     </div>
     </div>
-     <input name="" id="" class="btn btn-success"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
+ 
+     <input name="" id="" class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
     <!--
     <div class="mb-3">
      <label >Logo</label>
@@ -153,6 +129,9 @@
   
     
 </form>
+</div>
+</div>
+</div>
 </div>
 </div>
 @endsection
