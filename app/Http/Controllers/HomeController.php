@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Auth;
+use App\Models\Document;
 
 class HomeController extends Controller
 {
@@ -26,7 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-       // $h=$this->user;
-        return view('home');
+       // return view('home');
+       $documents = Document::OfType('App\Models\Announcement')->join('announcements', 'announcements.id', '=', 'imageable_id')->get();
+       //return $documents;
+       return view('announcements.index',compact('documents'));
     }
 }
