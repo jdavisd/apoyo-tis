@@ -10,6 +10,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,12 +26,14 @@ use App\Http\Controllers\UserController;
  //   return view('welcome');
 //});
 
-Auth::routes(['reset'=>true]);
+Auth::routes(['reset'=>true,'register'=>false,'login'=>true]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
+//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
 Route::resource('anuncio', AnnouncementController::class);
-Route::resource('editar-usuario', UserController::class)->names('user.password');
+//Route::resource('editar-usuario', UserController::class)->names('user.password');
 
 //Route::get('enviar',[MailController::class,'sendMail']);

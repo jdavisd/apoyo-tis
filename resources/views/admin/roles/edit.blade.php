@@ -13,7 +13,8 @@
     </div>
 @endif
     {!! Form::model($role, ['route'=>['admin.roles.update',$role],'method'=>'put']) !!}
-    
+    <label for=""  class="form-control">{{$role->name}}</label>
+
     @include('admin.roles.partials.form')
     {!! Form::submit('Editar rol', ['class'=>'btn btn-primary']) !!}
     {!! Form::close() !!}
