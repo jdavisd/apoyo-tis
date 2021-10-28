@@ -14,9 +14,9 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['name'=>'Admin']);
-        Role::create(['name'=>'Consultor']);
-        Role::create(['name'=>'Estudiante']);
+        $name1=Role::create(['name'=>'Admin']);
+        $name2= Role::create(['name'=>'Consultor']);
+        $name3=Role::create(['name'=>'Estudiante']);
         Permission::create(['name'=>'admin.home','description'=>'administracion ventana principal'])->syncRoles(['Admin', 'Consultor']);
         Permission::create(['name'=>'user.home','description'=>'pagina principal anuncios'])->syncRoles(['Admin','Consultor','Estudiante']);
         Permission::create(['name'=>'empresa','description'=>'registrar y administrar empresas'])->syncRoles(['Admin']);
@@ -28,7 +28,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=>'admin.roles.show ','description'=>'registrar y administrar empresas']);*/
         Permission::create(['name'=>'admin.roles','description'=>'registrar y administrar roles'])->syncRoles(['Admin']);
 
-        Permission::create(['name'=>'anuncio.index.','description'=>'ver anuncios publicados'])->syncRoles(['Consultor']);
+        Permission::create(['name'=>'anuncio.index','description'=>'ver anuncios publicados'])->syncRoles(['Consultor']);
         Permission::create(['name'=>'anuncio.create','description'=>'crear anuncios'])->syncRoles(['Consultor']);
 
 
