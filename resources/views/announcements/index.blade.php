@@ -14,22 +14,19 @@
                     <div class="card-header">
                         <label  class="card-title h5"><strong>{{$doc->title}}</strong></label>
                     </div>
-                    <div class="card-body">
-                        
+                    <div class="card-body">  
                         <p class="card-text">{{$doc->code}}</p>
                         <p class="card-text">{{$doc->period}}</p>
                         <p class="card-text">{{$doc->description}}</p>
-
-                       
-                            <div class="col align-self-end" style="position: absolute;
-                            position: absolute;
-                            bottom: 0em;
-                            left: 0em;" >
-                                <a class="btn btn-primary" href="{{asset('.../storage/app/public/anuncios').'/'.$doc->name}}" target="blank_">Ver Documento</a>
-                           
-                        </div>
-                       
-                    </div>
+                        <div class="col align-self-end"  >
+                            <a class="btn btn-primary" href="{{asset('storage/anuncios').'/'.$doc->name}}" target="blank_">Ver Documento</a>
+                            <form action="{{route('anuncio.destroy',$doc)}}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger" type="submit">Eliminar</button>
+                            </form>    
+                        </div> 
+                    </div>          
                 </div>          
             </div>
         @endforeach  

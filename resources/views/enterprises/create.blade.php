@@ -5,21 +5,19 @@
   <div class="col-md-8">
       <div class="card">
           <div class="card-header"><strong class="h5">Postular</strong></div>
-
-
-<div class="card-body">
-<form method="POST" action="{{route('empresa.store')}}">
-    @csrf
-    <div class="row my-3">
-      <label for=""class="col-md-4 text-md-right">Nombre Corto</label>
-      <div class="col-md-6">
-      <input type="text"
-      class="form-control  @error('short_name') is-invalid @enderror" name="short_name"  value="{{old('short_name')}}"  id="" aria-describedby="helpId" placeholder="">
-      @error('short_name')
-      <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
-                        @enderror
-    </div>
-    </div>
+          <div class="card-body">
+            <form method="POST" action="{{route('empresa.store')}}">
+              @csrf
+              <div class="row my-3">
+                <label for=""class="col-md-4 text-md-right">Nombre Corto</label>
+                <div class="col-md-6">
+                    <input type="text" class="form-control  @error('short_name') is-invalid @enderror" name="short_name"  
+                    value="{{old('short_name')}}"  id="" aria-describedby="helpId" placeholder="">
+                    @error('short_name')
+                    <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                    @enderror
+                </div>
+              </div>
 
     <!--
     <div class="mb-3">

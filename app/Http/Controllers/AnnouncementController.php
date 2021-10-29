@@ -40,16 +40,23 @@ class AnnouncementController extends Controller
      */
     public function store(Request $request)
     {
-        $document=new Document();
+        $request->validate([
+            'title'=>['required', 'max:40', 'min:10'],
+            'code'=>['required'],
+            'period'=>['required'],
+            'description'=>['required'],
+            'document'=>['required','mimes:pdf']
+          ]);
+
         $announcement= new Announcement();
         $announcement->title = $request->title;
         $announcement->code= $request->code;
         $announcement->period = $request->period;
         $announcement->description = $request->description;  
         $announcement->adviser_id=1;
+        $document=new Document();
 
         if($request->hasFile('document')){
-
             $document2=$request->file('document');
             $document->name = $document2->getClientOriginalName();
             $document2=$request->file('document')->storeAs('anuncios',$document2->getClientOriginalName(),'public');
@@ -57,11 +64,9 @@ class AnnouncementController extends Controller
             $document->imageable_id= $announcement->id;
             $document->imageable_type= Announcement::class;
             $document->save();
-
         }else{
             $announcement->save();
         }
-        
         return redirect()->route('anuncio.index');
     }
 
@@ -105,8 +110,13 @@ class AnnouncementController extends Controller
      * @param  \App\Models\Announcement  $announcement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Announcement $announcement)
+    public function destroy($document)
     {
-        //
+        $document = Document::find($document);
+        $announcement = Announcement::find($document->imageable_id);
+        unlink(storage_path('app/public/anuncios/'.$document->name));
+        $document->delete();
+        $announcement->delete();
+        return redirect()->route('anuncio.index');
     }
 }
