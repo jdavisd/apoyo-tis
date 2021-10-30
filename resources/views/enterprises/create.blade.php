@@ -8,7 +8,7 @@
 
 
 <div class="card-body">
-<form method="POST" action="{{route('empresa.store')}}">
+<form method="POST" action="{{route('empresa.store')}}" enctype="multipart/form-data">
     @csrf
     <div class="row my-3">
       <label for=""class="col-md-4 text-md-right">Nombre Corto</label>
@@ -33,15 +33,7 @@
     </div>
     
 -->
-<div class="row my-3">
-  <label for="" class="col-md-4 text-md-right">Logo</label>
-  <div class="col-md-6">
-  <input type="text" class="form-control @error('logo') is-invalid @enderror " name="logo" value="{{old('logo')}}"  id="" aria-describedby="helpId" placeholder="">
-  @error('logo')
-                          <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
-                        @enderror
-                        </div>
-</div>
+
 <div class="row my-3">{!! Form::label('project_id', 'Proyecto', ['class' => 'col-md-4 text-md-right']) !!}
   <div class="col-md-6">
   {!! Form::select ('project_id', $project, null, ['class' => 'form-control ' . ($errors->has('project_id') ? ' is-invalid' : null)]) !!}
@@ -91,10 +83,11 @@
     @enderror
    </div>
     </div>
+    {{$adviser}}
     <div class="row my-3">{!! Form::label('adviser_id', 'Consultor',['class' => 'col-md-4 text-md-right']) !!}
       <div class="col-md-6">
       {!! Form::select ('adviser_id', $adviser, null, ['class' => 'form-control ' . ($errors->has('adviser_id') ? ' is-invalid' : null)]) !!}
-        
+    
         @error('adviser_id')
         <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
       @enderror
@@ -118,6 +111,50 @@
     @enderror
      </div>
     </div>
+    <div class="row my-3">
+      <label for="" class="col-md-4 text-md-right">Logo</label>
+      <div class="col-md-6">
+      <input type="file" class="form-control @error('logo') is-invalid @enderror " name="logo"  id="" aria-describedby="helpId" placeholder="">
+      @error('logo')
+        <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+            @enderror
+                            </div>
+    </div>
+
+    <div class="card">
+
+    <div class="card-body">
+
+  <table class="table table-light">
+    <thead>
+      <tr>
+        <td>id</td>
+        <td>Email</td>
+        <td>nombre</td>
+      </tr>
+    </thead>
+    <tbody>
+
+      @foreach ($students as $student)
+      <div>
+          <label >
+              {!! Form::checkbox('students[]', $student->id,null, ['class'=>'mr-1']) !!}
+              {{$student->name}}
+          </label>
+      </div>
+  @endforeach
+  
+    </tbody>
+  </table>
+
+    </div>
+
+
+    </div>
+
+
+
+
  
      <input name="" id="" class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
     <!--

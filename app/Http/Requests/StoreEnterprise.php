@@ -30,7 +30,7 @@ class StoreEnterprise extends FormRequest
             'phone'=>'required|max:40',
             'email'=>'required|max:40',
             'type'=>'required|max:40',
-            'logo'=>'required|max:40',
+            'logo'=>'required',
             'email'=>'required|max:40',
             'adviser_id'=>'required',
             'project_id'=>'required'

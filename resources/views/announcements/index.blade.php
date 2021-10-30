@@ -25,7 +25,7 @@
                             position: absolute;
                             bottom: 0em;
                             left: 0em;" >
-                                <a class="btn btn-primary" href="{{asset('.../storage/app/public/anuncios').'/'.$doc->name}}" target="blank_">Ver Documento</a>
+                            <a class="btn btn-primary" href="{{asset('announcements').'/'.$doc->name}}" target="blank_">Ver Documento</a>
                            
                         </div>
                        

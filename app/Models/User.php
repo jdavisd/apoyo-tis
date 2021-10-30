@@ -52,4 +52,14 @@ class User extends Authenticatable
 {
   return $this->id;
 }
+public function announcements(){
+    return $this->hasMany(Announcement::class);
+}
+
+public function projectEnterprises(){
+    return $this->hasMany(ProjectEnterprise::class);
+}
+public function enterpriseUser(){
+    return $this->BelongTo(Enterprise::class);
+}
 }

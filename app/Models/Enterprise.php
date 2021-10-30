@@ -15,5 +15,8 @@ protected $fillable=['short_name','long_name','address','phone','email','type','
         return $this->hasMany(ProjectEnterprise::class);
        // return $this->belongsToMany(Project::class,'project_enterprises','enterprise_id','project_id');  
     }
+    public function enterpriseUser(){
+        return $this->hasMany(User::class);
+    }
     
 }

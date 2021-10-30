@@ -20,8 +20,10 @@ class CreateUsersTable extends Migration
            // $table->string('code')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('enterprise_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->foreign('enterprise_id')->references('id')->on('enterprises')->onDelete('cascade');
         });
     }
 
