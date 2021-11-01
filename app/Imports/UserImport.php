@@ -5,6 +5,7 @@ use Maatwebsite\Excel\Concerns\Importable;
 use App\Http\Controllers\MailController;
 use App\Mail\SendMail;
 use App\Models\User;
+use App\Notifications\NewUser;
 use Illuminate\Notifications\Messages\MailMessage;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Facades\Hash;
@@ -48,12 +49,14 @@ class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
             //'password'=>Hash::make($codeSis),
             //'password'=>Hash::make($partsEmail[0].$partname),
         ]);
+        
         if($this->roles){
             $user->roles()->sync($this->roles);
         }
 
         if($this->send){
-            $this->enviar->sendMail($row['email']);
+            //$this->enviar->sendMail($row['email']);
+            $user->notify(new NewUser($user));
         }
        // $this->enviar->sendMail($row['email']);
         return $user;

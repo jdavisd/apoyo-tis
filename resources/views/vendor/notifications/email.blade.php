@@ -44,7 +44,8 @@
 {{ $salutation }}
 @else
 @lang('Regards'),<br>
-{{ config('app.name') }}
+{{-- {{ config('app.name') }} --}}
+{{-- <img src="{{asset('storage/LogoTIS.jpeg')}}"> --}}
 @endif
 
 {{-- Subcopy --}}

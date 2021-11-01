@@ -6,48 +6,68 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header">Publicar Anuncio</div>
-
-
-
-
-
-    <form action="{{route('anuncio.store')}}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <div class="card-body">
-            <div class="form-group col text-black">
-                <div class="row my-3">
-                    <label class="col-md-4 text-md-right" for="title">Titulo:</label>
-                    <input class="form-control col-md-5" type="text" name="title">
-                </div>
-                <div class="row my-3">
-                    <label class="col-md-4 text-md-right" for="code">Codigo:</label>
-                    <input class="form-control col-md-5" type="text" name="code">
-                </div>
-                <div class="row my-3">
-                    <label class="col-md-4 text-md-right" for="date">Periodo:</label>
-                    <input class="form-control col-md-5" type="text" name="period" >
-                </div>
-                <div class="row my-3">
-                    <label class="col-md-4 text-md-right" for="description">Descripcion:</label>
-                    <input class="form-control col-md-5" type="text" name="description">
-                </div>
-                <div class="row my-3">
-                    <label class="col-md-4 text-md-right" for="document">Adjuntar:</label>
-                    <input class="col-md-5" type="file" name="document" accept=".pdf">
-                </div>
-            </div>      
-       
-            <div class="form-group row mb-0">
-                <div class="col-md-6 offset-md-4">
-                    <button class="btn btn-primary" type="submit">Publicar</button>
-                </div>
+            <div class="card-header"><strong class="h5">Publicar un Anuncio</strong></div>
+            <div class="card-body">
+                <form action="{{route('anuncio.store')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row my-3">
+                        <label class="col-md-4 text-md-right" for="">Titulo:</label>
+                        <div class="col-md-6">
+                            <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
+                            value="{{old('title')}}"  id="" aria-describedby="helpId" placeholder="">
+                            @error('title')
+                                <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label class="col-md-4 text-md-right" for="code">Codigo:</label>
+                        <div class="col-md-6">
+                            <input class="form-control @error('code') is-invalid @enderror" type="text" name="code"
+                            value="{{old('code')}}"  id="" aria-describedby="helpId" placeholder="">
+                            @error('code')
+                                <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label class="col-md-4 text-md-right" for="date">Periodo:</label>
+                        <div class="col-md-6">
+                            <input class="form-control @error('period') is-invalid @enderror" type="text" name="period"
+                            value="{{old('period')}}"  id="" aria-describedby="helpId" placeholder="">
+                            @error('period')
+                                <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label class="col-md-4 text-md-right" for="description">Descripcion:</label>
+                        <div class="col-md-6">
+                            <input class="form-control @error('description') is-invalid @enderror" type="text" name="description"
+                            value="{{old('description')}}"  id="" aria-describedby="helpId" placeholder="">
+                            @error('description')
+                                <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <label class="col-md-4 text-md-right" for="document">Adjuntar:</label>
+                        <div class="col-md-6">
+                            <input class="form-control @error('document') is-invalid @enderror" type="file" name="document" accept=".pdf"
+                            value="{{old('document')}}"  id="" aria-describedby="helpId" placeholder="">
+                            @error('document')
+                                <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                            @enderror
+                        </div>
+                    </div>     
+                    <div class="row my-3">
+                        <div class="col-md-7 text-md-right"> 
+                            <button class="btn btn-primary" type="submit">Publicar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </form>
-
-</div>
-</div>
-</div>
+    </div>
 </div>
 @endsection
