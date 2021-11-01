@@ -21,6 +21,7 @@ class ListUser extends Component
 
        $users=User::whereIn('id',$this->level)->paginate();
        //return view('livewire.admin.users-index',compact('users'));
+      // ->whereNotIn('id', [1, 2, 3])
        $students=User::where('name','LIKE','%'. $this->search .'%')->orWhere('email','LIKE','%'. $this->search .'%')->role('Estudiante')->paginate();
        //$students=User::where('name','LIKE','%'. $this->search .'%')->orWhere('email','LIKE','%'. $this->search .'%')->paginate();
       // $users2=$students->where('name','LIKE','%'. $this->search .'%')->orWhere('email','LIKE','%'. $this->search .'%')->paginate();

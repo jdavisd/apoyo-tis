@@ -92,7 +92,7 @@
                               
                                     <a class="dropdown-item" href="{{ route('user.password.edit',Auth::user()->id) }}">
                                    
-                                        {{ __('cambiar') }}
+                                        {{ __('Cambiar contraseña') }}
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
