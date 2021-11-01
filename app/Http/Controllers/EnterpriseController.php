@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEnterprise;
 use App\Models\Adviser;
+use App\Models\Document;
 use App\Models\Enterprise;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -33,7 +35,8 @@ class EnterpriseController extends Controller
      // return view('enterprises.create');
        $project = Project::pluck('name','id');
        //return  $project;
-       $adviser = Adviser::pluck('name','id');
+       $adviser = User::find(2);
+    
        return view('enterprises.create',compact('project','adviser'));
        
      
@@ -58,8 +61,20 @@ class EnterpriseController extends Controller
             'logo'=>$request->logo          
         ]);
        // $project=Project::findById($request->id_project);
+       if(!$request->hasFile('logo')){
+        return "No tiene el archivo";
+       }
+       $document=new Document();
+       $document2=$request->file('logo');
+       $document->name = $document2->getClientOriginalName();
+       $document2=$request->file('logo')->storeAs('logos',$document2->getClientOriginalName(),'public');
+       //$announcement->save();
+       $document->imageable_id= 1;
+       $document->imageable_type= Announcement::class;
+       $document->save();
+
         $enterprise->projectEnterprises1()->create([
-            'adviser_id'=>$request->adviser_id,
+            'adviser_id'=>1,
             'project_id'=>$request->project_id    
         ]
         );

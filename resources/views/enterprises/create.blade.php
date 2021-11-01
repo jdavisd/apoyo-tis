@@ -6,7 +6,7 @@
       <div class="card">
           <div class="card-header"><strong class="h5">Postular</strong></div>
           <div class="card-body">
-            <form method="POST" action="{{route('empresa.store')}}">
+            <form method="POST" action="{{route('empresa.store')}}" enctype="multipart/form-data">
               @csrf
               <div class="row my-3">
                 <label for=""class="col-md-4 text-md-right">Nombre Corto</label>
@@ -34,7 +34,7 @@
 <div class="row my-3">
   <label for="" class="col-md-4 text-md-right">Logo</label>
   <div class="col-md-6">
-  <input type="text" class="form-control @error('logo') is-invalid @enderror " name="logo" value="{{old('logo')}}"  id="" aria-describedby="helpId" placeholder="">
+  <input type="file" class="form-control @error('logo') is-invalid @enderror " name="logo" value="{{old('logo')}}"  id="" aria-describedby="helpId" placeholder="">
   @error('logo')
                           <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
                         @enderror
