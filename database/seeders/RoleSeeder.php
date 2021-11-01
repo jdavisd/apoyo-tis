@@ -28,9 +28,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=>'admin.roles.show ','description'=>'registrar y administrar empresas']);*/
         Permission::create(['name'=>'admin.roles','description'=>'registrar y administrar roles'])->syncRoles(['Admin']);
 
-        Permission::create(['name'=>'anuncio.index','description'=>'ver anuncios publicados'])->syncRoles(['Consultor']);
         Permission::create(['name'=>'anuncio.create','description'=>'crear anuncios'])->syncRoles(['Consultor']);
-
+        Permission::create(['name'=>'anuncio.edit','description'=>'editar anuncios publicados'])->syncRoles(['Consultor']);
+        Permission::create(['name'=>'anuncio.destroy','description'=>'eliminar anuncios publicados'])->syncRoles(['Consultor']);
+        Permission::create(['name'=>'anuncio.document','description'=>'ver documento de anuncios publicados'])->syncRoles(['Consultor','Admin','Estudiante']);
 
 
     }

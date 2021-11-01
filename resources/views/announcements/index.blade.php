@@ -19,13 +19,19 @@
                         <p class="card-text">{{$doc->period}}</p>
                         <p class="card-text">{{$doc->description}}</p>
                         <div class="row align-self-end"  >
-                            <a class="btn btn-primary mx-2" href="{{asset('storage/anuncios').'/'.$doc->name}}" target="blank_">Ver Documento</a>
+                            @can('anuncio.document')
+                                <a class="btn btn-primary mx-2" href="{{asset('storage/anuncios').'/'.$doc->name}}" target="blank_">Ver Documento</a>
+                            @endcan
+                            @can('anuncio.destroy')
                             <form action="{{route('anuncio.destroy',$doc->document_id)}}" method="POST">
                                 @csrf
                                 @method('delete')
                                 <button class="btn btn-danger mx-2" type="submit">Eliminar</button>
                             </form>
-                            <a class="btn btn-primary mx-2" href="{{route('anuncio.edit',$doc->document_id)}}">Editar</a>    
+                            @endcan
+                            @can('anuncio.edit')
+                                <a class="btn btn-primary mx-2" href="{{route('anuncio.edit',$doc->document_id)}}">Editar</a>    
+                            @endcan
                         </div> 
                     </div>          
                 </div>          

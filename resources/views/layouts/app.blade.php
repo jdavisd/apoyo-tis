@@ -53,12 +53,7 @@
                    </li>
                    @endcan 
                    
-                   @can('anuncio.index')
-                   <li class="nav-item">
-                    <a class="nav-link" href="{{ route('anuncio.index') }}">{{ __('Ver Anuncios') }}</a>
-                    </li>
-                    @endcan
-                
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
