@@ -45,12 +45,15 @@
                         <a class="nav-link" href="{{ route('empresa.create') }}">{{ __('Postularse') }}</a>
                    </li> 
                     @endcan  
+                   
+                   
                     @can('anuncio.create')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('anuncio.create') }}">{{ __('Anuncios') }}</a>
                    </li>
                    @endcan 
-                   @can('anuncio.create')
+                   
+                   @can('anuncio.index')
                    <li class="nav-item">
                     <a class="nav-link" href="{{ route('anuncio.index') }}">{{ __('Ver Anuncios') }}</a>
                     </li>

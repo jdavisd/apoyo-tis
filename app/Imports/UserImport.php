@@ -5,6 +5,7 @@ use Maatwebsite\Excel\Concerns\Importable;
 use App\Http\Controllers\MailController;
 use App\Mail\SendMail;
 use App\Models\User;
+use App\Notifications\NewUser;
 use Illuminate\Notifications\Messages\MailMessage;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Support\Facades\Hash;
@@ -16,7 +17,7 @@ use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 
 
-class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
+class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure,SkipsEmptyRows
 {
     use Importable,SkipsFailures,SkipsErrors;
     public $roles;
@@ -44,16 +45,18 @@ class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
         $user=  User::create([
             'name'=>$row['name'],
             'email'=>$row['email'],
-            //'password'=>Hash::make($row['password']),
+             'password'=>Hash::make($row['email']),
             //'password'=>Hash::make($codeSis),
-            'password'=>Hash::make($partsEmail[0].$partname),
+            //'password'=>Hash::make($partsEmail[0].$partname),
         ]);
+        
         if($this->roles){
             $user->roles()->sync($this->roles);
         }
 
         if($this->send){
-            $this->enviar->sendMail($row['email']);
+            //$this->enviar->sendMail($row['email']);
+            $user->notify(new NewUser($user));
         }
        // $this->enviar->sendMail($row['email']);
         return $user;
@@ -65,6 +68,7 @@ class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
        
             'name' => ['required'],
             'email' => ['required','unique:users,email'],
+            //'code' => ['required','unique:users,code'],
         ];
         
     }

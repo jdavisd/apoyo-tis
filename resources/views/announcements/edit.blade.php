@@ -68,7 +68,7 @@
                         </div>     
                         <div class="row my-3">
                             <div class="col-md-7 text-md-right"> 
-                                <button class="btn btn-primary" type="submit">Publicar</button>
+                                <button class="btn btn-primary" type="submit">Guardar Cambios</button>
                             </div>
                         </div>
                     </form>

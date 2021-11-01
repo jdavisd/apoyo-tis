@@ -3,6 +3,8 @@
    <div class="card">
     <div class="card-header">
      <input wire:model="search" class="form-control"placeholder="Ingrese nombre o correo del usuario">
+    {{$search}}
+    
     </div>
        @if ($users->count())
            

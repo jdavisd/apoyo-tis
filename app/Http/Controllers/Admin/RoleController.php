@@ -81,15 +81,11 @@ class RoleController extends Controller
      */
     public function update(Request $request, $role)
     {
-        $request->validate([
-            'name'=>'required'
-          ]);
-  
           //$role=Role::create($request->all());
-          $roles=Role::find($role);
-          $roles->permissions()->sync( $request->permissions);
+          $roles1=Role::find($role);
+          $roles1->syncPermissions( $request->permissions);
+         // $role->permissions()->sync( $request->permissions);
           return redirect()->route('admin.roles.edit',$role)->with('info','Se actualizo el rol');
-  
     }
 
     /**

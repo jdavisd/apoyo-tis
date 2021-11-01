@@ -18,12 +18,12 @@ class CreateProjectEnterprisesTable extends Migration
             $table->enum('status',[1,2,3,4,5])->default(1);
             $table->timestamps();
 
-           $table->unsignedBigInteger('adviser_id');
+           $table->unsignedBigInteger('users_id');
             $table->unsignedBigInteger('enterprise_id');
             $table->unsignedBigInteger('project_id');
             
 
-            $table->foreign('adviser_id')->references('id')->on('advisers')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('enterprise_id')->references('id')->on('enterprises')->onDelete('cascade');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
 

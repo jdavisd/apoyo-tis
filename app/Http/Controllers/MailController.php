@@ -22,6 +22,7 @@ class MailController extends Controller
             'body'=>'Est es un mensaje de prueba con exel'
         ];
         Mail::to($email)->send(new SendMail($details));
+
         return "correo enviado";
     }
 }

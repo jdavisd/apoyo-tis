@@ -10,6 +10,6 @@ class Project extends Model
     use HasFactory;
     protected $guarded=['status'];
     public function projectEnterprises(){
-        return $this->hasMany(Enterprise::class,'project_enterprises');
+        return $this->hasMany(ProjectEnterprise::class,'project_enterprises');
     }
 }

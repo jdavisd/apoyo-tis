@@ -8,8 +8,7 @@
 @stop
 
 @section('content')
-  
-    @livewire('admin.users-index')
+    @livewire('admin.users-index')    
 @stop
 
 @section('css')
@@ -17,5 +16,6 @@
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+    <script> console.log('Hi!ffddsf'); </script>
+
 @stop

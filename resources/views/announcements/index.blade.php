@@ -38,6 +38,7 @@
 <div  class="text-center">
     <h3>Aun no se ha pulicado ningun anuncio</h3>
 </div>
+
 @endif
 
 @endsection
