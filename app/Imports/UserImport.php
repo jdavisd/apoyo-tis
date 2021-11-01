@@ -16,7 +16,7 @@ use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsOnFailure;
 
 
-class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
+class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure,SkipsEmptyRows
 {
     use Importable,SkipsFailures,SkipsErrors;
     public $roles;
