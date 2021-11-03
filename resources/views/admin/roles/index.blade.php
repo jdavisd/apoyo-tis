@@ -16,7 +16,7 @@
 @endif
   <div class="card">
     <div class="card-body">
-        <table class="table table-light"
+        <table class="table table-striped"
           <thead class="thead-light">
                <tr>
                    <th>ID</th>

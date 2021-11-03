@@ -8,6 +8,7 @@ use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -22,15 +23,9 @@ use App\Http\Controllers\UserController;
 |
 */
 
-//Route::get('/', function () {
- //   return view('welcome');
-//});
 
 Auth::routes(['reset'=>true,'register'=>true,'login'=>true]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
-//Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
 Route::resource('anuncio', AnnouncementController::class);

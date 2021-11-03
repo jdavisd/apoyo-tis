@@ -31,6 +31,7 @@ class StoreEnterprise extends FormRequest
             'email'=>'required|max:40',
             'type'=>'required|max:40',
             'logo'=>'required',
+            'period'=>'required',        
             'email'=>'required|max:40',
             'adviser_id'=>'required',
             'project_id'=>'required'
