@@ -4,7 +4,7 @@
 
 @livewireScripts
  <div class="row justify-content-center">
-  {{Auth::user()->id}}  
+
   <div class="col-md-8">
         <div class="card">
             <div class="card-header"><strong class="h5">Postular</strong></div>

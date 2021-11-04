@@ -24,13 +24,13 @@ class NotificationUser extends Component
     public function decline(){
         $user=Auth::user()->id;
         User::where('id',$user)->update(['notification'=>null]);
-        $this->search=false;
+        $this->open=false;
     }
     public function acept(){
 
         $user=Auth::user()->id;
         User::where('id',$user)->update(['notification'=>null]);
         User::where('id',$user)->update(['enterprise_id'=>Auth::user()->notification]);
-        $this->search=false;
+        $this->open=false;
     }
 }

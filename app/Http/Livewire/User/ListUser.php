@@ -28,8 +28,7 @@ class ListUser extends Component
        $this->level[]=Auth::user()->id;
        $users=User::whereIn('id',$this->level)->paginate();
        $students=User::where('name','LIKE','%'. $this->search .'%')->orWhere('email','LIKE','%'. $this->search .'%')->whereNotIn('id',[Auth::user()->id ])->role('Estudiante')->paginate();
-       return view('livewire.user.list-user',compact('project','adviser','students','users'));
-        
+       return view('livewire.user.list-user',compact('project','adviser','students','users'));        
     }
     public function levelClicked()
     {
