@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Enterprise extends Model
 {
     use HasFactory;
-protected $fillable=['short_name','long_name','address','phone','email','type','logo','project_id','adviser_id'];
+protected $fillable=['short_name','long_name','address','phone','email','type','logo','project_id','adviser_id','period'];
    //s protected $guarded=['status'];
 
     public function projectEnterprises1(){

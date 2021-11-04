@@ -1,9 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Publicaciones')
-    
-@section('content')
-    
+@section('content') 
+@if (Auth::user()->notification)
+@livewire('user.notification-user')    
+@endif
+
 <br>
 @if ($documents->count())
 <div class="container">
@@ -47,5 +48,5 @@
 
 @endif
 
-@endsection
+@stop
 

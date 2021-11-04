@@ -30,6 +30,7 @@ class HomeController extends Controller
        // return view('home');
        $documents = Document::OfType('App\Models\Announcement')->join('announcements', 'announcements.id', '=', 'imageable_id')->get();
        //return $documents;
+      // return "cerdo";
        return view('announcements.index',compact('documents'));
     }
 }

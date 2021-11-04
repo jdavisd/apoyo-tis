@@ -10,8 +10,8 @@
            
       
        <div class="card-body">
-          <table class="table table-light"
-            <thead class="thead-light">
+          <table class="table table-striped"
+            <thead >
                  <tr>
                      <th>ID</th>
                      <th>Nombre</th>

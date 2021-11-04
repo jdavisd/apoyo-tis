@@ -1,11 +1,8 @@
-
 <div>
-
-
 @livewireScripts
-
  <div class="row justify-content-center">
-    <div class="col-md-8">
+
+  <div class="col-md-8">
         <div class="card">
             <div class="card-header"><strong class="h5">Postular</strong></div>
                  <div class="card-body">
@@ -77,6 +74,17 @@
          </div>
           </div>
         
+          <div class="row my-3">
+            <label class="col-md-4 text-md-right" for="date">Periodo</label>
+            <div class="col-md-6">
+                <input class="form-control @error('period') is-invalid @enderror" type="text" name="period"
+                value="{{old('period')}}"  id="" aria-describedby="helpId" placeholder="">
+                @error('period')
+                    <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                @enderror
+            </div>
+        </div>
+
           <div class="row my-3">{!! Form::label('adviser_id', 'Consultor',['class' => 'col-md-4 text-md-right']) !!}
             <div class="col-md-6">
             {!! Form::select ('adviser_id', $adviser, null, ['class' => 'form-control ' . ($errors->has('adviser_id') ? ' is-invalid' : null)]) !!}
@@ -200,7 +208,8 @@
                  @endforeach
               
              </tbody>
-          </table>
+         </table>
+          
        </div>
       
            <div class="card-footer">
