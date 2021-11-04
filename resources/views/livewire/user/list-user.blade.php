@@ -200,12 +200,11 @@
                  @endforeach
               
              </tbody>
-         </table>
           </table>
        </div>
       
            <div class="card-footer">
-               {{$users->links()}}
+               {{$students->links()}}
            </div>
            
                
