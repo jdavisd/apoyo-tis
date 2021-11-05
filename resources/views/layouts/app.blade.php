@@ -65,12 +65,14 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Inciar sesion') }}</a>
                                 </li>
                             @endif
-
-                            @if (Route::has('register'))
+                                @can('user.notify')
+                                @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Registro') }}</a>
                                 </li>
                             @endif
+                                @endcan
+                            
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -84,11 +86,13 @@
                                         {{ __('Administracion') }}
                                     </a>
                                     @endcan
-                              
+                                    @can('user.password.edit')
                                     <a class="dropdown-item" href="{{ route('user.password.edit',Auth::user()->id) }}">
                                    
                                         {{ __('Cambiar contraseña') }}
                                     </a>
+                                    @endcan
+                                    
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

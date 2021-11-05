@@ -61,6 +61,20 @@
                             </div>
                         </div>
 
+                        @can('user.notify')
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">
+                                Notificar
+                            </label>
+                        
+                        <div class="col-md-6 col-form-label text-md">
+                          <label >       
+                              {!! Form::checkbox('send',null, null, ['class'=>'mr-1']) !!}
+                             Enviar mensajes de notificación
+                          </label> 
+                        </div></div>
+                        @endcan
+
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

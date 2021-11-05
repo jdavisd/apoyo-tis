@@ -7,6 +7,7 @@ use App\Models\Announcement;
 use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class AnnouncementController extends Controller
 {
@@ -57,8 +58,11 @@ class AnnouncementController extends Controller
 
         if($request->hasFile('document')){
             $document2=$request->file('document');
+            $nameDocument=$document2->getClientOriginalName();
             $document->name = $document2->getClientOriginalName();
-            $document2=$request->file('document')->storeAs('anuncios',$document2->getClientOriginalName(),'public');
+            //$document2=$request->file('document')->storeAs('../public/storage/anuncios',$document2->getClientOriginalName(),'public');
+            //$document2->move(public_path().'/storage/anuncios/',$document2->getClientOriginalName());
+            Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
             $announcement->save();
             $document->imageable_id= $announcement->id;
             $document->imageable_type= Announcement::class;
@@ -118,12 +122,15 @@ class AnnouncementController extends Controller
         $announcement->period = $request->period;
         $announcement->description = $request->description;
         if($request->hasFile('document')){
-            unlink(storage_path('app/public/anuncios/'.$document->name));
+            Storage::disk('ftp')->delete('anuncios/'.$document->name); 
+            //unlink(storage_path('app/public/anuncios/'.$document->name));
             $document2=$request->file('document');
             $var = DB::table('documents')
               ->where('document_id', $document->document_id)
               ->update(['name' => $document2->getClientOriginalName()]);
-            $document2=$request->file('document')->storeAs('anuncios',$document2->getClientOriginalName(),'public');
+            //$document2=$request->file('document')->storeAs('anuncios',$document2->getClientOriginalName(),'public');
+            $nameDocument=$document2->getClientOriginalName();
+            Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
         }
         $announcement->save();
 
@@ -140,7 +147,8 @@ class AnnouncementController extends Controller
     {
         $document = Document::where('document_id', "=" , $document)->first();
         $announcement = Announcement::find($document->imageable_id);
-        unlink(storage_path('app/public/anuncios/'.$document->name));
+        Storage::disk('ftp')->delete('anuncios/'.$document->name); 
+        //unlink(storage_path('app/public/anuncios/'.$document->name));
         DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
         $announcement->delete();
         return redirect()->route('anuncio.index');

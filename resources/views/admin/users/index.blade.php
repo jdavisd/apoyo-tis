@@ -4,6 +4,7 @@
 
 @section('content_header')
     <a class="btn btn-primary btn-sm float-right" href="{{route('admin.usersimport.create')}}">importar Usuarios</a>
+    <a class="btn btn-primary btn-sm float-right mx-3" href="{{ route('register') }}">Registrar Usuario</a>
     <h1>Usuarios</h1>
 @stop
 

@@ -34,6 +34,6 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=>'anuncio.destroy','description'=>'eliminar anuncios publicados'])->syncRoles(['Consultor']);
         Permission::create(['name'=>'anuncio.document','description'=>'ver documento de anuncios publicados'])->syncRoles(['Consultor','Admin','Estudiante']);
 
-
+        Permission::create(['name'=>'user.notify','description'=>'notificar a un usuario registrado'])->syncRoles(['Admin']);
     }
 }

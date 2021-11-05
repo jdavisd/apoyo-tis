@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Auth;
 */
 
 
-Auth::routes(['reset'=>true,'register'=>false,'login'=>true]);
+Auth::routes(['reset'=>true,'register'=>true,'login'=>true]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
