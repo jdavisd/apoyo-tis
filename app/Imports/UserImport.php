@@ -55,8 +55,8 @@ class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
         }
 
         if($this->send){
-            //$this->enviar->sendMail($row['email']);
-            $user->notify(new NewUser($user));
+            $this->enviar->sendMail($row['email']);
+           // $user->notify(new NewUser($user));
         }
        // $this->enviar->sendMail($row['email']);
         return $user;
@@ -65,9 +65,12 @@ class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
     {
       
         return [
-       
+      
             'name' => ['required'],
-            'email' => ['required','unique:users,email'],
+            //'email' => ['required','unique:users,email'],
+            'email' => ['unique:users,email','required','email:rfc,dns,filter']
+            //'email' => ['required','unique:users,email'],
+         
             //'code' => ['required','unique:users,code'],
         ];
         

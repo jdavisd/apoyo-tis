@@ -15,7 +15,7 @@
 <section style="padding-top:60;">
     <div class="container">
        <div class="row">
-          <div class="col-md-6 offset-md3">
+          <div class="col-md-8 offset-md3">
               <div class="card">
                  <!-- <div class="card-header">
                      <h3>Importar usuarios</h3>
@@ -36,7 +36,7 @@
                         @enderror
                     
                         @if (session()->has('failures'))
-                            <table class="table table-danger">
+                            <table class="table table-danger table-responsive">
                                 <thead>
                                     <tr>
                                     <th>

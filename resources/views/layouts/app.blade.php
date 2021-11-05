@@ -89,11 +89,12 @@
                                         {{ __('Administracion') }}
                                     </a>
                                     @endcan
-                              
+                                    @can('user.password.edit')
                                     <a class="dropdown-item" href="{{ route('user.password.edit',Auth::user()->id) }}">
                                    
                                         {{ __('Cambiar contraseña') }}
                                     </a>
+                                    @endcan
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
