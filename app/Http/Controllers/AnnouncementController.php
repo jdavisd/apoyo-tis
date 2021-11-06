@@ -71,7 +71,8 @@ class AnnouncementController extends Controller
         }else{
             $announcement->save();
         }
-        return redirect()->route('anuncio.index');
+        return redirect()->route('anuncio.index')->with('info','Se creo el anuncio');
+
     }
 
     /**
@@ -134,8 +135,7 @@ class AnnouncementController extends Controller
             Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
         }
         $announcement->save();
-
-        return redirect()->route('anuncio.index');
+        return redirect()->route('anuncio.index')->with('infoUpdate','Se actualizo el anuncio');
     }
 
     /**
@@ -152,6 +152,6 @@ class AnnouncementController extends Controller
         //unlink(storage_path('app/public/anuncios/'.$document->name));
         DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
         $announcement->delete();
-        return redirect()->route('anuncio.index');
+        return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
     }
 }

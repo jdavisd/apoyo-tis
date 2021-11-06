@@ -4,9 +4,36 @@
 @if (Auth::user()->notification)
 @livewire('user.notification-user')    
 @endif
-
-<br>
 @if ($documents->count())
+@if (session('info'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>{{session('info')}}</strong> 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  
+@endif
+@if (session('infoUpdate'))
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>{{session('infoUpdate')}}</strong> 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  
+@endif
+
+@if (session('infoDelete'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>{{session('infoDelete')}}</strong> 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  
+@endif
+
 <div class="container">
     <div class="row row-cols-1 row-cols-md-2">
         @foreach ($documents as $doc)
