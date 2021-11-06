@@ -15,14 +15,8 @@ class MailController extends Controller
     {
     }
 
-    public function sendMail($email){
-
-        $details=[
-            'title'=>'Correo de creacion de cuenta',
-            'body'=>'Est es un mensaje de prueba con exel'
-        ];
+    public function sendMail($email,$details){  
         Mail::to($email)->send(new SendMail($details));
-
-        return "correo enviado";
     }
+    
 }

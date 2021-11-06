@@ -26,7 +26,8 @@
                         <label for="password" class="col-md-4 text-md-right">contraseña </label>
                         <div class="col-md-6">
                             <input   class="form-control  @error('password') is-invalid @enderror" id="password"name ="password"type="password"class="form-control">    
-                        @error('password')
+                       
+                            @error('password')
                         <div class=""><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
                       @enderror
                        </div>
@@ -37,7 +38,8 @@
                         
       <label  class="col-md-4 text-md-right" for="password_confirmation">Confirmar contraseña</label>
                         <div class="col-md-6">
-                            <input name ="password_confirmation"type="password"class="form-control  @error('password_confirmation') is-invalid @enderror">    
+                          
+                          <input name ="password_confirmation"type="password"class="form-control  @error('password_confirmation') is-invalid @enderror">    
                         @error('password_confirmation')
                         <div class=""><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
                       @enderror

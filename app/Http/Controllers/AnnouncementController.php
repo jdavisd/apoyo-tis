@@ -65,7 +65,7 @@ class AnnouncementController extends Controller
             $document2=$request->file('document')->storeAs('Anuncios',$document2->getClientOriginalName(),'public');
             //Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument.'/',\File::get($document2));
             //$nameDocument=$document2->getClientOriginalName();
-            Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
+           // Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
             $announcement->save();
             $document->imageable_id= $announcement->id;
             $document->imageable_type= Announcement::class;
@@ -73,7 +73,8 @@ class AnnouncementController extends Controller
         }else{
             $announcement->save();
         }
-        return redirect()->route('anuncio.index');
+        return redirect()->route('anuncio.index')->with('info','Se creo el anuncio');
+
     }
 
     /**
@@ -133,8 +134,7 @@ class AnnouncementController extends Controller
             $document2=$request->file('document')->storeAs('anuncios',$document2->getClientOriginalName(),'public');
         }
         $announcement->save();
-
-        return redirect()->route('anuncio.index');
+        return redirect()->route('anuncio.index')->with('infoUpdate','Se actualizo el anuncio');
     }
 
     /**
@@ -150,6 +150,6 @@ class AnnouncementController extends Controller
         unlink(storage_path('app/public/anuncios/'.$document->name));
         DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
         $announcement->delete();
-        return redirect()->route('anuncio.index');
+        return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
     }
 }

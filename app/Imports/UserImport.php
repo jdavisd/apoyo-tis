@@ -37,47 +37,32 @@ class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
     */
     public function model(array $row)
     {
-        $partsEmail= explode("@", strval( $row['email']));
-        //$partsName= explode(" ", strval( $row['name']));
-        //substr(string,start,length)
-        $partname=substr(strval( $row['name']),0,3);
-
         $user=  User::create([
             'name'=>$row['name'],
             'email'=>$row['email'],
-             'password'=>Hash::make($row['email']),
-            //'password'=>Hash::make($codeSis),
-            //'password'=>Hash::make($partsEmail[0].$partname),
-        ]);
-        
+            'password'=>Hash::make($row['email']),
+        ]);      
         if($this->roles){
             $user->roles()->sync($this->roles);
         }
-
         if($this->send){
-            $this->enviar->sendMail($row['email']);
-           // $user->notify(new NewUser($user));
+            $details=[
+                'title'=>'Correo de creacion de cuenta',
+                'body'=>'Usted ha sido registrado en la platadorma de TIS Utilize su correo institucional como correo y como contraseña para ingresar a la plataforma No olvide por seguridad realizar el cambio de su contraseña',
+                'action'=>'PlataformaTIS',
+                'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
+            ];
+            $this->enviar->sendMail($row['email'],$details);
         }
-       // $this->enviar->sendMail($row['email']);
         return $user;
     }
     public function rules(): array
     {
       
         return [
-      
             'name' => ['required'],
-            //'email' => ['required','unique:users,email'],
             'email' => ['unique:users,email','required','email:rfc,dns,filter']
-            //'email' => ['required','unique:users,email'],
-         
-            //'code' => ['required','unique:users,code'],
         ];
         
     }
-
-/*public function customValidationAttributes()
-{
-    return ['email' => 'correo'];
-}*/
 }
