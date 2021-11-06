@@ -28,6 +28,6 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Este es un mensaje de prueba')->view('emails.send');
+        return $this->subject('Registro de cuenta en TIS')->view('emails.send');
     }
 }

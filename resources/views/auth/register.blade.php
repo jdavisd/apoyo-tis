@@ -61,7 +61,7 @@
                             </div>
                         </div>
 
-                        @can('user.notify')
+                        @can('user.notificar')
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">
                                 Notificar
