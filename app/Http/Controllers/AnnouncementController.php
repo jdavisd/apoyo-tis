@@ -58,11 +58,12 @@ class AnnouncementController extends Controller
 
         if($request->hasFile('document')){
             $document2=$request->file('document');
+
             $nameDocument=$document2->getClientOriginalName();
+
             $document->name = $document2->getClientOriginalName();
-            //$document2=$request->file('document')->storeAs('../public/storage/anuncios',$document2->getClientOriginalName(),'public');
-            //$document2->move(public_path().'/storage/anuncios/',$document2->getClientOriginalName());
-            Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
+            $document2=$request->file('document')->storeAs('Anuncios',$document2->getClientOriginalName(),'public');
+            //Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
             $announcement->save();
             $document->imageable_id= $announcement->id;
             $document->imageable_type= Announcement::class;

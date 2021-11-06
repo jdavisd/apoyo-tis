@@ -40,6 +40,11 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name'=>['required', 'max:40', 'min:6'],
+            'period'=>['required'],
+            'code'=>['required'],
+          ]);
         $request=Project::create($request->all());
         return $request->all();
 
