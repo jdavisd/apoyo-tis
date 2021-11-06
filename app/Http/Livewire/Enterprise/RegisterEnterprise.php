@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\User;
+namespace App\Http\Livewire\Enterprise;
 
 use Livewire\Component;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
 use Livewire\WithPagination;
-class ListUser extends Component
+class RegisterEnterprise extends Component
 {
     use WithPagination;
     protected $paginationTheme='bootstrap';
@@ -28,7 +27,7 @@ class ListUser extends Component
        $this->level[]=Auth::user()->id;
        $users=User::whereIn('id',$this->level)->paginate();
        $students=User::where('name','LIKE','%'. $this->search .'%')->orWhere('email','LIKE','%'. $this->search .'%')->whereNotIn('id',[Auth::user()->id ])->role('Estudiante')->paginate();
-       return view('livewire.user.list-user',compact('project','adviser','students','users'));        
+       return view('livewire.enterprise.register-enterprise',compact('project','adviser','students','users'));        
     }
     public function levelClicked()
     {

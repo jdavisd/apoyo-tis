@@ -1,6 +1,6 @@
  @extends('layouts.app')
 
  @section('content') 
-    @livewire('user.list-user')  
+    @livewire('enterprise.register-enterprise')  
 
 @stop

@@ -1,44 +1,57 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid" style="
-    background-color: #6cb2eb;
-    max-width: 120rem;
-    width: 75%;
-    margin: 2rem auto;
 
 
-    ">
-<h4>Postular</h4>
-<div style="
-    background-color: #6cb2eb;
-    max-width: 120rem;
-    width: 90%;
-    margin: 1rem auto;
-    ">
-<form method="POST" action="{{route('proyecto.store')}}">
-    @csrf
-    <div class="mb-3">
-      <label for="" class="form-label">Nombre proyecto</label>
-      <input type="text"
-        class="form-control" name="name" id="" aria-describedby="helpId" placeholder="">
-     
-    </div>
-    <div class="mb-3">
-      <label for="" class="form-label">Gestion</label>
-      <input type="text"
-        class="form-control" name="period" id="" >
-   
-    </div>
-    <div class="mb-3">
-      <label for="" class="form-label">Numero de pliego</label>
-      <input type="text"
-        class="form-control" name="code" id="" >
-   
-    </div>
-    <input name="" id="" class="btn btn-success"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
-    <br>
-</form>
+
+<div class="row justify-content-center">
+  <div class="col-md-8">
+      <div class="card">
+          <div class="card-header"><strong class="h5">Registrar proyecto </strong></div>
+          <div class="card-body">
+            <form method="POST" action="{{route('proyecto.store')}}">
+                  @csrf
+                  <div class="row my-3">
+                    <label for="name" class="col-md-4 text-md-right" >Nombre proyecto</label>
+                      <div class="col-md-6">
+                        <input class="form-control @error('name') is-invalid @enderror" type="text" name="name"
+                          value="{{old('name')}}"  id="" aria-describedby="helpId" placeholder="">
+                          @error('name')
+                              <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                          @enderror
+                      </div>
+                  </div>
+                  <div class="row my-3">
+                      <label class="col-md-4 text-md-right" for="period">Gestion</label>
+                      <div class="col-md-6">
+                          <input class="form-control @error('period') is-invalid @enderror" type="text" name="period"
+                          value="{{old('period')}}"  id="" aria-describedby="helpId" placeholder="">
+                          @error('period')
+                              <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                          @enderror
+                      </div>
+                  </div>
+                  <div class="row my-3">
+                      <label class="col-md-4 text-md-right" for="code">Numero de pliego</label>
+                      <div class="col-md-6">
+                          <input class="form-control @error('code') is-invalid @enderror" type="text" name="code"
+                          value="{{old('code')}}"  id="" aria-describedby="helpId" placeholder="">
+                          @error('code')
+                              <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                          @enderror
+                      </div>
+                  </div>
+                 
+                  <div class="row my-3">
+                      <div class="col-md-7 text-md-right"> 
+                          <button class="btn btn-primary" type="submit">Guardar</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
 </div>
-</div>
+
+
 @endsection
