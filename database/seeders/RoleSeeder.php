@@ -18,7 +18,7 @@ class RoleSeeder extends Seeder
         $name2= Role::create(['name'=>'Consultor']);
         $name3=Role::create(['name'=>'Estudiante']);
         $name3=Role::create(['name'=>'Postulante']);
-        Permission::create(['name'=>'admin.home','description'=>'administracion ventana principal'])->syncRoles(['Admin', 'Consultor']);
+        Permission::create(['name'=>'admin.home','description'=>'administracion ventana principal'])->syncRoles(['Admin']);
         Permission::create(['name'=>'user.home','description'=>'pagina principal anuncios'])->syncRoles(['Admin','Consultor','Estudiante']);
         Permission::create(['name'=>'empresa','description'=>'registrar y administrar empresas'])->syncRoles(['Admin']);
         Permission::create(['name'=>'user.password.edit','description'=>'Editar contraseña de usuario'])->syncRoles(['Admin','Consultor']);
