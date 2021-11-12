@@ -52,19 +52,11 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
-        /*'ftp' => [
-            'driver'   => 'ftp',
-            'host'     => '192.168.2.113',
-            'port'     => '2221',
-            'username' => 'android',
-            'password' => 'android',
-            'root' => '1',
-        ],*/
         'ftp' => [
             'driver'   => 'ftp',
-            'host'     => '167.157.26.45',
-            'username' => 'servisoft',
-            'password' => 'AjKvompqJ5JXIOf',
+            'host' => env('FTP_HOST'),
+            'username' => env('FTP_USERNAME'),
+            'password' => env('FTP_PASSWORD'),
             'root' => 'public_html/storage',
             
         ],

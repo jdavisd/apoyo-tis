@@ -48,11 +48,14 @@ class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
         if($this->send){
             $details=[
                 'title'=>'Correo de creacion de cuenta',
-                'body'=>'Usted ha sido registrado en la platadorma de TIS Utilize su correo institucional como correo y como contraseña para ingresar a la plataforma No olvide por seguridad realizar el cambio de su contraseña',
+                'list'=>['Usted ha sido registrado en la platadorma de TIS',
+                         'Utilize su correo institucional como correo y como contraseña para ingresar a la plataforma',
+                         'No olvide por seguridad realizar el cambio de su contraseña'],
                 'action'=>'PlataformaTIS',
                 'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
             ];
             $this->enviar->sendMail($row['email'],$details);
+           // $user->notify(new NewUser($user));
         }
         return $user;
     }
