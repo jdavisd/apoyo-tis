@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ImportuserRequest;
 use App\Imports\UserImport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Role;
+
 
 
 
@@ -41,12 +43,9 @@ class ImportuserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImportuserRequest $request)
     {
-  
-        $request->validate([
-            'file'=>['required','mimes:xlsx,csv'],
-          ]);
+
           $import=new UserImport($request->roles,$request->send);
           Excel::import( $import,$request->file);
           //$import->rules();
