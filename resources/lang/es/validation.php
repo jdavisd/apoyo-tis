@@ -148,8 +148,14 @@ return [
 
     'attributes' => [
         'name'=>'nombre',
-        'email'=>'correo electronico',
-        'file'=>'archivo'
+        'email'=>'correo electrónico',
+        'file'=>'archivo',
+        'password'=>'contraseña',
+        'title'=>'título',
+        'code'=>'código',
+        'period'=>'gestión',
+        'description'=>'descripción',
+        'document'=>'adjuntar'
     ],
 
 ];

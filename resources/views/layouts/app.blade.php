@@ -62,7 +62,7 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Inciar sesion') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
                                 </li>
                             @endif
                                 @can('user.notify')
@@ -83,13 +83,13 @@
                                     @can('admin.home')
                                     <a class="dropdown-item" href="{{ route('admin.home') }}">
                                    
-                                        {{ __('Administracion') }}
+                                        {{ __('Administración') }}
                                     </a>
                                     @endcan
                                     @can('user.password.edit')
                                     <a class="dropdown-item" href="{{ route('user.password.edit',Auth::user()->id) }}">
                                    
-                                        {{ __('Cambiar contraseña') }}
+                                        {{ __('Cambiar Contraseña') }}
                                     </a>
                                     @endcan
                                     

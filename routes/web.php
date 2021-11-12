@@ -28,7 +28,7 @@ Auth::routes(['reset'=>true,'register'=>true,'login'=>true]);
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('user.home');
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
-Route::resource('anuncio', AnnouncementController::class);
+Route::resource('anuncio', AnnouncementController::class)->middleware('can:anuncio.create');
 //Route::resource('editar-usuario', UserController::class)->names('user.password');
 
 //Route::get('enviar',[MailController::class,'sendMail']);
