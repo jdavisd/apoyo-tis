@@ -3,7 +3,7 @@
 @section('title', 'Apoyo')
 
 @section('content_header')
-    <h1>Asignar rol usarios</h1>
+    <h1>Editar usuario</h1>
 @stop
 
 @section('content')
@@ -12,13 +12,27 @@
         <strong>{{session('info')}}</strong>
     </div>
 @endif
-    <p>Usuarios.</p>
+    
  <div class="card">
      <div class="card-body">
-     <p class="h5">Nombre</p>
-     <p class="form-control">{{$user->name}}</p>
-     <h2 class="h5">Listado de roles</h2>
+  
+
      {!! Form::model($user, ['route'=>['admin.users.update',$user],'method'=>'put']) !!}
+       
+     <label class="" for="name">Nombre:</label>
+         <input class="form-control @error('name') is-invalid @enderror" type="text" name="name"
+         value="{{old('name',$user->name)}}"  id="" aria-describedby="helpId" placeholder="" >
+         @error('name')
+             <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+         @enderror
+         
+         <label class="" for="email">Correo Electronico:</label>
+         <input class="form-control @error('email') is-invalid @enderror" type="text" name="email"
+         value="{{old('email',$user->email)}}"  id="" aria-describedby="helpId" placeholder="" >
+         @error('email')
+             <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+         @enderror
+         <label class="" for="">Roles:</label>
      @foreach ($roles as $role)
          <div>
              <label >
@@ -27,7 +41,7 @@
              </label>
          </div>
      @endforeach
-     {!! Form::submit('Asignar rol', ['class'=>'btn btn-primary mt-2']) !!}
+     {!! Form::submit('Editar Usuario', ['class'=>'btn btn-primary mt-2']) !!}
      {!! Form::close() !!}
      </div>
  </div>

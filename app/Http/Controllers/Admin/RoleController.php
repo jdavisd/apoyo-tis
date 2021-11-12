@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
@@ -42,7 +43,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-          'name'=>'required'
+          'name'=>'[required]'
         ]);
 
         $role=Role::create($request->all());

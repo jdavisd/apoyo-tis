@@ -73,8 +73,15 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $user->roles()->sync($request->roles);
-        return redirect()->route('admin.users.edit',$user)->with('info','Rol asignado correctamente');
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users','email:rfc,dns,filter'],
+        ]);
+         $user->roles()->sync($request->roles); 
+         $user->name = $request->name;
+         $user->email = $request->email;
+         $user->save();
+        return redirect()->route('admin.users.edit',$user)->with('info','Usuario editado correctamente');
     }
 
     /**
