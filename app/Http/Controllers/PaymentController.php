@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProjectEnterprise;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
-class ProjectEnterpriseController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProjectEnterpriseController extends Controller
      */
     public function index()
     {
-       return view('ProjectEnterprise.index');
+        //
     }
 
     /**
@@ -41,22 +41,21 @@ class ProjectEnterpriseController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProjectEnterprise  $projectEnterprise
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Payment $payment)
     {
-         //$project=ProjectEnterprise::find($projectEnterprise);
-         return view('ProjectEnterprise.show',compact('id'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProjectEnterprise  $projectEnterprise
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProjectEnterprise $projectEnterprise)
+    public function edit(Payment $payment)
     {
         //
     }
@@ -65,10 +64,10 @@ class ProjectEnterpriseController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProjectEnterprise  $projectEnterprise
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProjectEnterprise $projectEnterprise)
+    public function update(Request $request, Payment $payment)
     {
         //
     }
@@ -76,10 +75,10 @@ class ProjectEnterpriseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProjectEnterprise  $projectEnterprise
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProjectEnterprise $projectEnterprise)
+    public function destroy(Payment $payment)
     {
         //
     }

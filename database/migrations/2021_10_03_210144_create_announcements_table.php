@@ -19,11 +19,9 @@ class CreateAnnouncementsTable extends Migration
             $table->string('code');
             $table->string('period');
             $table->text('description');
-
             $table->unsignedBigInteger('adviser_id');
-
             $table->foreign('adviser_id')->references('id')->on('advisers')->onDelete('cascade');
-
+             
             $table->timestamps();
         });
     }

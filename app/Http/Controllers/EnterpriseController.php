@@ -7,13 +7,14 @@ use App\Http\Requests\StoreEnterprise;
 use App\Models\Adviser;
 use App\Models\Document;
 use App\Models\Enterprise;
-
+use App\Models\Payment;
 use App\Models\Project;
 use App\Models\ProjectEnterprise;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Traits\HasRoles;
+
 
 
 
@@ -27,7 +28,8 @@ class EnterpriseController extends Controller
      */
     public function index()
     {
-       return view('enterprises.index');
+    
+      return view('enterprises.index');
     }
 
     /**
