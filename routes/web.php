@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\ProjectEnterpriseController;
 use App\Http\Controllers\UserController;
+use App\Models\ProjectEnterprise;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -29,6 +31,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('us
 Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
 Route::resource('anuncio', AnnouncementController::class);
+Route::resource('trabajos',ProjectEnterpriseController::class)->names('user.enterpriseproject');
 //Route::resource('editar-usuario', UserController::class)->names('user.password');
 
 //Route::get('enviar',[MailController::class,'sendMail']);

@@ -75,7 +75,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users','email:rfc,dns,filter'],
+            'email' => ['required', 'string', 'email', 'max:255','email:rfc,dns,filter'],
         ]);
          $user->roles()->sync($request->roles); 
          $user->name = $request->name;

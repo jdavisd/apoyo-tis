@@ -14,7 +14,7 @@ class ProjectEnterpriseController extends Controller
      */
     public function index()
     {
-        //
+       return view('ProjectEnterprise.index');
     }
 
     /**
@@ -44,9 +44,10 @@ class ProjectEnterpriseController extends Controller
      * @param  \App\Models\ProjectEnterprise  $projectEnterprise
      * @return \Illuminate\Http\Response
      */
-    public function show(ProjectEnterprise $projectEnterprise)
+    public function show($projectEnterprise)
     {
-        //
+         $project=ProjectEnterprise::find($projectEnterprise);
+         return $project;
     }
 
     /**

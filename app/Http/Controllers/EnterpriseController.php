@@ -62,7 +62,6 @@ class EnterpriseController extends Controller
           'phone'=>$request->phone,
           'email'=>$request->email,
           'type'=>$request->type,  
-          'period'=>$request->period,  
         ]);
         
         if($request->students){
@@ -79,8 +78,10 @@ class EnterpriseController extends Controller
         $document=new Document(); 
          if($request->hasFile('logo')){
            $document2=$request->file('logo');
+           $nameDocument=$document2->getClientOriginalName();
            $document->name = $document2->getClientOriginalName();
            $document2=$request->file('logo')->storeAs('logos',$document2->getClientOriginalName(),'public');
+            //Storage::disk('ftp')->put('logos'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
            $enterprise->projectEnterprises1()->create([
            'users_id'=>$request->adviser_id,
            'project_id'=>$request->project_id    

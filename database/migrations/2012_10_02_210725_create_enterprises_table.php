@@ -18,7 +18,6 @@ class CreateEnterprisesTable extends Migration
             $table->string('short_name');
             $table->string('long_name');
             $table->string('address');
-            $table->string('period');
             $table->string('phone');
             $table->string('email');
             $table->string('type');
