@@ -22,7 +22,8 @@ class ListEnterprise extends Component
     {
         $enterprises = ProjectEnterprise::join('users','project_enterprises.users_id',"=",'users.id')
         ->join('enterprises', 'project_enterprises.enterprise_id', '=', 'enterprises.id')
-        ->select('enterprises.short_name','enterprises.long_name', 'enterprises.period','users.name')
+        ->join('projects', 'project_enterprises.project_id', '=', 'projects.id')
+        ->select('enterprises.short_name','enterprises.long_name', 'projects.period','users.name')
         ->where('enterprises.short_name','LIKE','%'. $this->search .'%')
         ->orWhere('enterprises.long_name','LIKE','%'. $this->search .'%')->orderBy($this->sort,$this->order)->paginate();
         return view('livewire.enterprise.list-enterprise',compact('enterprises'));

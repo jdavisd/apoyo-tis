@@ -7,13 +7,14 @@ use App\Http\Requests\StoreEnterprise;
 use App\Models\Adviser;
 use App\Models\Document;
 use App\Models\Enterprise;
-
+use App\Models\Payment;
 use App\Models\Project;
 use App\Models\ProjectEnterprise;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Traits\HasRoles;
+
 
 
 
@@ -27,7 +28,8 @@ class EnterpriseController extends Controller
      */
     public function index()
     {
-       return view('enterprises.index');
+    
+      return view('enterprises.index');
     }
 
     /**
@@ -62,7 +64,6 @@ class EnterpriseController extends Controller
           'phone'=>$request->phone,
           'email'=>$request->email,
           'type'=>$request->type,  
-          'period'=>$request->period,  
         ]);
         
         if($request->students){
@@ -79,8 +80,10 @@ class EnterpriseController extends Controller
         $document=new Document(); 
          if($request->hasFile('logo')){
            $document2=$request->file('logo');
+           $nameDocument=$document2->getClientOriginalName();
            $document->name = $document2->getClientOriginalName();
            $document2=$request->file('logo')->storeAs('logos',$document2->getClientOriginalName(),'public');
+            //Storage::disk('ftp')->put('logos'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
            $enterprise->projectEnterprises1()->create([
            'users_id'=>$request->adviser_id,
            'project_id'=>$request->project_id    

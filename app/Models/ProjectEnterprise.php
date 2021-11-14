@@ -19,5 +19,7 @@ class ProjectEnterprise extends Model
     public function project(){
         return $this->belongsTo(Project::class);
     }
-  
+    public function payment(){
+        return $this->hasMany(Payment::class);
+    }
 }
