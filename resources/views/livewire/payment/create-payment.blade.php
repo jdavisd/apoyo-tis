@@ -1,8 +1,8 @@
 <div>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Open Form
+        Adicionar
     </button>
-    
+
     <!-- Modal -->
     <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -17,14 +17,14 @@
                     <form>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Detalles</label>
-                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese detalles" wire:model="details">
+                            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Ingrese detalles" wire:model="details" name="details">
                             {{-- @error('name') <span class="text-danger error">{{ $message }}</span>@enderror --}}
                             {{$details}}
                         
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput2">Fecha</label>
-                            <input type="date" class="form-control" id="exampleFormControlInput2" wire:model="date" >
+                            <input type="date" class="form-control" id="exampleFormControlInput2" wire:model="date" name="date">
                             {{-- @error('email') <span class="text-danger error">{{ $message }}</span>@enderror --}}
                       
                         

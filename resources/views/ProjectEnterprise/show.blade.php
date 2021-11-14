@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
-{{-- @livewire('project-enterprise.show-projectenterprise',['id'=>$id]) --}}
+<div class="text-center">
+@livewire('project-enterprise.show-projectenterprise',['id'=>$id])
 @livewire('payment.create-payment',['id'=>$id])
+</div>
 @stop

@@ -111,14 +111,16 @@
                 <td> {{$project->period}} </td>
                 <td> {{$project->status}} </td>
                 <td> <a class="btn btn-primary mx-2" href="{{route('user.enterpriseproject.show',$project->id)}}">Editar</a>  </td>
-               </tr>
+                {{$project}}
+              
+              </tr>
                @endforeach
       
           </tbody>
         </table>
        </div>
        <div class="card-footer">
-    
+        
     </div>
     
    </div> 

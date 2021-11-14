@@ -45,7 +45,7 @@ class ProjectEnterpriseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
          //$project=ProjectEnterprise::find($projectEnterprise);
          return view('ProjectEnterprise.show',compact('id'));
     }

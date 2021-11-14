@@ -1,20 +1,26 @@
 <div>
-   <div>
-{{$project1}}
-     cabecera 
-   </div>
-   <div>
-       tabla de pagos 
-      <table class="table table-light">
-          <thead class="thead-light">
+    <div>
+    cabecera 
+    </div>
+    <div>
+       <h1>Plan de pagos</h1>
+        <table class="table table-light">
+            <thead class="thead-light">
               <tr>
-                  <th>#</th>
+                  <th>Fecha</th>
+                  <th>Detalles</th>
+                  <th>Entregables</th>
               </tr>
           </thead>
           <tbody>
+            @foreach ($documents as $item)
               <tr>
-                  <td></td>
-              </tr>
+                <td>{{$item->date}}</td>
+                <td>{{$item->details}}</td>
+                <td><a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver Documento</a></td>
+                </tr>
+              @endforeach
+              
           </tbody>
       </table>
    </div>
