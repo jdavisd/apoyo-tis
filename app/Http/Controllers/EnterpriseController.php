@@ -14,6 +14,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -83,7 +84,7 @@ class EnterpriseController extends Controller
            $nameDocument=$document2->getClientOriginalName();
            $document->name = $document2->getClientOriginalName();
            $document2=$request->file('logo')->storeAs('logos',$document2->getClientOriginalName(),'public');
-            //Storage::disk('ftp')->put('logos'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
+          //Storage::disk('ftp')->put('logos'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
            $enterprise->projectEnterprises1()->create([
            'users_id'=>$request->adviser_id,
            'project_id'=>$request->project_id    

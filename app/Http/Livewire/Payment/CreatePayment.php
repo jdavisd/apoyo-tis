@@ -18,7 +18,18 @@ class CreatePayment extends Component
     public $date;
     public $payment;
     public $deliveries;
+    public $updateMode = false;
     
+    protected $rules=[
+        'deliveries' => 'required',
+        'date'=>'required',  
+        'details'=>'required'
+
+    ];
+    public function updated($propertyName){
+        $this->validateOnly($propertyName);
+
+    }
     public function mount($id)
     {
         $this->project = ProjectEnterprise::find($id);
@@ -26,10 +37,11 @@ class CreatePayment extends Component
     }
     public function render()
     {
+
         return view('livewire.payment.create-payment');
     }
     public function store(Request $request){
-    
+        $this->validate();
         $payment=Payment::create([
             'project_enterprise_id' => $this->project->id,
             'date'=>$this->date,  
@@ -44,12 +56,16 @@ class CreatePayment extends Component
             ]);
             $this->deliveries->storeAs('Pagos',$var,'public');
           }
-
+          $this->updateMode = false;
+          $this->emit('userStore'); 
+          $this->reset(['details','date','deliveries','payment']);
+          $this->emit('render');
 
         // $this->proyect->payment()->create([
         //     'details'=>$this->details,
         //     'date'=>$this->date,    
         //   ]
         //   );
+
     }
 }

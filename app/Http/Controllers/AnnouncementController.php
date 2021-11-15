@@ -18,7 +18,8 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $documents = Document::OfType('App\Models\Announcement')->join('announcements','announcements.id',"=",'documents.imageable_id')->get();
+        $documents = Document::OfType('App\Models\Announcement')
+        ->join('announcements','announcements.id',"=",'documents.imageable_id')->get();
         return view('announcements.index',compact('documents'));
     }
 

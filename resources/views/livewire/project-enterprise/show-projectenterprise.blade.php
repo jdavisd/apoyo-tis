@@ -1,6 +1,9 @@
 <div>
     <div>
-    cabecera 
+    cabecera
+    
+    
+    @livewire('payment.create-payment',['id'=>$idP])
     </div>
     <div>
        <h1>Plan de pagos</h1>
@@ -17,12 +20,17 @@
               <tr>
                 <td>{{$item->date}}</td>
                 <td>{{$item->details}}</td>
-                <td><a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver Documento</a></td>
+                <td><a class="btn btn-primary mx-2" href="{{route('file',$item->name)}}" target="blank_">Ver Documento</a></td>
                 </tr>
               @endforeach
               
           </tbody>
       </table>
    </div>
-
+@livewireScripts
+<script type="text/javascript">
+  window.livewire.on('userStore', () => {
+      $('#exampleModal').modal('hide');
+  });
+</script>
 </div>

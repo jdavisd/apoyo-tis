@@ -13,21 +13,26 @@ class ShowProjectenterprise extends Component
     public $project;
     public $payment;
     public $documents;
+    protected $listeners=['render'=>'render'];
+    public $idP;
 
     public function mount($id)
     {
-        $this->project = ProjectEnterprise::find($id);
-        $this->payment=$this->project->payment()->get();
-        $this->documents= Document::OfType('App\Models\Payment')
-        ->join('payments','payments.id',"=",'documents.imageable_id')
-        ->join('project_enterprises','payments.project_enterprise_id','=','project_enterprises.id')
-        ->where('project_enterprises.id','=',$this->project->id)
-        ->get();
+        
+        $this->idP=$id;
     }
     public function render()
     {
         //$this->project=ProjectEnterprise::find(1);
-        $project1=$this->project;
+        $this->reset=['documents'];
+        $this->project = ProjectEnterprise::find( $this->idP);
+        $this->payment=$this->project->payment()->get();
+        $this->documents= Document::OfType('App\Models\Payment')
+        ->join('payments','payments.id',"=",'documents.imageable_id')
+        ->join('project_enterprises','payments.project_enterprise_id','=','project_enterprises.id')
+        ->where('payments.project_enterprise_id','=',$this->project->id)
+        ->get();
+    
         return view('livewire.project-enterprise.show-projectenterprise');
     }
 }
