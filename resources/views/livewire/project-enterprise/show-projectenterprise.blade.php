@@ -27,6 +27,9 @@
           </tbody>
       </table>
    </div>
+   <div class="card-footer">
+    {{$documents->links()}}
+</div>
 @livewireScripts
 <script type="text/javascript">
   window.livewire.on('userStore', () => {
