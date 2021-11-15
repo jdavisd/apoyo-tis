@@ -23,7 +23,7 @@
                     @csrf
                     @method('PUT')
                     <div class="row my-3">
-                        <label for="password" class="col-md-4 text-md-right">contraseña </label>
+                        <label for="password" class="col-md-4 text-md-right">Nueva contraseña </label>
                         <div class="col-md-6">
                             <input   class="form-control  @error('password') is-invalid @enderror" id="password"name ="password"type="password"class="form-control">    
                        

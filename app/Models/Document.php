@@ -9,8 +9,8 @@ class Document extends Model
 {
     use HasFactory;
     protected $fillable=['name','imageable_id','imageable_type'];
-
-    public function imageable(){
+    protected $primaryKey='document_id';
+         public function imageable(){
         return $this->morphTo();
     }
 
