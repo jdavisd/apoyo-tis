@@ -17,7 +17,6 @@ class CreateDocumentsTable extends Migration
             $table->increments('document_id');
             $table->string('name');
             $table->unsignedBigInteger('imageable_id');
-
             $table->string('imageable_type');
             $table->timestamps();
         });

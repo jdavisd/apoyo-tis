@@ -111,8 +111,7 @@
                 <td> {{$project->period}} </td>
                 <td> {{$project->status}} </td>
                 <td> <a class="btn btn-primary mx-2" href="{{route('user.enterpriseproject.show',$project->id)}}">Editar</a>  </td>
-                {{$project}}
-              
+               
               </tr>
                @endforeach
       

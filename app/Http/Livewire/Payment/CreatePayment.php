@@ -29,23 +29,22 @@ class CreatePayment extends Component
         return view('livewire.payment.create-payment');
     }
     public function store(Request $request){
-    
+        
         $payment=Payment::create([
             'project_enterprise_id' => $this->project->id,
             'date'=>$this->date,  
             'details'=>$this->details
           ]);
           if(!$this->deliveries==null){
-              $var = $this->enterprise->short_name.'.'.$this->deliveries->getClientOriginalName();
-            Document::create([
-                'name' => $var,
-                'imageable_id'=>$payment->id,  
-                'imageable_type'=>Payment::class    
-            ]);
-            $this->deliveries->storeAs('Pagos',$var,'public');
-          }
-
-
+                $var = $this->enterprise->short_name.'.'.$this->deliveries->getClientOriginalName();
+                Document::create([
+                    'name' => $var,
+                    'imageable_id'=>$payment->id,  
+                    'imageable_type'=>Payment::class    
+                ]);
+                $this->deliveries->storeAs('pagos',$var,'public');
+              }
+            
         // $this->proyect->payment()->create([
         //     'details'=>$this->details,
         //     'date'=>$this->date,    

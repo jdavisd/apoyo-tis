@@ -1,6 +1,6 @@
 <div>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Adicionar
+        Agregar
     </button>
 
     <!-- Modal -->
@@ -27,18 +27,19 @@
                             <input type="date" class="form-control" id="exampleFormControlInput2" wire:model="date" name="date">
                             {{-- @error('email') <span class="text-danger error">{{ $message }}</span>@enderror --}}
                       
-                        
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlInput2">Entregables</label>
                             <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="deliveries" >
+                            
                             {{-- @error('email') <span class="text-danger error">{{ $message }}</span>@enderror --}}
+                            
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
-                    <button type="button" wire:click.prevent="store()" class="btn btn-primary close-modal">Save changes</button>
+                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
+                    <button type="button" wire:click.prevent="store()" class="btn btn-primary close-modal">Agregar</button>
                 </div>
             </div>
 

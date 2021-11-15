@@ -1,9 +1,10 @@
 <div>
     <div>
-    cabecera 
+      <h1>{{$enterprise->short_name}}</h1>
     </div>
-    <div>
-       <h1>Plan de pagos</h1>
+    {{$documents}}
+    <div class="my-5">
+       <h3>Plan de pagos</h3>
         <table class="table table-light">
             <thead class="thead-light">
               <tr>
@@ -20,9 +21,8 @@
                 <td><a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver Documento</a></td>
                 </tr>
               @endforeach
-              
           </tbody>
       </table>
    </div>
-
+   @livewireScripts
 </div>
