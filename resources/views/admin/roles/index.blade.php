@@ -31,11 +31,16 @@
                 <td>{{$role->id}}</td>
                 <td>{{$role->name}}</td>
                 <td  width="10px"><a class ="btn btn-sm btn-primary" href="{{route('admin.roles.edit',$role)}}">Editar</a></td>
-                <td width="10px">   <form action="{{route('admin.roles.destroy',$role)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                    </form></td>
+                
+                    @if ($role->name!='Admin')
+                    <td width="10px">  
+                    <form action="{{route('admin.roles.destroy',$role)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                        </form></td>
+                    @endif
+             
               </tr>
                @endforeach
             
