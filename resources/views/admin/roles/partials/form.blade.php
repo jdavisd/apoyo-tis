@@ -8,5 +8,7 @@
                    {!! Form::checkbox('permissions[]', $permission->id,null, ['class'=>'mr-1']) !!}
                    {{$permission->description}}
                </label>
+               
            </div>
+         
        @endforeach

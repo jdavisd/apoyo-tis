@@ -6,7 +6,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header"><strong class="h5">Publicar un Anuncio</strong></div>
+            <div class="card-header"><strong class="h5">Realizar una publicación</strong></div>
             <div class="card-body">
                 <form action="{{route('anuncio.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf

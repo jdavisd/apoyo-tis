@@ -3,7 +3,7 @@
 @section('title', 'Apoyo')
 
 @section('content_header')
-    <h1>Crear rol</h1>
+    <h1>Crear un rol</h1>
 @stop
 
 @section('content')
@@ -18,6 +18,10 @@
        <small class="text-danger" style="font-weight: bold;"">{{$message}}</small>         
      @enderror
      @include('admin.roles.partials.form')
+      @error('permissions')
+        <small class="text-danger" style="font-weight: bold;"">Debe seleccionar almenos un permiso</small>         
+      @enderror
+      <br>
      {!! Form::submit('Crear rol', ['class'=>'btn btn-primary']) !!}
      {!! Form::close() !!}
       </div>
@@ -30,4 +34,5 @@
 
 @section('js')
     <script> console.log('Hi!'); </script>
+    
 @stop

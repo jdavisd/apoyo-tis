@@ -10,13 +10,20 @@
 @if (session('info'))
     <div class="alert alert-success" role="alert">
         <strong>{{session('info')}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
     </div>
 @endif
     {!! Form::model($role, ['route'=>['admin.roles.update',$role],'method'=>'put']) !!}
     <label for=""  class="form-control">{{$role->name}}</label>
 
     @include('admin.roles.partials.form')
-    {!! Form::submit('Editar rol', ['class'=>'btn btn-primary']) !!}
+    @error('permissions')
+        <small class="text-danger" style="font-weight: bold;"">Debe seleccionar almenos un permiso</small>         
+      @enderror
+<br>
+    {!! Form::submit('Guardar', ['class'=>'btn btn-primary']) !!}
     {!! Form::close() !!}
 @stop
 

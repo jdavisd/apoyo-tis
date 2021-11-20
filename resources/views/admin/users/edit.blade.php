@@ -10,6 +10,9 @@
 @if (session('info'))
     <div class="alert alert-success" role="alert">
         <strong>{{session('info')}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
     </div>
 @endif
     
@@ -26,7 +29,7 @@
              <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
          @enderror
          
-         <label class="" for="email">Correo Electronico:</label>
+         <label class="" for="email">Correo Electrónico:</label>
          <input class="form-control @error('email') is-invalid @enderror" type="text" name="email"
          value="{{old('email',$user->email)}}"  id="" aria-describedby="helpId" placeholder="" >
          @error('email')
@@ -41,7 +44,7 @@
              </label>
          </div>
      @endforeach
-     {!! Form::submit('Editar Usuario', ['class'=>'btn btn-primary mt-2']) !!}
+     {!! Form::submit('Guardar', ['class'=>'btn btn-primary mt-2']) !!}
      {!! Form::close() !!}
      </div>
  </div>

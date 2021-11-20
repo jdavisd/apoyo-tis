@@ -26,7 +26,7 @@
                       @csrf
                       <div class="form-group">
                           <label for="file">
-                             Subir archivo 
+                             Subir archivo csv
                           </label>
                           
                           <input class="form-control @error('file') is-invalid @enderror" id="file" type="file" name="file" id="file" value="subir archivo" accept=".csv,.xlsx">
@@ -92,7 +92,7 @@
                             </label> 
                           </div>
                          
-                          <button type="submit" class="btn btn-primary">subir</button>
+                          <button type="submit" class="btn btn-primary">Importar</button>
                       </div>
 
                     </form>
