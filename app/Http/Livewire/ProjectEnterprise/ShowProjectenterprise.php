@@ -17,6 +17,7 @@ class ShowProjectenterprise extends Component
     public $documents;
     public $enterprise;
     public $socios;
+    public $logo;
     protected $listeners=['render'=>'render'];
     public $idP;
 
@@ -32,7 +33,8 @@ class ShowProjectenterprise extends Component
         $this->project = ProjectEnterprise::find( $this->idP);
         $this->enterprise = $this->project->enterprise()->first();
         $this->payment=$this->project->payment()->get();
-        $this->socios=User::where('notification','=',$this->idP)->get();
+        $this->socios=User::Where('enterprise_id','=',$this->idP)->get();
+        $this->logo= Document::OfType('App\Models\Enterprise')->where('imageable_id','=',$this->enterprise->id)->first();;
         $this->documents= Document::OfType('App\Models\Payment')
         ->join('payments','payments.id',"=",'documents.imageable_id')
         ->join('project_enterprises','payments.project_enterprise_id','=','project_enterprises.id')

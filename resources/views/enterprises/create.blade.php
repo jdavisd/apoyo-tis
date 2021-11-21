@@ -2,5 +2,4 @@
 
  @section('content') 
     @livewire('enterprise.register-enterprise')  
-
 @stop
