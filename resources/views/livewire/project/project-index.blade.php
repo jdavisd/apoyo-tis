@@ -68,6 +68,7 @@
                 </svg>
                 @endif
                 </th>
+                <th></th>
                   
                </thead>
            <tbody>
@@ -76,8 +77,8 @@
                 <td> {{$project->name}} </td>
                 <td> {{$project->period}} </td>
                 <td> {{$project->code}} </td>
-                <td><a class="btn btn-primary mx-2" href="{{route('proyecto.edit',$project->id)}}">Editar</a></td>
-            
+                <td><a class="btn btn-primary mx-2" href="{{route('proyecto.edit',$project->id)}}">Editar</a><button class ="btn btn-danger mx-1 mr-1" wire:click="$emit('deleteUser',{{$project->id}})" >Borrar</button></td>
+              
                </tr>
                @endforeach
       
@@ -92,5 +93,32 @@
 
 </div>
   @livewireScripts
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    livewire.on('deleteUser',  userID=>{
+
+       Swal.fire({
+ title: 'Estas seguro?',
+ text: "No podras revertir los cambios!",
+ icon: 'warning',
+ showCancelButton: true,
+ confirmButtonColor: '#3085d6',
+ cancelButtonColor: '#d33',
+ confirmButtonText: 'Si'
+}).then((result) => {
+ if (result.isConfirmed) {
+   Livewire.emitTo('project.project-index','delete',userID);
+   Swal.fire(
+     'Eliminado!',
+     'El usuario ha sido eliminado.'
+   )
+ }
+});
+
+    })
+
+
+   
+  </script>
 </div>
 

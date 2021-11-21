@@ -88,7 +88,7 @@ class ProjectController extends Controller
         $project->period=$request->period;
         $project->code=$request->code;
         $project->save();
-        return redirect()->route('project.index')->with('infoUpdate','Se actualizo el proyecto');
+        return redirect()->route('proyecto.index')->with('infoUpdate','Se actualizo el proyecto');
     }
     /**
      * Remove the specified resource from storage.

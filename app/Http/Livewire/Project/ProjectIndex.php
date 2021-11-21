@@ -7,14 +7,14 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
 
-class IndexProject extends Component
+class ProjectIndex extends Component
 {
-   
     use WithPagination;
     protected $paginationTheme='bootstrap';
     public $search;
     public $sort='period';
     public $order='desc'; 
+    protected $listeners=['delete'];
     
     public function updatingSearch(){
         $this->resetPage();
@@ -24,7 +24,7 @@ class IndexProject extends Component
     public function render()
     {
         $projects=Project::where('name','LIKE','%'. $this->search .'%')->orWhere('period','LIKE','%'. $this->search .'%')->orderBy($this->sort,$this->order)->paginate();
-        return view('livewire.project.index-project',compact('projects'));
+        return view('livewire.project.project-index',compact('projects'));
     }
     public function order($by){
       if($by==$this->sort){
@@ -39,5 +39,10 @@ class IndexProject extends Component
        $this->sort=$by;
        $this->order='asc'; 
     }
-}
+  }
+   public function delete($id){
+    $project = Project::find($id);
+    $project->delete();
+    $this->render();
+   }
 }
