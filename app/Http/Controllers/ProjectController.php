@@ -47,8 +47,7 @@ class ProjectController extends Controller
             'code'=>['required'],
           ]);
         $request=Project::create($request->all());
-        return $request->all();
-
+        return redirect()->route('proyecto.index')->with('infoCreate','Se creo el proyecto');
     }
 
     /**
