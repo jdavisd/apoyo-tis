@@ -81,7 +81,7 @@
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     @can('admin.home')
-                                    <a class="dropdown-item" href="{{ route('admin.home') }}">
+                                    <a class="dropdown-item" href="{{ route('admin.users.index') }}">
                                    
                                         {{ __('Administración') }}
                                     </a>

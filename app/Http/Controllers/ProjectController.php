@@ -18,7 +18,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+       
+       return view ('projects.index');
     }
 
     /**
@@ -46,8 +47,7 @@ class ProjectController extends Controller
             'code'=>['required'],
           ]);
         $request=Project::create($request->all());
-        return $request->all();
-
+        return redirect()->route('proyecto.index')->with('infoCreate','Se creo el proyecto');
     }
 
     /**
@@ -67,9 +67,10 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit( $id)
     {
-        //
+        $project=Project::find($id);
+        return view ('projects.edit',compact('project'));
     }
 
     /**
@@ -79,11 +80,15 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $id)
     {
-        //
+        $project=Project::find($id);
+        $project->name=$request->name;
+        $project->period=$request->period;
+        $project->code=$request->code;
+        $project->save();
+        return redirect()->route('proyecto.index')->with('infoUpdate','Se actualizo el proyecto');
     }
-
     /**
      * Remove the specified resource from storage.
      *
