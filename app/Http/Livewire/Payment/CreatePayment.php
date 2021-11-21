@@ -18,7 +18,6 @@ class CreatePayment extends Component
     public $date;
     public $payment;
     public $deliveries;
-    public $updateMode = false;
     
     protected $rules=[
         'deliveries' => 'required',
@@ -56,7 +55,6 @@ class CreatePayment extends Component
             ]);
             $this->deliveries->storeAs('Pagos',$var,'public');
           }
-          $this->updateMode = false;
           $this->emit('userStore'); 
           $this->reset(['details','date','deliveries','payment']);
           $this->emit('render');

@@ -55,7 +55,7 @@ class ImportuserController extends Controller
 
          // dd($import->failures()); 
         
-        return  back()->with('info','Usuarios registrados correctamente');
+         return redirect()->route('admin.users.index')->with('info','Usuarios registrados correctamente');
     }
 
     /**

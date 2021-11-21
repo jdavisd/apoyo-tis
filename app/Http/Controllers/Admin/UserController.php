@@ -82,7 +82,8 @@ class UserController extends Controller
          $user->name = $request->name;
          $user->email = $request->email;
          $user->save();
-        return redirect()->route('admin.users.edit',$user)->with('info','Usuario editado correctamente');
+        // return redirect()->route('admin.users.edit',$user)->with('info','Usuario editado correctamente');
+        return redirect()->route('admin.users.index')->with('info','Usuario actualizado correctamente');
     }
 
     /**

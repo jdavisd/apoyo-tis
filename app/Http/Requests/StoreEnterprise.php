@@ -33,7 +33,8 @@ class StoreEnterprise extends FormRequest
             'logo'=>'required',      
             'email'=>'required|max:40',
             'adviser_id'=>'required',
-            'project_id'=>'required'
+            'project_id'=>'required',
+            'students'=>'required|min:2|max:4',
         ];
     }
 }

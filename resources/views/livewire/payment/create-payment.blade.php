@@ -1,5 +1,5 @@
 <div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" wire:click="$set('updateMode',true)" data-target="#exampleModal" >
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >
         Adicionar
     </button>
 
@@ -37,8 +37,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
-                    <button type="button" wire:click.prevent="store()" class="btn btn-primary close-modal" >Save changes</button>
+                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
+                    <button type="button" wire:click.prevent="store()" class="btn btn-primary close-modal">Agregar</button>
                 </div>
             </div>
 

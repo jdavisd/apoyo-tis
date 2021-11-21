@@ -1,14 +1,12 @@
 <div>
-  
    <div class="card">
     <div class="card-header">
      <input wire:model="search" class="form-control"placeholder="Ingrese nombre o correo del usuario">
-    {{$search}}
-    
+     <a class="btn btn-primary my-3" href="{{route('admin.usersimport.create')}}">Importar Usuarios</a>
+     <a class="btn btn-primary mx-3" href="{{ route('register') }}">Registrar Usuario</a>
     </div>
        @if ($users->count())
            
-      
        <div class="card-body">
           <table class="table table-striped"
             <thead >

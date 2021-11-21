@@ -26,7 +26,7 @@
                       @csrf
                       <div class="form-group">
                           <label for="file">
-                             Subir archivo 
+                             Subir archivo csv
                           </label>
                           
                           <input class="form-control @error('file') is-invalid @enderror" id="file" type="file" name="file" id="file" value="subir archivo" accept=".csv,.xlsx">
@@ -75,12 +75,12 @@
                                   {!! Form::checkbox('roles[]', $role->id,null, ['class'=>'mr-1']) !!}
                                   {{$role->name}}
                               
-                              </label>
-                          
-
+                              </label>                          
                           </div>
                           @endforeach
-                       
+                          @error('roles')
+                          <small class="text-danger" style="font-weight: bold;"">Debe seleccionar almenos un rol</small>         
+                          @enderror
                           <div>
                               <label >
                                   Notificar
@@ -92,7 +92,7 @@
                             </label> 
                           </div>
                          
-                          <button type="submit" class="btn btn-primary">subir</button>
+                          <button type="submit" class="btn btn-primary">Importar</button>
                       </div>
 
                     </form>

@@ -43,7 +43,7 @@ class EnterpriseController extends Controller
        $project = Project::pluck('name','id');
        $adviser = User::role('Consultor')->get();    
        $adviser= $adviser->pluck('name','id');
-       $students = User::role('Estudiante')->get();
+       $students = User::role('Estudiante')->whereNull('notification')->get();
        return view('enterprises.create',compact('project','adviser','students')); 
     }
 

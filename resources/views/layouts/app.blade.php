@@ -49,7 +49,7 @@
                    
                     @can('anuncio.create')
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('anuncio.create') }}">{{ __('Anuncios') }}</a>
+                        <a class="nav-link" href="{{ route('anuncio.create') }}">{{ __('Publicar') }}</a>
                    </li>
                    @endcan 
                    

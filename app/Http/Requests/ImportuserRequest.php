@@ -25,8 +25,8 @@ class ImportuserRequest extends FormRequest
     {
         return [
             
-                'file'=>'required|mimetypes:text/csv,text/plain,application/csv,text/comma-separated-values,text/anytext,application/octet-stream,application/txt'
-              
+                'file'=>'required|mimetypes:text/csv,text/plain,application/csv,text/comma-separated-values,text/anytext,application/octet-stream,application/txt',
+                'roles'=>'required|min:1'
         ];
     }
     public function messages()
