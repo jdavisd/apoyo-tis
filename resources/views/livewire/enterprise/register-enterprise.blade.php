@@ -113,6 +113,7 @@
                 @error('logo')
                   <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
                       @enderror
+                      
                                       </div>
               </div>
            
@@ -123,7 +124,8 @@
                 <div class="col-md-6">    
                               <button type="button" class="btn btn-outline-secondary form-control  " data-toggle="modal" data-target="#exampleModal">
                                   Añadir socios
-                              </button>     
+                              </button> 
+                                 
                               </div>        
                               <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog modal-lg" role="document">
@@ -168,14 +170,10 @@
                 <div  class="card-body">
                     <strong>No hay postulantes añadidos</strong>
                 </div>
-    
                 @endif 
-         
-    
             </div>
+           
             @if ($students->count())
-         
-          
            <div class="table table-light table-responsive" >
               <table class="table table-light "
                 <thead class="thead-light">
@@ -231,6 +229,9 @@
             
              <br>
             </div>
+            @error('students')
+            <small class="text-danger" style="font-weight: bold;"">Debe seleccionar entre 3 a 5 socios</small>         
+          @enderror
                          
                                     <input name="" id="" class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
                            

@@ -75,12 +75,12 @@
                                   {!! Form::checkbox('roles[]', $role->id,null, ['class'=>'mr-1']) !!}
                                   {{$role->name}}
                               
-                              </label>
-                          
-
+                              </label>                          
                           </div>
                           @endforeach
-                       
+                          @error('roles')
+                          <small class="text-danger" style="font-weight: bold;"">Debe seleccionar almenos un rol</small>         
+                          @enderror
                           <div>
                               <label >
                                   Notificar

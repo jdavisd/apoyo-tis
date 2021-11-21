@@ -6,7 +6,7 @@ use App\Models\Document;
 use App\Models\Payment;
 use Livewire\Component;
 use App\Models\ProjectEnterprise;
-
+use App\Models\User;
 
 class ShowProjectenterprise extends Component
 {
@@ -15,6 +15,8 @@ class ShowProjectenterprise extends Component
     public $order='desc'; 
     public $payment;
     public $documents;
+    public $enterprise;
+    public $socios;
     protected $listeners=['render'=>'render'];
     public $idP;
 
@@ -28,7 +30,9 @@ class ShowProjectenterprise extends Component
         //$this->project=ProjectEnterprise::find(1);
         $this->reset=['documents'];
         $this->project = ProjectEnterprise::find( $this->idP);
+        $this->enterprise = $this->project->enterprise()->first();
         $this->payment=$this->project->payment()->get();
+        $this->socios=User::where('notification','=',$this->idP)->get();
         $this->documents= Document::OfType('App\Models\Payment')
         ->join('payments','payments.id',"=",'documents.imageable_id')
         ->join('project_enterprises','payments.project_enterprise_id','=','project_enterprises.id')

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends Controller
@@ -93,6 +94,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->id==$id){
+            return redirect()->route('admin.users.index')->with('info','No puede eliminar este usuario');
+        }
         $user = User::find($id);
         $user->delete();
         return redirect()->route('admin.users.index')->with('info','Usuario eliminado correctamente');

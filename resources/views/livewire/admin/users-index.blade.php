@@ -25,11 +25,12 @@
                   <td>{{$user->email}}</td>
                   <td class="row">
                       <a class ="btn btn-primary mx-1" href="{{route('admin.users.edit',$user)}}">Editar</a>
-                      <form action="{{route('admin.users.destroy',$user->id)}}" method="POST">
-                        @csrf
-                        @method('delete')
-                        <button class="btn btn-danger" type="submit">Eliminar</button>
-                    </form>
+                       @if (Auth::user()->id!=$user->id)
+                        <button class ="btn btn-danger mx-1" wire:click="$emit('deleteUser',{{$user->id}})" >Borrar</button>
+                       
+                           
+                       @endif
+  
                     </td>
                 </tr>
                  @endforeach
@@ -52,5 +53,31 @@
            @endif
    </div>
    @livewireScripts
-   
+   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+     livewire.on('deleteUser',  userID=>{
+
+        Swal.fire({
+  title: 'Estas seguro?',
+  text: "No podras revertir los cambios!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Si'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Livewire.emitTo('admin.users-index','delete',userID);
+    Swal.fire(
+      'Eliminado!',
+      'El usuario ha sido eliminado.'
+    )
+  }
+});
+
+     })
+
+
+    
+   </script>
 </div>

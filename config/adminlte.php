@@ -242,7 +242,7 @@ return [
             'text' => 'Lista de usuarios',
             'route'  => 'admin.users.index',
             'icon' => 'fas fa-fw fa-user',
-            'can'=>'admin.roles',
+            'can'=>'admin.users',
         ],
         [
             'text' => 'Roles',
