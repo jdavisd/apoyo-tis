@@ -31,6 +31,9 @@
                </table>
                 </table>
              </div>
+             <div class="card-footer">
+                {{$roles->links()}}
+            </div>
           </div>
           @livewireScripts
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -47,7 +50,7 @@
          confirmButtonText: 'Si'
         }).then((result) => {
          if (result.isConfirmed) {
-           Livewire.emitTo('admin.roles -index','delete',userID);
+           Livewire.emitTo('admin.roles-index','delete',userID);
            Swal.fire(
              'Eliminado!',
              'El rol ha sido eliminado.'
