@@ -16,7 +16,7 @@
                <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Detalles</label>
+                            <label for="exampleFormControlInput1">Asunto</label>
                             <textarea type="" class="form-control" id="exampleFormControlInput1"  rows="3" placeholder="Ingrese detalles" wire:model="details" name="details">
                                 </textarea>
                             {{$details}}

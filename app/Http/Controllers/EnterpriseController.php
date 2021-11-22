@@ -55,7 +55,6 @@ class EnterpriseController extends Controller
      */
     public function store(StoreEnterprise $request)
     {
-      
       $user=Auth::user()->roles->where('name','Estudiante');
       if($user->count()){
         $enterprise=Enterprise::create([
@@ -69,13 +68,11 @@ class EnterpriseController extends Controller
         
         if($request->students){
           foreach($request->students as $student){
-            if($student==Auth::user()->id){
-              User::where('id',Auth::user()->id)->update(['enterprise_id' => $enterprise->id]);
-            }
-            else{
-              User::where('id',$student)->update(['notification' => $enterprise->id]);
-            }     
+            
+             // User::where('id',$student)->update(['notification' => $enterprise->id]);
+              User::where('id',$student)->update(['enterprise_id' => $enterprise->id]);              
           }
+          User::where('id',Auth::user()->id)->update(['enterprise_id' => $enterprise->id]);
         }
         
         $document=new Document(); 
@@ -92,11 +89,13 @@ class EnterpriseController extends Controller
          );
       
           $document->imageable_id= $enterprise->id;
-          $document->imageable_type= ProjectController::class;
+          $document->imageable_type= Enterprise::class;
           $document->save();
       
          }
-         return $enterprise;
+    
+         return redirect()->route('user.enterpriseproject.show',$enterprise->projectEnterprises1->first()->id);
+        
       }
       
       
