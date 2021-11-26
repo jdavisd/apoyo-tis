@@ -25,7 +25,10 @@ class RegisterEnterprise extends Component
        $adviser= $adviser->pluck('name','id');
        $this->level[]=Auth::user()->id;
        $users=User::whereIn('id',$this->level)->paginate();
-       $students=User::where('name','LIKE','%'. $this->search .'%')->whereNull('notification')->Where('email','LIKE','%'. $this->search .'%')->whereNotIn('id',[Auth::user()->id ])->role('Estudiante')->paginate();
+       $students=User::where('name','LIKE','%'. $this->search .'%')
+       ->where([['name','LIKE','%'. $this->search .'%'],['enterprise_id', NULL]])
+       ->orWhere([['email','LIKE','%'. $this->search .'%'],['enterprise_id', NULL]])
+       ->whereNotIn('id',[Auth::user()->id ])->role('Estudiante')->paginate();
        return view('livewire.enterprise.register-enterprise',compact('project','adviser','students','users'));        
     }
     public function levelClicked()

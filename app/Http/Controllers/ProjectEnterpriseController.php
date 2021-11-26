@@ -58,8 +58,8 @@ class ProjectEnterpriseController extends Controller
      */
     public function edit($id)
     {
-        $projectEnterprise=ProjectEnterprise::find($id);
-        return view('project-enterprise.edit',compact('projectEnterprise'));
+        
+        return view('ProjectEnterprise.edit',compact('id'));
     }
 
     /**
