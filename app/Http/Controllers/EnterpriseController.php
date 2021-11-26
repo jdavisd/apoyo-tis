@@ -122,7 +122,7 @@ class EnterpriseController extends Controller
      */
     public function edit(Enterprise $enterprise)
     {
-        //
+       
     }
 
     /**
