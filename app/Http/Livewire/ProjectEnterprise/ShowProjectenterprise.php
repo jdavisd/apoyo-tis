@@ -7,6 +7,7 @@ use App\Models\Payment;
 use Livewire\Component;
 use App\Models\ProjectEnterprise;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class ShowProjectenterprise extends Component
 {
@@ -18,7 +19,7 @@ class ShowProjectenterprise extends Component
     public $enterprise;
     public $socios;
     public $logo;
-    protected $listeners=['render'=>'render'];
+    protected $listeners=['render','delete','accept'];
     public $idP;
 
     public function mount($id)
@@ -38,10 +39,33 @@ class ShowProjectenterprise extends Component
         $this->documents= Document::OfType('App\Models\Payment')
         ->join('payments','payments.id',"=",'documents.imageable_id')
         ->join('project_enterprises','payments.project_enterprise_id','=','project_enterprises.id')
+        
         ->where('payments.project_enterprise_id','=',$this->project->id)
+        ->select('documents.document_id','payments.date','payments.details','documents.name','payments.status')
         ->orderBy($this->sort,$this->order)
         ->get();
     
         return view('livewire.project-enterprise.show-projectenterprise');
+    }
+
+    public function delete($id){
+        $document = Document::where('document_id', "=" , $id)->first();
+        $payment = Payment::find($document->imageable_id);
+        //Storage::disk('ftp')->delete('anuncios/'.$document->name); 
+        unlink(storage_path('app/public/pagos/'.$document->name));
+        DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
+        $payment->delete();
+        $this->render();
+        //return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
+    }
+
+
+    public function accept(){
+        $this->project->status = 'acceptado';
+        
+    }
+
+    public function reject(){
+        
     }
 }

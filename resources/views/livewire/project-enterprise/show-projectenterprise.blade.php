@@ -90,8 +90,12 @@
     </div>
   </div>
     <div>
-      <h3>Entregables</h3>
-    @livewire('payment.create-payment',['id'=>$idP])
+      <br>
+      <h3>Propuestas</h3>
+      @can('propuesta.create')
+      @livewire('payment.create-payment',['id'=>$idP])
+      @endcan
+    
     </div>
     <div class="my-5">
         <table class="table table-light">
@@ -99,7 +103,14 @@
               <tr>
                   <th>Fecha</th>
                   <th>Asunto</th>
-                  <th>Entregables</th>
+                  <th>Documento</th>
+                  @can('proyecto.index')
+                    <th>Accion</th>
+                  @endcan
+                  @can('propuesta.create')
+                    <th>Estado</th>
+                  @endcan
+                  
               </tr>
           </thead>
           <tbody>
@@ -107,7 +118,20 @@
               <tr>
                 <td>{{$item->date}}</td>
                 <td>{{$item->details}}</td>
-                <td><a class="btn btn-primary mx-2" href="{{route('file',$item->name)}}">Descargar</a></td>
+                {{-- <td><a class="btn btn-primary mx-2" href="{{route('file',$item->name)}}">Descargar</a></td> --}}
+                <td>
+                  <a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver</a>
+                </td>
+                <td>
+                  @can('proyecto.index')
+                  <a class="btn btn-primary mx-1" wire:click="$emit('accept',{{$item->id}})">Aceptar</a>
+                  <a class="btn btn-primary mx-1" wire:click="$emit('reject',{{$item->id}})">Rechazar</a>
+                  {{$item->status}}
+                  @endcan
+                  @can('propuesta.create')
+                    {{$item->status}}
+                  @endcan
+                </td>
                 </tr>
               @endforeach
           </tbody>
@@ -122,4 +146,57 @@
       $('#exampleModal').modal('hide');
   });
 </script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <script>
+            livewire.on('accept',  userID=>{
+        
+               Swal.fire({
+         title: 'Estas seguro?',
+         text: "No podras revertir los cambios!",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Si'
+        }).then((result) => {
+         if (result.isConfirmed) {
+           Livewire.emit('project-enterprise.show-projectenterprise','accept',userID);
+           Swal.fire(
+             'Eliminado!',
+             'La publicación ha sido eliminada.'
+           )
+         }
+        });
+        
+            })
+           
+          </script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+          <script>
+            livewire.on('reject',  userID=>{
+        
+               Swal.fire({
+         title: 'Estas seguro?',
+         text: "No podras revertir los cambios!",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Si'
+        }).then((result) => {
+         if (result.isConfirmed) {
+           Livewire.emit('project-enterprise.show-projectenterprise','reject',userID);
+           Swal.fire(
+             'Eliminado!',
+             'La publicación ha sido eliminada.'
+           )
+         }
+        });
+        
+            })
+        
+        
+           
+          </script>
 </div>
