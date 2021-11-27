@@ -19,7 +19,7 @@ class ShowProjectenterprise extends Component
     public $enterprise;
     public $socios;
     public $logo;
-    protected $listeners=['render','delete','accept'];
+    protected $listeners=['accept','render','delete','reject'];
     public $idP;
 
     public function mount($id)
@@ -41,7 +41,7 @@ class ShowProjectenterprise extends Component
         ->join('project_enterprises','payments.project_enterprise_id','=','project_enterprises.id')
         
         ->where('payments.project_enterprise_id','=',$this->project->id)
-        ->select('documents.document_id','payments.date','payments.details','documents.name','payments.status')
+        ->select('documents.document_id','payments.date','payments.details','documents.name','payments.id','payments.status','payments.created_at')
         ->orderBy($this->sort,$this->order)
         ->get();
     
@@ -60,12 +60,18 @@ class ShowProjectenterprise extends Component
     }
 
 
-    public function accept(){
-        $this->project->status = 'acceptado';
+    public function accept($id){
         
+        $payment = Payment::find($id);
+        $payment->status = 'Aceptado';
+        $payment->save();
+        $this->render();   
     }
 
-    public function reject(){
-        
+    public function reject($id){
+        $payment = Payment::find($id);
+        $payment->status = 'Rechazado';
+        $payment->save();
+        $this->render();
     }
 }

@@ -86,6 +86,9 @@
                 </svg>
                 @endif
                 </th>
+                <th>
+                  Acción
+                </th>
                </thead>
            <tbody>
                @foreach ($enterprises as $enterprise)
@@ -94,6 +97,7 @@
                 <td> {{$enterprise->long_name}} </td>
                 <td> {{$enterprise->period}} </td>
                 <td> {{$enterprise->name}} </td>
+                <td></td>
             
                </tr>
                @endforeach

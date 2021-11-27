@@ -116,16 +116,17 @@
           <tbody>
             @foreach ($documents as $item)
               <tr>
-                <td>{{$item->date}}</td>
+                <td>{{$item->created_at}}</td>
                 <td>{{$item->details}}</td>
                 {{-- <td><a class="btn btn-primary mx-2" href="{{route('file',$item->name)}}">Descargar</a></td> --}}
                 <td>
                   <a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver</a>
+                  <button class ="btn btn-danger mx-1" wire:click="$emit('borrar',{{$item->document_id}})" >Eliminar</button>
                 </td>
                 <td>
                   @can('proyecto.index')
-                  <a class="btn btn-primary mx-1" wire:click="$emit('accept',{{$item->id}})">Aceptar</a>
-                  <a class="btn btn-primary mx-1" wire:click="$emit('reject',{{$item->id}})">Rechazar</a>
+                  <button class ="btn btn-success mx-1" wire:click="$emit('acceptar',{{$item->id}})" >Aprobar</button>
+                  <a class="btn btn-danger mx-1" wire:click="$emit('rechazar',{{$item->id}})" >Rechazar</a>
                   {{$item->status}}
                   @endcan
                   @can('propuesta.create')
@@ -141,15 +142,15 @@
     
 </div>
 @livewireScripts
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script type="text/javascript">
   window.livewire.on('userStore', () => {
       $('#exampleModal').modal('hide');
   });
 </script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
           <script>
-            livewire.on('accept',  userID=>{
-        
+            livewire.on('acceptar',  userI=>{
                Swal.fire({
          title: 'Estas seguro?',
          text: "No podras revertir los cambios!",
@@ -160,7 +161,7 @@
          confirmButtonText: 'Si'
         }).then((result) => {
          if (result.isConfirmed) {
-           Livewire.emit('project-enterprise.show-projectenterprise','accept',userID);
+           Livewire.emitTo('project-enterprise.show-projectenterprise','accept',userI);
            Swal.fire(
              'Eliminado!',
              'La publicación ha sido eliminada.'
@@ -172,9 +173,30 @@
            
           </script>
 
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
           <script>
-            livewire.on('reject',  userID=>{
+            livewire.on('rechazar',  userID=>{
+        
+               Swal.fire({
+         title: 'Estas seguro?',
+         text: "No podras revertir los cambios!",
+         icon: 'warning',
+         showCancelButton: true,
+         confirmButtonColor: '#3085d6',
+         cancelButtonColor: '#d33',
+         confirmButtonText: 'Aceptar'
+        }).then((result) => {
+         if (result.isConfirmed) {
+           Livewire.emitTo('project-enterprise.show-projectenterprise','reject',userID);
+           Swal.fire(
+             'Eliminado!',
+             'La publicación ha sido eliminada.'
+           )
+         }
+        });    
+            })
+          </script>
+          <script>
+            livewire.on('borrar',  docID=>{
         
                Swal.fire({
          title: 'Estas seguro?',
@@ -186,17 +208,13 @@
          confirmButtonText: 'Si'
         }).then((result) => {
          if (result.isConfirmed) {
-           Livewire.emit('project-enterprise.show-projectenterprise','reject',userID);
+           Livewire.emitTo('project-enterprise.show-projectenterprise','delete',docID);
            Swal.fire(
              'Eliminado!',
              'La publicación ha sido eliminada.'
            )
          }
-        });
-        
+        });    
             })
-        
-        
-           
           </script>
 </div>
