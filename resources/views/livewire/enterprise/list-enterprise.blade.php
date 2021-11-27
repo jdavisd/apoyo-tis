@@ -115,7 +115,7 @@
    </div> 
   
 </div>
-
+@if ($socios->count())
 <div wire:ignore.self class="modal fade"  wire:mode="open" id="detalles" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document" style="width:1250px;">
       <div class="modal-content">
@@ -162,10 +162,11 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label for="name" class="col-md-6 col-form-label text-md-right">Socios:</label>
+                      <label class="col-md-6 col-form-label text-md-right">Socios:</label>
                       <div class="col-md-5"> 
                         @foreach ($socios as $item)    
-                            <label class="col-form-label">{{(string)$item->name}}</label>
+
+                            <label class="col-form-label">{{$item->name}}</label>
                         @endforeach           
                       </div>
                     </div>
@@ -190,5 +191,7 @@
       </div>
   </div>
 </div>
+@endif
+
   @livewireScripts
 </div>
