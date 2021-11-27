@@ -30,7 +30,7 @@ class ShowProjectenterprise extends Component
     public function render()
     {
         //$this->project=ProjectEnterprise::find(1);
-        $this->reset=['documents'];
+        //$this->reset=['documents'];
         $this->project = ProjectEnterprise::find( $this->idP);
         $this->enterprise = $this->project->enterprise()->first();
         $this->payment=$this->project->payment()->get();
@@ -49,14 +49,16 @@ class ShowProjectenterprise extends Component
     }
 
     public function delete($id){
-        $document = Document::where('document_id', "=" , $id)->first();
-        $payment = Payment::find($document->imageable_id);
-        //Storage::disk('ftp')->delete('anuncios/'.$document->name); 
-        unlink(storage_path('app/public/pagos/'.$document->name));
-        DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
-        $payment->delete();
-        $this->render();
-        //return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
+
+        dd($id);
+        // $document = Document::where('document_id', "=" , $id)->first();
+        // $payment = Payment::find($document->imageable_id);
+        // //Storage::disk('ftp')->delete('anuncios/'.$document->name); 
+        // unlink(storage_path('app/public/pagos/'.$document->name));
+        // DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
+        // $payment->delete();
+        // $this->render();
+        // //return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
     }
 
 

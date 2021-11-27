@@ -123,6 +123,7 @@
                 <td>
                   <a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver</a>
                   <button class ="btn btn-danger mx-1" wire:click="$emit('borrar',{{$item->document_id}})" >Eliminar</button>
+                  {{$item->document_id}}
                 </td>
                 <td>
                   @can('proyecto.index')
