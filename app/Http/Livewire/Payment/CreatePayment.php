@@ -20,8 +20,7 @@ class CreatePayment extends Component
     public $deliveries;
     
     protected $rules=[
-        'deliveries' => 'required',
-
+        'deliveries' => 'required|mimes:pdf',
         'details'=>'required'
 
     ];
@@ -43,7 +42,8 @@ class CreatePayment extends Component
         $this->validate();
         $payment=Payment::create([
             'project_enterprise_id' => $this->project->id,
-            'details'=>$this->details
+            'details'=>$this->details,
+            'status'=>'Por revisar'
           ]);
           if(!$this->deliveries==null){
               $var = $this->enterprise->short_name.'.'.$this->deliveries->getClientOriginalName();

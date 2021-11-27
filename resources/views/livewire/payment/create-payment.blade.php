@@ -26,7 +26,7 @@
                       
                         <div class="form-group">
                             <label for="exampleFormControlInput2">Entregables</label>
-                            <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="deliveries"  name="deliveries">
+                            <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="deliveries"  name="deliveries" accept="application/pdf">
                             @error('deliveries') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
                     </form>

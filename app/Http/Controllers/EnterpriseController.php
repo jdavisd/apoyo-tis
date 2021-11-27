@@ -31,6 +31,7 @@ class EnterpriseController extends Controller
     public function index()
     {
       return view('enterprises.index');
+    
     }
 
     /**
@@ -132,10 +133,53 @@ class EnterpriseController extends Controller
      * @param  \App\Models\Enterprise  $enterprise
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Enterprise $enterprise)
+    public function update(Request $request, $enterprise_id,Document $document )
     {
-        //
+
+      $user=Auth::user()->roles->where('name','Estudiante');
+      if($user->count()){
+        $enterprise=Enterprise::find($enterprise_id);
+        $enterprise->short_name=$request->short_name;
+        $enterprise->long_name=$request->long_name;
+        $enterprise->address=$request->address;
+        $enterprise->phone=$request->phone;
+        $enterprise->email=$request->email;
+        $enterprise->type=$request->type;  
+         $enterprise->save();
+        
+        if($request->students){
+          foreach($request->students as $student){
+            
+             // User::where('id',$student)->update(['notification' => $enterprise->id]);
+              User::where('id',$student)->update(['enterprise_id' => $enterprise->id]);              
+          }
+          User::where('id',Auth::user()->id)->update(['enterprise_id' => $enterprise->id]);
+        }
+        
+     //   $document = Document::where('document_id', "=" , $document)->first();
+       // $announcement = Announcement::find($document->imageable_id);
+         if($request->hasFile('logo')){
+           $document2=$request->file('logo');
+           $nameDocument=$document2->getClientOriginalName();
+           $document->name = $document2->getClientOriginalName();
+           $document2=$request->file('logo')->storeAs('logos',$document2->getClientOriginalName(),'public');
+          //Storage::disk('ftp')->put('logos'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
+           $enterprise->projectEnterprises1()->update([
+           'users_id'=>$request->adviser_id,
+           'project_id'=>$request->project_id    
+         ]
+         );
+
+      
+          $document->imageable_id= $enterprise->id;
+          $document->imageable_type= Enterprise::class;
+          $document->save();
+      
+         }
+    
+         return redirect()->route('user.enterpriseproject.show',$enterprise->projectEnterprises1->first()->id);
     }
+  }
 
     /**
      * Remove the specified resource from storage.

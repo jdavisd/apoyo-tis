@@ -109,7 +109,7 @@
               <div class="row my-3">
                 <label for="" class="col-md-4 text-md-right">Logo</label>
                 <div class="col-md-6">
-                <input type="file" class="form-control @error('logo') is-invalid @enderror " name="logo"  id="" aria-describedby="helpId" accept="image/*" placeholder="">
+                <input type="file" class="form-control @error('logo') is-invalid @enderror " name="logo"  id="" aria-describedby="helpId" placeholder="" accept="image/*">
                 @error('logo')
                   <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
                       @enderror

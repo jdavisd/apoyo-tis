@@ -9,9 +9,9 @@
             <div class="card">
                 <div class="card-header"><strong class="h5">Postular</strong></div>
                      <div class="card-body">
-                         <form method="POST" action="{{route('empresa.store')}}" enctype="multipart/form-data">
+                         <form method="POST" action="{{route('empresa.update',$enterprise->id,$logo->id,$project1->id)}}" enctype="multipart/form-data">
                             @csrf
-                            @method('update')
+                            @method('put')
                             <div class="row my-3">
                                 <label for=""class="col-md-4 text-md-right">Nombre Corto</label>
                                 <div class="col-md-6">

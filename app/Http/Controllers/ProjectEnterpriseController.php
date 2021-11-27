@@ -71,7 +71,7 @@ class ProjectEnterpriseController extends Controller
      */
     public function update(Request $request, ProjectEnterprise $projectEnterprise)
     {
-        //
+        
     }
 
     /**

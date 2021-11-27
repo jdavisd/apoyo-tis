@@ -2,9 +2,11 @@
     <div class=" row justify-content-center">
      
     <div class="card col-8">
+
        <div class="card-header">
-           <input type="text" name="search" class="form-control" placeholder="Ingrese nombre de su proyecto"wire:model="search" id="">
-       </div>
+           <input type="text" name="search" class="form-control" placeholder="Ingrese nombre de su proyecto"wire:model="search" id="">  
+           <a class="btn btn-primary mx-2" href="{{route('proyecto.create')}}">Crear</a> 
+        </div>
        <div class="card-body">
            <table class="table table-striped">
                <thead>
@@ -77,7 +79,8 @@
                 <td> {{$project->name}} </td>
                 <td> {{$project->period}} </td>
                 <td> {{$project->code}} </td>
-                <td><a class="btn btn-primary mx-2" href="{{route('proyecto.edit',$project->id)}}">Editar</a><button class ="btn btn-danger mx-1 mr-1" wire:click="$emit('deleteUser',{{$project->id}})" >Borrar</button></td>
+                <td><a class="btn btn-primary mx-2" href="{{route('proyecto.edit',$project->id)}}">Editar</a>
+                  <button class ="btn btn-danger mx-1 mr-1" wire:click="$emit('deleteUser',{{$project->id}})" >Borrar</button></td>
               
                </tr>
                @endforeach
