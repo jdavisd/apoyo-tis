@@ -18,6 +18,9 @@ class RegisterEnterprise extends Component
     public function updatingSearch(){
         $this->resetPage();
       }
+      public function updatingLevel(){
+        $this->resetPage();
+      }
     public function render()
     {
        $project = Project::pluck('name','id');

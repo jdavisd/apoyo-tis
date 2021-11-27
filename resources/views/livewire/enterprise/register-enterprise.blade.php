@@ -141,7 +141,6 @@
                                      
               <input type="text" name="hola" id="" wire:model="search" class="form-control" placeholder="Ingrese nombre o correo">
             
-           
               <div>
            
                 <h5>Añadidos</h5>
@@ -172,6 +171,7 @@
                 </div>
                 @endif 
             </div>
+        
            
             @if ($students->count())
            <div class="table table-light table-responsive" >
@@ -201,12 +201,12 @@
                   
                  </tbody>
              </table>
-              
+             <div class="card-footer">
+              {{$students->links()}}
+          </div>
            </div>
           
-               <div class="card-footer">
-                   {{$students->links()}}
-               </div>
+               
                
                    
                @else
