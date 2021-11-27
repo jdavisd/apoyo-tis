@@ -11,6 +11,7 @@
                      <div class="card-body">
                          <form method="POST" action="{{route('empresa.store')}}" enctype="multipart/form-data">
                             @csrf
+                            @method('update')
                             <div class="row my-3">
                                 <label for=""class="col-md-4 text-md-right">Nombre Corto</label>
                                 <div class="col-md-6">

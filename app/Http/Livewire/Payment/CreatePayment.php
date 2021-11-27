@@ -15,13 +15,13 @@ class CreatePayment extends Component
     public $project;
     public $enterprise;
     public $details;
-    public $date;
+
     public $payment;
     public $deliveries;
     
     protected $rules=[
         'deliveries' => 'required',
-        'date'=>'required',  
+
         'details'=>'required'
 
     ];
@@ -43,7 +43,6 @@ class CreatePayment extends Component
         $this->validate();
         $payment=Payment::create([
             'project_enterprise_id' => $this->project->id,
-            'date'=>$this->date,  
             'details'=>$this->details
           ]);
           if(!$this->deliveries==null){
@@ -56,7 +55,7 @@ class CreatePayment extends Component
             $this->deliveries->storeAs('Pagos',$var,'public');
           }
           $this->emit('userStore'); 
-          $this->reset(['details','date','deliveries','payment']);
+          $this->reset(['details','deliveries','payment']);
           $this->emit('render');
 
         // $this->proyect->payment()->create([

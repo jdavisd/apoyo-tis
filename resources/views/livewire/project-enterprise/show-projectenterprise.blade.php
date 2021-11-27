@@ -106,7 +106,7 @@
           <tbody>
             @foreach ($documents as $item)
               <tr>
-                <td>{{$item->date}}</td>
+                <td>{{$item->created_at}}</td>
                 <td>{{$item->details}}</td>
                 <td><a class="btn btn-primary mx-2" href="{{route('file',$item->name)}}">Descargar</a></td>
                 </tr>

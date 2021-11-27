@@ -23,12 +23,7 @@
                             @error('details') <span class="text-danger error">{{ $message }}</span>@enderror
                         
                         </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput2">Fecha</label>
-                            <input type="date" class="form-control" id="exampleFormControlInput2" wire:model="date" name="date">
-                        
-                            @error('date') <span class="text-danger error">{{ $message }}</span>@enderror
-                        </div>
+                      
                         <div class="form-group">
                             <label for="exampleFormControlInput2">Entregables</label>
                             <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="deliveries"  name="deliveries">
