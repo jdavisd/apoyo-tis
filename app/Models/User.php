@@ -58,7 +58,7 @@ public function announcements(){
 }
 
 public function projectEnterprises(){
-    return $this->hasMany(ProjectEnterprise::class);
+    return $this->hasMany(ProjectEnterprise::class,'project_enterprises','users_id');
     //'project_enterprises','users_id');
 }
 public function enterpriseUser(){

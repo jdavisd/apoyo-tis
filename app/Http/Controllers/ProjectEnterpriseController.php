@@ -56,9 +56,10 @@ class ProjectEnterpriseController extends Controller
      * @param  \App\Models\ProjectEnterprise  $projectEnterprise
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProjectEnterprise $projectEnterprise)
+    public function edit($id)
     {
-        //
+        
+        return view('ProjectEnterprise.edit',compact('id'));
     }
 
     /**
@@ -70,7 +71,7 @@ class ProjectEnterpriseController extends Controller
      */
     public function update(Request $request, ProjectEnterprise $projectEnterprise)
     {
-        //
+        
     }
 
     /**

@@ -9,18 +9,19 @@ use App\Models\ProjectEnterprise;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
 
-class CreatePayment extends Component
+class EditPayment extends Component
 {
     use WithFileUploads;
     public $project;
     public $enterprise;
     public $details;
-
+    public $date;
     public $payment;
     public $deliveries;
     
     protected $rules=[
-        'deliveries' => 'required|mimes:pdf',
+        'deliveries' => 'required',
+        'date'=>'required',  
         'details'=>'required'
 
     ];
@@ -35,15 +36,14 @@ class CreatePayment extends Component
     }
     public function render()
     {
-
-        return view('livewire.payment.create-payment');
+        return view('livewire.payment.edit-payment');
     }
-    public function store(Request $request){
+    public function update(){
         $this->validate();
-        $payment=Payment::create([
+        $payment=Payment::update([
             'project_enterprise_id' => $this->project->id,
-            'details'=>$this->details,
-            'status'=>'Por revisar'
+            'date'=>$this->date,  
+            'details'=>$this->details
           ]);
           if(!$this->deliveries==null){
               $var = $this->enterprise->short_name.'.'.$this->deliveries->getClientOriginalName();
@@ -55,7 +55,7 @@ class CreatePayment extends Component
             $this->deliveries->storeAs('Pagos',$var,'public');
           }
           $this->emit('userStore'); 
-          $this->reset(['details','deliveries','payment']);
+          $this->reset(['details','date','deliveries','payment']);
           $this->emit('render');
 
         // $this->proyect->payment()->create([

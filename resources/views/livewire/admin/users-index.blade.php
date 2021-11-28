@@ -23,10 +23,11 @@
                   <td>{{$user->id}}</td>
                   <td>{{$user->name}}</td>
                   <td>{{$user->email}}</td>
+                  
                   <td class="row">
                       <a class ="btn btn-primary mx-1" href="{{route('admin.users.edit',$user)}}">Editar</a>
                        @if (Auth::user()->id!=$user->id)
-                        <button class ="btn btn-danger mx-1" wire:click="$emit('deleteUser',{{$user->id}})" >Borrar</button>
+                        <button class ="btn btn-danger mx-1" wire:click="askUser({{$user->id}})" >Borrar</button>
                        
                            
                        @endif
@@ -80,4 +81,22 @@
 
     
    </script>
+   
+   <script>
+    livewire.on('notPermit' ,() =>{
+
+      Swal.fire({
+  icon: 'error',
+  title: 'No pudes eliminar este usuario',
+  text: 'Es un consultor con mas de 10 empresas',
+ 
+})
+
+    })
+
+
+   
+  </script>
+  
+
 </div>

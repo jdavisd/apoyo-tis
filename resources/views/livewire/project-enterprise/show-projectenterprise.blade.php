@@ -10,6 +10,7 @@
             </svg>
         </button>
       </div>
+     <a href="{{route('user.enterpriseproject.edit',$project->id)}}"> Editar</a>
         <!-- Modal -->
         <div wire:ignore.self class="modal fade"  wire:mode="open" id="detalles" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document" style="width:1250px;">
@@ -121,12 +122,14 @@
                 {{-- <td><a class="btn btn-primary mx-2" href="{{route('file',$item->name)}}">Descargar</a></td> --}}
                 <td>
                   <a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver</a>
-                  <button class ="btn btn-danger mx-1" wire:click="$emit('borrar',{{$item->document_id}})" >Eliminar</button>
+                  <button class ="btn btn-danger mx-1" wire:click="$emit('acceptar',{{$item->document_id}})" >Eliminar</button>
+                  {{-- <button class ="btn btn-danger mx-1" wire:click="test({{$item->document_id}})" >Eliminar</button> --}}
                   {{$item->document_id}}
                 </td>
                 <td>
                   @can('proyecto.index')
                   <button class ="btn btn-success mx-1" wire:click="$emit('acceptar',{{$item->id}})" >Aprobar</button>
+               
                   <a class="btn btn-danger mx-1" wire:click="$emit('rechazar',{{$item->id}})" >Rechazar</a>
                   {{$item->status}}
                   @endcan
@@ -194,26 +197,11 @@
         });    
             })
           </script>
+
           <script>
             livewire.on('borrar',  docID=>{
-        
-               Swal.fire({
-         title: 'Estas seguro?',
-         text: "No podras revertir los cambios!",
-         icon: 'warning',
-         showCancelButton: true,
-         confirmButtonColor: '#3085d6',
-         cancelButtonColor: '#d33',
-         confirmButtonText: 'Si'
-        }).then((result) => {
-         if (result.isConfirmed) {
-           Livewire.emitTo('project-enterprise.show-projectenterprise','delete',docID);
-           Swal.fire(
-             'Eliminado!',
-             'La publicación ha sido eliminada.'
-           )
-         }
-        });    
+              Livewire.emit('delete',userID);
+          
             })
   </script></script>
 </div>

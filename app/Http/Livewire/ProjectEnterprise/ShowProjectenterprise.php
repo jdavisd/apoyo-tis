@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\DB;
 class ShowProjectenterprise extends Component
 {
     public $project;
-    public $sort='date';
+    public $sort='created_at';
     public $order='desc'; 
     public $payment;
     public $documents;
     public $enterprise;
     public $socios;
     public $logo;
-    protected $listeners=['accept','render','delete','reject'];
+    protected $listeners=['accept','render','reject','delete'=>'delete'];
     public $idP;
 
     public function mount($id)
@@ -35,40 +35,42 @@ class ShowProjectenterprise extends Component
         $this->enterprise = $this->project->enterprise()->first();
         $this->payment=$this->project->payment()->get();
         $this->socios=User::Where('enterprise_id','=',$this->idP)->get();
-        $this->logo= Document::OfType('App\Models\Enterprise')->where('imageable_id','=',$this->enterprise->id)->first();;
+        $this->logo= Document::OfType('App\Models\Enterprise')->where('imageable_id','=',$this->enterprise->id)->first();
         $this->documents= Document::OfType('App\Models\Payment')
         ->join('payments','payments.id',"=",'documents.imageable_id')
         ->join('project_enterprises','payments.project_enterprise_id','=','project_enterprises.id')
         
         ->where('payments.project_enterprise_id','=',$this->project->id)
-        ->select('documents.document_id','payments.date','payments.details','documents.name','payments.id','payments.status','payments.created_at')
+        ->select('documents.document_id','payments.created_at','payments.details','documents.name','payments.id','payments.status','payments.created_at')
         ->orderBy($this->sort,$this->order)
         ->get();
     
         return view('livewire.project-enterprise.show-projectenterprise');
     }
+  
 
     public function delete($id){
 
-        dd($id);
-        // $document = Document::where('document_id', "=" , $id)->first();
-        // $payment = Payment::find($document->imageable_id);
-        // //Storage::disk('ftp')->delete('anuncios/'.$document->name); 
-        // unlink(storage_path('app/public/pagos/'.$document->name));
-        // DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
-        // $payment->delete();
-        // $this->render();
-        // //return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
+        //dd($id);
+        $document = Document::where('document_id', "=" , $id)->first();
+        $payment = Payment::find($document->imageable_id);
+       //Storage::disk('ftp')->delete('anuncios/'.$document->name); 
+         unlink(storage_path('app/public/pagos/'.$document->name));
+        DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
+       $payment->delete();
+       $this->render();
+      //return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
     }
 
 
-    public function accept($id){
+      public function accept($id){
         
         $payment = Payment::find($id);
-        $payment->status = 'Aceptado';
+       $payment->status = 'Aceptado';
         $payment->save();
         $this->render();   
-    }
+     }
+  
 
     public function reject($id){
         $payment = Payment::find($id);

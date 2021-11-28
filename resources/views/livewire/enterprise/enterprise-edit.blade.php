@@ -4,18 +4,19 @@
 
     @livewireScripts
      <div class="row justify-content-center">
-    
+    {{$users}}
       <div class="col-md-8">
             <div class="card">
                 <div class="card-header"><strong class="h5">Postular</strong></div>
                      <div class="card-body">
-                         <form method="POST" action="{{route('empresa.store')}}" enctype="multipart/form-data">
+                         <form method="POST" action="{{route('empresa.update',$enterprise->id,$logo->id,$project1->id)}}" enctype="multipart/form-data">
                             @csrf
+                            @method('put')
                             <div class="row my-3">
                                 <label for=""class="col-md-4 text-md-right">Nombre Corto</label>
                                 <div class="col-md-6">
                                   <input type="text"
-                                    class="form-control  @error('short_name') is-invalid @enderror" name="short_name"  value="{{old('short_name')}}"  id="" aria-describedby="helpId" placeholder="">
+                                    class="form-control  @error('short_name') is-invalid @enderror" name="short_name"  value="{{old('short_name',$enterprise->short_name)}}"  id="" aria-describedby="helpId" placeholder="">
                                    @error('short_name')
                                     <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
                                                   @enderror
@@ -29,7 +30,7 @@
                          
          <div class="row my-3">{!! Form::label('project_id', 'Proyecto', ['class' => 'col-md-4 text-md-right']) !!}
             <div class="col-md-6">
-            {!! Form::select ('project_id', $project, null, ['class' => 'form-control ' . ($errors->has('project_id') ? ' is-invalid' : null)]) !!}
+            {!! Form::select ('project_id', $project, $projectID, ['class' => 'form-control ' . ($errors->has('project_id') ? ' is-invalid' : null)]) !!}
             @error('project_id')
             <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
           @enderror
@@ -39,7 +40,7 @@
               <div class="row my-3">
                 <label for=""class="col-md-4 text-md-right">Telefono</label>
                 <div class="col-md-6">
-                <input type="number"class="form-control   @error('phone') is-invalid @enderror" name="phone" value=" {{old('phone')}}" id="" aria-describedby="helpId" placeholder="">        
+                <input type=""class="form-control   @error('phone') is-invalid @enderror" name="phone" value=" {{old('phone',intval($enterprise->phone))}}" id="" aria-describedby="helpId" placeholder="">        
                 @error('phone')
                 <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
               @enderror
@@ -49,7 +50,7 @@
                 <label for=""class="col-md-4 text-md-right">Correo Electronico</label>
                 <div class="col-md-6">
                 <input type="email"
-                class="form-control  @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" id="" aria-describedby="helpId" placeholder="">
+                class="form-control  @error('email') is-invalid @enderror" name="email" value="{{old('email',$enterprise->email)}}" id="" aria-describedby="helpId" placeholder="">
                 @error('email')
                 <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
               @enderror
@@ -60,7 +61,7 @@
                 <label for=""class="col-md-4 text-md-right">Nombre largo</label>
                 <div class="col-md-6">
                 <input type="text"
-                class="form-control   @error('long_name') is-invalid @enderror" name="long_name"  value=" {{old('long_name')}}" id="" aria-describedby="helpId" placeholder="">
+                class="form-control   @error('long_name') is-invalid @enderror" name="long_name"  value=" {{old('long_name',$enterprise->long_name)}}" id="" aria-describedby="helpId" placeholder="">
                 @error('long_name')
                 <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
               @enderror
@@ -70,7 +71,7 @@
                 <label for=""class="col-md-4 text-md-right">Direccion</label>
                 <div class="col-md-6">
                 <input type="text"
-                class="form-control  @error('address') is-invalid @enderror" name="address" value=" {{old('long_name')}}" id="" aria-describedby="helpId" placeholder="">
+                class="form-control  @error('address') is-invalid @enderror" name="address" value=" {{old('address',$enterprise->address)}}" id="" aria-describedby="helpId" placeholder="">
                 @error('address')
                 <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
               @enderror
@@ -100,16 +101,16 @@
                 <label for=""class="col-md-4 text-md-right">tipo sociedad</label>
                 <div class="col-md-6">
                 <input type="text"
-                class="form-control  @error('type') is-invalid @enderror" name="type" value="{{old('type')}}" id="" aria-describedby="helpId" placeholder="" >
+                class="form-control  @error('type') is-invalid @enderror" name="type" value="{{old('type',$enterprise->type)}}" id="" aria-describedby="helpId" placeholder="" >
                 @error('type')
                 <div class=""><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
               @enderror
                </div>
               </div>
               <div class="row my-3">
-                <label for="" class="col-md-4 text-md-right">Logo</label>
+                <label for="" class="col-md-4 text-md-right">Logo (Reemplazara al actual)</label>
                 <div class="col-md-6">
-                <input type="file" class="form-control @error('logo') is-invalid @enderror " name="logo"  id="" aria-describedby="helpId" placeholder="" accept="image/*">
+                <input type="file" class="form-control @error('logo') is-invalid @enderror " name="logo"  id="" aria-describedby="helpId" accept="image/*" placeholder="">
                 @error('logo')
                   <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
                       @enderror
@@ -118,6 +119,11 @@
               </div>
            
             <div>
+                <div class="row my-3">
+                    <div class="col-md-8 text-md-right">
+                    <a class="btn btn-primary" href="{{asset('storage/logos').'/'.$logo->name}}" target="blank_">Visualizar Documento Actual</a>
+                    </div>
+                </div>
               <div class="row my-3">
               
                 <label for="" class="col-md-4 text-md-right">Socios</label>      
@@ -141,12 +147,11 @@
                                      
               <input type="text" name="hola" id="" wire:model="search" class="form-control" placeholder="Ingrese nombre o correo">
             
+           
               <div>
            
-                
-                @if ( $users->currentPage()==1 )
-                @if ($users->count() )
                 <h5>Añadidos</h5>
+                @if ($users->count())
                 <div class="table table-light table-responsive">
                     <table class="table">
                         <thead class="thead-light">
@@ -157,7 +162,6 @@
                         </thead>
                         <tbody>
                            @foreach ($users as $user)
-                         
                          <tr>
                              <td> {{$user->name}}</td>
                              <td>{{$user->email}}</td>
@@ -172,14 +176,10 @@
                 <div  class="card-body">
                     <strong>No hay postulantes añadidos</strong>
                 </div>
-              </div>
                 @endif 
-                @endif
+            </div>
            
-            
-              </div>
-           
-            @if ($students->count() )
+            @if ($students->count())
            <div class="table table-light table-responsive" >
               <table class="table table-light "
                 <thead class="thead-light">
@@ -207,12 +207,12 @@
                   
                  </tbody>
              </table>
-             <div class="card-footer">
-              {{$students->links()}}
-          </div>
+              
            </div>
           
-               
+               <div class="card-footer">
+                   {{$students->links()}}
+               </div>
                
                    
                @else
