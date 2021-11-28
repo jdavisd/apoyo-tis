@@ -4,7 +4,7 @@
 
     @livewireScripts
      <div class="row justify-content-center">
-    {{$users}}
+    {{$level}}
       <div class="col-md-8">
             <div class="card">
                 <div class="card-header"><strong class="h5">Postular</strong></div>
@@ -151,7 +151,7 @@
               <div>
            
                 <h5>Añadidos</h5>
-                @if ($users->count())
+                @if ($users)
                 <div class="table table-light table-responsive">
                     <table class="table">
                         <thead class="thead-light">
@@ -195,12 +195,16 @@
                       <td>{{$student->name}}</td>
                       <td>{{$student->email}}</td>
                       <td><div class="mt-1">
+                      
+                        
+                        <input
+                        type="checkbox"
+                        class="form-checkbox"
+                        name="tags"
+                        value="{{ $student->id }}"
+                        wire:model="level">
                        
-                       
-                        <label  class="inline-flex items-center">
-                            {!! Form::checkbox('students[]', $student->id,null, ['class'=>'mr-1','wire:model'=>'level','wire:click'=>'levelClicked']) !!}
-    
-                        </label>
+                     
                     </div></td>
                     </tr>
                      @endforeach

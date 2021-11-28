@@ -15,11 +15,12 @@ class EnterpriseEdit extends Component
    
     use WithPagination;
     protected $paginationTheme='bootstrap';
-    public $level;
+    public $level=[];
     public $hola;
     public $search; 
     public $open=true;
-  
+    public $users;
+
     public $idP;
     public function updatingSearch(){
         $this->resetPage();
@@ -29,7 +30,10 @@ class EnterpriseEdit extends Component
     {
         
         $this->idP=$id;
+        $this->level=User::where('enterprise_id','=',$this->idP)->pluck('id')->toArray();
     }
+    
+ 
     public function render()
     {
        $this->project = Project::pluck('name','id');
@@ -38,26 +42,27 @@ class EnterpriseEdit extends Component
        $adviser = User::role('Consultor')->get();   
        $adviser= $adviser->pluck('name','id');
 
-       $this->level=User::where('enterprise_id','=',$this->idP)->get('id');
+       
+       $this->users=User::whereIn('id',$this->level)->get();
       
          $this->project1 = ProjectEnterprise::find( $this->idP);
          $enterprise = $this->project1->enterprise()->first();
-        $users=User::whereIn('id',$this->level)->paginate();
+        //$this->users=User::whereIn('id',$this->level)->get();
         
        $this->logo= Document::OfType('App\Models\Enterprise')->where('imageable_id','=',$enterprise->id)->first();
        
-       $this->level=User::where('enterprise_id','=',$this->idP)->get();
+       //$this->level=User::where('enterprise_id','=',$this->idP)->get();
        $students=User::where('name','LIKE','%'. $this->search .'%')
        ->where([['name','LIKE','%'. $this->search .'%'],['enterprise_id',NULL]])
        ->orWhere([['email','LIKE','%'. $this->search .'%'],['enterprise_id', NULL]])
        ->role('Estudiante')->paginate();      
        
-       return view('livewire.enterprise.enterprise-edit',compact('adviser','students','users','enterprise')); 
+       return view('livewire.enterprise.enterprise-edit',compact('adviser','students','enterprise')); 
     }
     public function levelClicked()
     {
-        
-        
+      $this->users=User::whereIn('id',$this->level)->get();
+       // $this->render();
     
     }
 }

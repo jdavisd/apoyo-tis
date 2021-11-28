@@ -4,7 +4,7 @@
 
     @livewireScripts
      <div class="row justify-content-center">
-    
+  
       <div class="col-md-8">
             <div class="card">
                 <div class="card-header"><strong class="h5">Postular</strong></div>
@@ -144,7 +144,7 @@
               <div>
            
                 
-                @if ( $users->currentPage()==1 )
+                {{-- @if ( $users->currentPage()==1 ) --}}
                 @if ($users->count() )
                 <h5>Añadidos</h5>
                 <div class="table table-light table-responsive">
@@ -174,7 +174,7 @@
                 </div>
               </div>
                 @endif 
-                @endif
+                {{-- @endif --}}
            
             
               </div>
