@@ -194,9 +194,7 @@
                      <tr>
                       <td>{{$student->name}}</td>
                       <td>{{$student->email}}</td>
-                      <td><div class="mt-1">
-                       
-                       
+                      <td><div class="mt-1">  
                         <label  class="inline-flex items-center">
                             {!! Form::checkbox('students[]', $student->id,null, ['class'=>'mr-1','wire:model'=>'level','wire:click'=>'levelClicked']) !!}
     

@@ -142,18 +142,17 @@
           </tbody>
       </table>
    </div>
-   <div class="card-footer">
+  <div class="card-footer">
     
-</div>
+  </div>
 @livewireScripts
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11">
+  <script type="text/javascript">
   window.livewire.on('userStore', () => {
       $('#exampleModal').modal('hide');
   });
-</script>
-
-          <script>
+  </script>
+  <script>
             livewire.on('acceptar',  userI=>{
                Swal.fire({
          title: 'Estas seguro?',
@@ -178,8 +177,7 @@
           </script>
 
           <script>
-            livewire.on('rechazar',  userID=>{
-        
+            livewire.on('rechazar',  userID=>{   
                Swal.fire({
          title: 'Estas seguro?',
          text: "No podras revertir los cambios!",
@@ -205,5 +203,5 @@
               Livewire.emit('delete',userID);
           
             })
-          </script>
+  </script></script>
 </div>

@@ -104,6 +104,7 @@
           
                </thead>
            <tbody>
+             {{$projects}}
                @foreach ($projects as $project)
                <tr>
                 <td> {{$project->short_name}} </td>

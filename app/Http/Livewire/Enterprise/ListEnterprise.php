@@ -33,8 +33,7 @@ class ListEnterprise extends Component
         $enterprises = ProjectEnterprise::join('users','project_enterprises.users_id',"=",'users.id')
         ->join('enterprises', 'project_enterprises.enterprise_id', '=', 'enterprises.id')
         ->join('projects', 'project_enterprises.project_id', '=', 'projects.id')
-        ->join('documents','project_enterprises.id','=','documents.imageable_id')
-        ->select('enterprises.short_name','enterprises.long_name', 'projects.period','users.name','documents.name as doc','enterprises.id','enterprises.phone','enterprises.email','enterprises.type')
+        ->select('enterprises.short_name','enterprises.long_name', 'projects.period','users.name','enterprises.id')
         ->where('enterprises.short_name','LIKE','%'. $this->search .'%')
         ->orWhere('enterprises.long_name','LIKE','%'. $this->search .'%')->orderBy($this->sort,$this->order)->paginate();
         return view('livewire.enterprise.list-enterprise',compact('enterprises','empresa','socios'));
