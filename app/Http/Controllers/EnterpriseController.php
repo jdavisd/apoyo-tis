@@ -133,9 +133,9 @@ class EnterpriseController extends Controller
      * @param  \App\Models\Enterprise  $enterprise
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $enterprise_id,Document $document )
+    public function update(Request $request, $enterprise_id)
     {
-
+      //  dd($document);
       $user=Auth::user()->roles->where('name','Estudiante');
       if($user->count()){
         $enterprise=Enterprise::find($enterprise_id);
@@ -156,20 +156,23 @@ class EnterpriseController extends Controller
           User::where('id',Auth::user()->id)->update(['enterprise_id' => $enterprise->id]);
         }
         
-     //   $document = Document::where('document_id', "=" , $document)->first();
+        $document = Document::OfType('App\Models\Enterprise')->where('documents.imageable_id','=',$enterprise_id)->first();
+        // $document = Document::where('document_id', "=" , $document)->first();
        // $announcement = Announcement::find($document->imageable_id);
+        $project = ProjectEnterprise::where('enterprise_id','=',$enterprise_id)->first();
+        $project->users_id = $request->adviser_id;
+        $project->project_id=$request->project_id ;
+        $project->save();
+
          if($request->hasFile('logo')){
            $document2=$request->file('logo');
            $nameDocument=$document2->getClientOriginalName();
            $document->name = $document2->getClientOriginalName();
            $document2=$request->file('logo')->storeAs('logos',$document2->getClientOriginalName(),'public');
           //Storage::disk('ftp')->put('logos'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
-           $enterprise->projectEnterprises1()->update([
-           'users_id'=>$request->adviser_id,
-           'project_id'=>$request->project_id    
-         ]
-         );
+           
 
+         
       
           $document->imageable_id= $enterprise->id;
           $document->imageable_type= Enterprise::class;

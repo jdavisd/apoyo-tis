@@ -21,6 +21,7 @@ class RegisterEnterprise extends Component
       public function updatingLevel(){
         $this->resetPage();
       }
+      
     public function render()
     {
        $project = Project::pluck('name','id');

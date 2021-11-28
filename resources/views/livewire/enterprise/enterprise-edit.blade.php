@@ -4,14 +4,16 @@
 
     @livewireScripts
      <div class="row justify-content-center">
-    {{$users}}
+    {{-- {{$users}} --}}
       <div class="col-md-8">
             <div class="card">
                 <div class="card-header"><strong class="h5">Postular</strong></div>
                      <div class="card-body">
-                         <form method="POST" action="{{route('empresa.update',$enterprise->id,$logo->id,$project1->id)}}" enctype="multipart/form-data">
+                       {{$logo}}
+                         <form method="POST" action="{{route('empresa.update',$enterprise->id,$project1->id)}}" enctype="multipart/form-data">
                             @csrf
                             @method('put')
+                            {{$level[0]}}-{{$level[1]}}-{{$level[2]}}-{{$level[3]}}-{{$level[4]}}
                             <div class="row my-3">
                                 <label for=""class="col-md-4 text-md-right">Nombre Corto</label>
                                 <div class="col-md-6">
@@ -82,7 +84,7 @@
     
               <div class="row my-3">{!! Form::label('adviser_id', 'Consultor',['class' => 'col-md-4 text-md-right']) !!}
                 <div class="col-md-6">
-                {!! Form::select ('adviser_id', $adviser, null, ['class' => 'form-control ' . ($errors->has('adviser_id') ? ' is-invalid' : null)]) !!}
+                {!! Form::select ('adviser_id', $adviser, $adviserID, ['class' => 'form-control ' . ($errors->has('adviser_id') ? ' is-invalid' : null)]) !!}
               
                   @error('adviser_id')
                   <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
@@ -149,7 +151,7 @@
             
            
               <div>
-           
+           {{-- {{$level[0][3]}} --}}
                 <h5>Añadidos</h5>
                 @if ($users->count())
                 <div class="table table-light table-responsive">
@@ -183,6 +185,7 @@
            <div class="table table-light table-responsive" >
               <table class="table table-light "
                 <thead class="thead-light">
+                  
                      <tr>
                         <th>Nombre</th>
                          <th>Correo</th>

@@ -31,7 +31,8 @@ class UsersIndex extends Component
   }
   public function askUser($id){
     $user = User::find($id);
-    $count=ProjectEnterprise::where('users_id',2)->get()->count();
+
+    $count=ProjectEnterprise::where('users_id',$id)->get()->count();
     if($user->hasRole('Consultor') && $count>10 ){
       $this->emit('notPermit');
     }
