@@ -99,7 +99,6 @@
                 <td> {{$enterprise->name}} </td>
                 <td>   
                     <button type="button" class="btn btn-primary" wire:click="$emit('show',{{$enterprise->id}})" data-toggle="modal" data-target="#detalles" >Detalles</button>
-                    {{$enterprise->id}}
                 </td>
             
                </tr>
