@@ -32,7 +32,7 @@ class EnterpriseEdit extends Component
     }
     public function render()
     {
-       $project = Project::pluck('name','id');
+       $this->project = Project::pluck('name','id');
        $this->projectID=ProjectEnterprise::where('enterprise_id',$this->idP)->get('project_id');
       
        $adviser = User::role('Consultor')->get();   
@@ -41,10 +41,10 @@ class EnterpriseEdit extends Component
        $this->level=User::where('enterprise_id','=',$this->idP)->get('id');
       
          $this->project1 = ProjectEnterprise::find( $this->idP);
-         $this->enterprise = $this->project1->enterprise()->first();
+         $enterprise = $this->project1->enterprise()->first();
         $users=User::whereIn('id',$this->level)->paginate();
         
-       $this->logo= Document::OfType('App\Models\Enterprise')->where('imageable_id','=',$this->enterprise->id)->first();
+       $this->logo= Document::OfType('App\Models\Enterprise')->where('imageable_id','=',$enterprise->id)->first();
        
        $this->level=User::where('enterprise_id','=',$this->idP)->get();
        $students=User::where('name','LIKE','%'. $this->search .'%')
@@ -52,7 +52,7 @@ class EnterpriseEdit extends Component
        ->orWhere([['email','LIKE','%'. $this->search .'%'],['enterprise_id', NULL]])
        ->role('Estudiante')->paginate();      
        
-       return view('livewire.enterprise.enterprise-edit',compact('project','adviser','students','users')); 
+       return view('livewire.enterprise.enterprise-edit',compact('adviser','students','users','enterprise')); 
     }
     public function levelClicked()
     {

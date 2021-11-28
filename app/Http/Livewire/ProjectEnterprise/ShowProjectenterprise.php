@@ -19,7 +19,7 @@ class ShowProjectenterprise extends Component
     public $enterprise;
     public $socios;
     public $logo;
-    protected $listeners=['accept','render','delete','reject'];
+    protected $listeners=['accept','render','reject','delete'=>'delete'];
     public $idP;
 
     public function mount($id)
@@ -47,28 +47,30 @@ class ShowProjectenterprise extends Component
     
         return view('livewire.project-enterprise.show-projectenterprise');
     }
+  
 
     public function delete($id){
 
-        dd($id);
-        // $document = Document::where('document_id', "=" , $id)->first();
-        // $payment = Payment::find($document->imageable_id);
-        // //Storage::disk('ftp')->delete('anuncios/'.$document->name); 
-        // unlink(storage_path('app/public/pagos/'.$document->name));
-        // DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
-        // $payment->delete();
-        // $this->render();
-        // //return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
+        //dd($id);
+        $document = Document::where('document_id', "=" , $id)->first();
+        $payment = Payment::find($document->imageable_id);
+       //Storage::disk('ftp')->delete('anuncios/'.$document->name); 
+         unlink(storage_path('app/public/pagos/'.$document->name));
+        DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
+       $payment->delete();
+       $this->render();
+      //return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
     }
 
 
-    public function accept($id){
+      public function accept($id){
         
         $payment = Payment::find($id);
-        $payment->status = 'Aceptado';
+       $payment->status = 'Aceptado';
         $payment->save();
         $this->render();   
-    }
+     }
+  
 
     public function reject($id){
         $payment = Payment::find($id);

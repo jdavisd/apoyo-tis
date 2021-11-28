@@ -176,9 +176,10 @@ class EnterpriseController extends Controller
           $document->save();
       
          }
-    
-         return redirect()->route('user.enterpriseproject.show',$enterprise->projectEnterprises1->first()->id);
+        
+         return redirect()->route('user.enterpriseproject.show',$enterprise->projectEnterprises1->first()->id);   
     }
+    
   }
 
     /**

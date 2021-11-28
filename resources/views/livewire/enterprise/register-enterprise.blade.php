@@ -143,8 +143,10 @@
             
               <div>
            
+                
+                @if ( $users->currentPage()==1 )
+                @if ($users->count() )
                 <h5>Añadidos</h5>
-                @if ($users->count())
                 <div class="table table-light table-responsive">
                     <table class="table">
                         <thead class="thead-light">
@@ -155,6 +157,7 @@
                         </thead>
                         <tbody>
                            @foreach ($users as $user)
+                         
                          <tr>
                              <td> {{$user->name}}</td>
                              <td>{{$user->email}}</td>
@@ -169,11 +172,14 @@
                 <div  class="card-body">
                     <strong>No hay postulantes añadidos</strong>
                 </div>
+              </div>
                 @endif 
-            </div>
-        
+                @endif
            
-            @if ($students->count())
+            
+              </div>
+           
+            @if ($students->count() )
            <div class="table table-light table-responsive" >
               <table class="table table-light "
                 <thead class="thead-light">
