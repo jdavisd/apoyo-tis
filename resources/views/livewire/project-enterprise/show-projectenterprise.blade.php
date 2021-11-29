@@ -1,5 +1,6 @@
 <div>
   <div class="row justify-content-center">
+    @livewire('project-enterprise.leave-project')
     <div class="col-md-8">
       <div>  
         <div class="row justify-content-center">
@@ -10,7 +11,7 @@
             </svg>
         </button>
       </div>
-     <a href="{{route('user.enterpriseproject.edit',$project->id)}}"> Editar</a>
+     <a class="btn btn-secundary"href="{{route('user.enterpriseproject.edit',$project->id)}}"> Editar</a>
         <!-- Modal -->
         <div wire:ignore.self class="modal fade"  wire:mode="open" id="detalles" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document" style="width:1250px;">

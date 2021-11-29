@@ -51,7 +51,6 @@ class ShowProjectenterprise extends Component
 
     public function delete($id){
 
-        //dd($id);
         $document = Document::where('document_id', "=" , $id)->first();
         $payment = Payment::find($document->imageable_id);
        //Storage::disk('ftp')->delete('anuncios/'.$document->name); 

@@ -36,8 +36,6 @@ class EnterpriseEdit extends Component
         //dd($this->level);
 
     }
-    
- 
     public function render()
     {
        $this->project = Project::pluck('name','id');
@@ -57,9 +55,9 @@ class EnterpriseEdit extends Component
        
        $students=User::where('name','LIKE','%'. $this->search .'%')
        ->where([['name','LIKE','%'. $this->search .'%'],['enterprise_id',NULL]])
-       ->orWhere([['name','LIKE','%'. $this->search .'%'],['enterprise_id',$enterprise->id ]])
+       //->orWhere([['name','LIKE','%'. $this->search .'%'],['enterprise_id',$enterprise->id ]])
        ->orWhere([['email','LIKE','%'. $this->search .'%'],['enterprise_id',NULL ]])
-       ->orWhere([['email','LIKE','%'. $this->search .'%'],['enterprise_id',$enterprise->id ]])
+       //->orWhere([['email','LIKE','%'. $this->search .'%'],['enterprise_id',$enterprise->id ]])
        ->role('Estudiante')->paginate();      
        
        return view('livewire.enterprise.enterprise-edit',compact('adviser','students','enterprise')); 
@@ -67,7 +65,7 @@ class EnterpriseEdit extends Component
     public function levelClicked()
     {
         
-      $this->users=User::whereIn('id',$this->level)->get();
+        $this->users=User::whereIn('id',$this->level)->get();
     
     }
-}
+} 

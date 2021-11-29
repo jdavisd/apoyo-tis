@@ -135,7 +135,7 @@ class EnterpriseController extends Controller
      */
     public function update(Request $request, $enterprise_id)
     {
-      //  dd($document);
+      dd($request->students);
       $user=Auth::user()->roles->where('name','Estudiante');
       if($user->count()){
         $enterprise=Enterprise::find($enterprise_id);
