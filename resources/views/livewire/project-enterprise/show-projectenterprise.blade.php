@@ -11,6 +11,7 @@
         </button>
       </div>
      <a href="{{route('user.enterpriseproject.edit',$project->id)}}"> Editar</a>
+     <button class ="btn btn-success mx-1" wire:click="$emit('salirse',{{$enterprise->id}})" >Salir</button>
         <!-- Modal -->
         <div wire:ignore.self class="modal fade"  wire:mode="open" id="detalles" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document" style="width:1250px;">
@@ -104,14 +105,8 @@
               <tr>
                   <th>Fecha</th>
                   <th>Asunto</th>
-                  <th>Documento</th>
-                  @can('proyecto.index')
-                    <th>Accion</th>
-                  @endcan
-                  @can('propuesta.create')
-                    <th>Estado</th>
-                  @endcan
-                  
+                  <th>Estado</th>    
+                  <th>Accion</th>   
               </tr>
           </thead>
           <tbody>
@@ -121,15 +116,8 @@
                 <td>{{$item->details}}</td>
                 {{-- <td><a class="btn btn-primary mx-2" href="{{route('file',$item->name)}}">Descargar</a></td> --}}
                 <td>
-                  <a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver</a>
-                  <button class ="btn btn-danger mx-1" wire:click="$emit('acceptar',{{$item->document_id}})" >Eliminar</button>
-                  {{-- <button class ="btn btn-danger mx-1" wire:click="test({{$item->document_id}})" >Eliminar</button> --}}
-                  {{$item->document_id}}
-                </td>
-                <td>
                   @can('proyecto.index')
                   <button class ="btn btn-success mx-1" wire:click="$emit('acceptar',{{$item->id}})" >Aprobar</button>
-               
                   <a class="btn btn-danger mx-1" wire:click="$emit('rechazar',{{$item->id}})" >Rechazar</a>
                   {{$item->status}}
                   @endcan
@@ -137,6 +125,13 @@
                     {{$item->status}}
                   @endcan
                 </td>
+                <td>
+                  <a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver</a>
+                  <button class ="btn btn-danger mx-1" wire:click="$emit('borrar',{{$item->document_id}})" >Eliminar</button>
+                  {{-- <button class ="btn btn-danger mx-1" wire:click="test({{$item->document_id}})" >Eliminar</button> --}}
+                  {{$item->document_id}}
+                </td>
+                
                 </tr>
               @endforeach
           </tbody>
@@ -188,7 +183,7 @@
          confirmButtonText: 'Aceptar'
         }).then((result) => {
          if (result.isConfirmed) {
-           Livewire.emitTo('project-enterprise.show-projectenterprise','reject',userID);
+           livewire.emitTo('project-enterprise.show-projectenterprise','reject',userID);
            Swal.fire(
              'Eliminado!',
              'La publicación ha sido eliminada.'
@@ -197,11 +192,59 @@
         });    
             })
           </script>
+        </script>
 
-          <script>
+<script>
+  livewire.on('borrar',  userID=>{   
+     Swal.fire({
+title: 'Estas seguro?',
+text: "No podras revertir los cambios!",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+confirmButtonText: 'Aceptar'
+}).then((result) => {
+if (result.isConfirmed) {
+ livewire.emitTo('project-enterprise.show-projectenterprise','delete',userID);
+ Swal.fire(
+   'Eliminado!',
+   'La publicación ha sido eliminada.'
+ )
+}
+});    
+  })
+</script>
+
+          {{-- <script>
             livewire.on('borrar',  docID=>{
               Livewire.emit('delete',userID);
           
             })
-  </script></script>
+  </script> --}}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+  <script>
+    livewire.on('salirse',  userID=>{ 
+    swal({
+  title: "Are you sure?",
+  text: "Once deleted, you will not be able to recover this imaginary file!",
+  icon: "warning",
+  buttons: true,
+  dangerMode: true,
+})
+.then((willDelete) => {
+  if (willDelete) {
+    livewire.emitTo('project-enterprise.show-projectenterprise','leave',userID); 
+    swal("Poof! Your imaginary file has been deleted!", {
+      icon: "success",
+    });
+    
+  } else {
+    swal("Your imaginary file is safe!");
+  }
+});
+    })
+  </script>
+  </script>
 </div>

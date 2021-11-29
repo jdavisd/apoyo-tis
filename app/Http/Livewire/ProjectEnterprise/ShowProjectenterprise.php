@@ -3,11 +3,13 @@
 namespace App\Http\Livewire\ProjectEnterprise;
 
 use App\Models\Document;
+use App\Models\Enterprise;
 use App\Models\Payment;
 use Livewire\Component;
 use App\Models\ProjectEnterprise;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+
 
 class ShowProjectenterprise extends Component
 {
@@ -19,7 +21,7 @@ class ShowProjectenterprise extends Component
     public $enterprise;
     public $socios;
     public $logo;
-    protected $listeners=['accept','render','reject','delete'=>'delete'];
+    protected $listeners=['accept','render','reject','delete'=>'delete','leave'];
     public $idP;
 
     public function mount($id)
@@ -47,14 +49,11 @@ class ShowProjectenterprise extends Component
     
         return view('livewire.project-enterprise.show-projectenterprise');
     }
-  
 
     public function delete($id){
-
-        //dd($id);
         $document = Document::where('document_id', "=" , $id)->first();
         $payment = Payment::find($document->imageable_id);
-       //Storage::disk('ftp')->delete('anuncios/'.$document->name); 
+       //Storage::disk('ftp')->delete('pagos/'.$document->name); 
          unlink(storage_path('app/public/pagos/'.$document->name));
         DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
        $payment->delete();
@@ -62,20 +61,22 @@ class ShowProjectenterprise extends Component
       //return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
     }
 
-
-      public function accept($id){
-        
+    public function accept($id){
         $payment = Payment::find($id);
-       $payment->status = 'Aceptado';
+        $payment->status = 'Aceptado';
         $payment->save();
         $this->render();   
-     }
-  
+    }
 
     public function reject($id){
         $payment = Payment::find($id);
         $payment->status = 'Rechazado';
         $payment->save();
         $this->render();
+    }
+
+    public function leave ($id){
+        $enterprise = Enterprise::find($id)->first();
+        $users = User::where('users.enterprise_id','=',$id)->get();
     }
 }
