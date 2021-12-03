@@ -149,14 +149,24 @@ class EnterpriseController extends Controller
         'phone'=>'required|max:40',
         'email'=>['required', 'string', 'email', 'max:255','email:rfc,filter,dns'],
         'type'=>'required|max:40',
-        'logo'=>'required|mimes:png,jpg,jpeg,gif,bmp,webp',      
+        'logo'=>'mimes:png,jpg,jpeg,gif,bmp,webp',      
         'adviser_id'=>'required',
         'project_id'=>'required',
-        'students' => ['required',
-            new CheckStudents($enterprise_id)
-    ],
+  
     ]);
-     // dd($request->students);
+
+    if($request->students){
+      $count=count($request->students);
+      $count2=User::where('enterprise_id',$enterprise_id)->get()->count();
+      $a= $count+$count2;
+    }
+    else{
+      $count2=User::where('enterprise_id',$enterprise_id)->get()->count();
+      $a= $count2;
+    }
+   
+  
+    if(($a)< 6 && ($a)>2){
       $user=Auth::user()->roles->where('name','Estudiante');
       if($user->count()){
         $enterprise=Enterprise::find($enterprise_id);
@@ -202,7 +212,13 @@ class EnterpriseController extends Controller
          }
         
          return redirect()->route('user.enterpriseproject.show',$enterprise->projectEnterprises1->first()->id);   
+    }     
     }
+    else{
+      return redirect()->route('user.enterpriseproject.edit',$enterprise_id)->with('info','los socios deben deben ser de 3 a 5'); 
+    }
+     // dd($request->students);
+     
     
   }
 

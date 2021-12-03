@@ -28,9 +28,12 @@ class CheckStudents implements Rule
      */
     public function passes($attribute, $value)
     {
-        $count=count($value);
+       // dd($value);
+       dd($this->enterprise_id);
+         $count=count($value);
         $count2=User::where('enterprise_id',$this->enterprise_id)->get()->count();
         $a= $count+$count2;
+      
         if(($a)< 6 && ($a)>2){
                return true;
         }

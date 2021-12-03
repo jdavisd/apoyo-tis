@@ -1,6 +1,6 @@
 
 <div>
-
+ 
 
   @livewireScripts
    <div class="row justify-content-center">
@@ -241,6 +241,9 @@
           @error('students')
           <small class="text-danger" style="font-weight: bold;"">Debe seleccionar entre 3 a 5 socios</small>         
         @enderror
+        @if (session('info'))
+        <small class="text-danger" style="font-weight: bold;"">Debe seleccionar entre 3 a 5 socios</small> 
+      @endif
                        
                                   <input name="" id="" class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
                          
