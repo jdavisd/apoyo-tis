@@ -77,4 +77,5 @@ class ShowProjectenterprise extends Component
         $payment->save();
         $this->render();
     }
+    
 }

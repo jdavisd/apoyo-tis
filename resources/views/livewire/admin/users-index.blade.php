@@ -68,7 +68,7 @@
   confirmButtonText: 'Si'
 }).then((result) => {
   if (result.isConfirmed) {
-    Livewire.emitTo('admin.users-index','delete',userID);
+    livewire.emitTo('admin.users-index','delete',userID);
     Swal.fire(
       'Eliminado!',
       'El usuario ha sido eliminado.'

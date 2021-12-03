@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreEnterprise extends FormRequest
@@ -28,13 +29,13 @@ class StoreEnterprise extends FormRequest
             'long_name' => 'required',
             'address'=>'required|max:40',
             'phone'=>'required|max:40',
-            'email'=>'required|max:40',
+            'email'=>['required', 'string', 'email', 'max:255','email:rfc,filter,dns'],
             'type'=>'required|max:40',
             'logo'=>'required|mimes:png,jpg,jpeg,gif,bmp,webp',      
-            'email'=>'required|max:40',
             'adviser_id'=>'required',
             'project_id'=>'required',
             'students'=>'required|min:2|max:4',
         ];
     }
+
 }

@@ -37,7 +37,7 @@ class UsersIndex extends Component
       $this->emit('notPermit');
     }
     else{
-      $this->emit('deleteUser');
+      $this->emit('deleteUser',$id);
     }
 }
 }

@@ -55,6 +55,7 @@ class ListEnterprise extends Component
 
   public function show ($id){
     
+    
     $this->idP = $id;
     $this->render();
     // dd($this->socios);

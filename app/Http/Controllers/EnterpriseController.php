@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Rules\CheckStudents;
 
 
 
@@ -23,7 +24,12 @@ use Illuminate\Support\Facades\DB;
 
 class EnterpriseController extends Controller
 {
-    /**
+  public function __construct()
+  {
+      $this->middleware('auth');
+
+  }  
+  /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -135,7 +141,22 @@ class EnterpriseController extends Controller
      */
     public function update(Request $request, $enterprise_id)
     {
-      dd($request->students);
+      
+      $request->validate([
+        'short_name'=>'required|max:40',
+        'long_name' => 'required',
+        'address'=>'required|max:40',
+        'phone'=>'required|max:40',
+        'email'=>['required', 'string', 'email', 'max:255','email:rfc,filter,dns'],
+        'type'=>'required|max:40',
+        'logo'=>'required|mimes:png,jpg,jpeg,gif,bmp,webp',      
+        'adviser_id'=>'required',
+        'project_id'=>'required',
+        'students' => ['required',
+            new CheckStudents($enterprise_id)
+    ],
+    ]);
+     // dd($request->students);
       $user=Auth::user()->roles->where('name','Estudiante');
       if($user->count()){
         $enterprise=Enterprise::find($enterprise_id);
