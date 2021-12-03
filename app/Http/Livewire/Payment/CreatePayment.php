@@ -55,7 +55,8 @@ class CreatePayment extends Component
             ]);
             $this->deliveries->storeAs('pagos',$var,'public');
             $nameDocument=$this->deliveries->getClientOriginalName();
-            //Storage::disk('ftp')->put('pagos'.'/'.$nameDocument, fopen($this->deliveries, 'w+'));
+            $this->deliveries->storeAs('pagos', $var, 'ftp');
+            //Storage::disk('ftp')->put('pagos'.'/'.$nameDocument, fopen($this->deliveries, 'r+'));
           }
           $this->emit('userStore'); 
           $this->reset(['details','deliveries','payment']);

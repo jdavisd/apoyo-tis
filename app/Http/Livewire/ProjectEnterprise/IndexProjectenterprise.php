@@ -32,18 +32,21 @@ class IndexProjectenterprise extends Component
             ->orWhere([['projects.name','LIKE','%'. $this->search .'%'],['project_enterprises.users_id', Auth::user()->id]])
             ->orderBy($this->sort,$this->order)->paginate();
             $proyectid=ProjectEnterprise::select('id');
-          }else{
-              $projects =User::find(Auth::user()->id)       
-              ->join('project_enterprises','users.enterprise_id',"=",'project_enterprises.id')
-              ->join('enterprises', 'project_enterprises.enterprise_id', '=', 'enterprises.id')
-              ->join('projects', 'project_enterprises.project_id', '=', 'projects.id')
-              ->select('enterprises.short_name','project_enterprises.status', 'projects.period','projects.name','project_enterprises.users_id','project_enterprises.id')
-              ->where([['enterprises.short_name','LIKE','%'. $this->search .'%'],['enterprises.id', Auth::user()->id]])
-              ->orWhere([['projects.name','LIKE','%'. $this->search .'%'],['enterprises.id', Auth::user()->id]])
-              ->orderBy($this->sort,$this->order)->paginate();
-              $proyectid=ProjectEnterprise::select('id');
+            return view('livewire.project-enterprise.index-projectenterprise',compact('projects'));
           }
-        return view('livewire.project-enterprise.index-projectenterprise',compact('projects'));
+          else{
+
+            $projects =User::find(Auth::user()->id)       
+            ->join('project_enterprises','users.id',"=",'project_enterprises.users_id')
+            ->join('enterprises', 'project_enterprises.enterprise_id', '=', 'enterprises.id')
+            ->join('projects', 'project_enterprises.project_id', '=', 'projects.id')
+            ->select('enterprises.short_name','project_enterprises.status', 'projects.period','projects.name','project_enterprises.users_id','project_enterprises.id')
+            ->where([['enterprises.short_name','LIKE','%'. $this->search .'%'],['project_enterprises.users_id', Auth::user()->id]])
+            ->orWhere([['projects.name','LIKE','%'. $this->search .'%'],['project_enterprises.users_id', Auth::user()->id]])
+            ->orderBy($this->sort,$this->order)->get();
+            return view('livewire.project-enterprise.index-projectenterprise',compact('projects'));
+          }
+        
     }
     public function order($by){
       if($by==$this->sort){

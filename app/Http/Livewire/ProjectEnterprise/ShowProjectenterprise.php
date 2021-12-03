@@ -8,6 +8,7 @@ use App\Models\Payment;
 use Livewire\Component;
 use App\Models\ProjectEnterprise;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 
 
@@ -21,8 +22,11 @@ class ShowProjectenterprise extends Component
     public $enterprise;
     public $socios;
     public $logo;
-    protected $listeners=['accept','render','reject','delete'=>'delete','leave'];
+    protected $listeners=['accept','render','reject','delete'=>'delete'];
     public $idP;
+    public $estado=false;
+
+    
 
     public function mount($id)
     {
@@ -30,7 +34,8 @@ class ShowProjectenterprise extends Component
         $this->idP=$id;
     }
     public function render()
-    {
+    {   
+        
         //$this->project=ProjectEnterprise::find(1);
         //$this->reset=['documents'];
         $this->project = ProjectEnterprise::find( $this->idP);
@@ -53,8 +58,8 @@ class ShowProjectenterprise extends Component
     public function delete($id){
         $document = Document::where('document_id', "=" , $id)->first();
         $payment = Payment::find($document->imageable_id);
-       //Storage::disk('ftp')->delete('pagos/'.$document->name); 
-         unlink(storage_path('app/public/pagos/'.$document->name));
+        Storage::disk('ftp')->delete('pagos/'.$document->name); 
+         //unlink(storage_path('app/public/pagos/'.$document->name));
         DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
        $payment->delete();
        $this->render();
@@ -65,6 +70,7 @@ class ShowProjectenterprise extends Component
         $payment = Payment::find($id);
         $payment->status = 'Aceptado';
         $payment->save();
+        // $this->estado = true;
         $this->render();   
     }
 
@@ -72,11 +78,9 @@ class ShowProjectenterprise extends Component
         $payment = Payment::find($id);
         $payment->status = 'Rechazado';
         $payment->save();
+        // $this->estado = false;
         $this->render();
     }
 
-    public function leave ($id){
-        $enterprise = Enterprise::find($id)->first();
-        $users = User::where('users.enterprise_id','=',$id)->get();
-    }
+    
 }

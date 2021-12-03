@@ -39,30 +39,6 @@ class EditPayment extends Component
         return view('livewire.payment.edit-payment');
     }
     public function update(){
-        $this->validate();
-        $payment=Payment::update([
-            'project_enterprise_id' => $this->project->id,
-            'date'=>$this->date,  
-            'details'=>$this->details
-          ]);
-          if(!$this->deliveries==null){
-              $var = $this->enterprise->short_name.'.'.$this->deliveries->getClientOriginalName();
-            Document::create([
-                'name' => $var,
-                'imageable_id'=>$payment->id,  
-                'imageable_type'=>Payment::class    
-            ]);
-            $this->deliveries->storeAs('Pagos',$var,'public');
-          }
-          $this->emit('userStore'); 
-          $this->reset(['details','date','deliveries','payment']);
-          $this->emit('render');
-
-        // $this->proyect->payment()->create([
-        //     'details'=>$this->details,
-        //     'date'=>$this->date,    
-        //   ]
-        //   );
-
+      
     }
 }

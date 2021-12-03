@@ -8,7 +8,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Adiccionar propuesta</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                          <span aria-hidden="true close-btn">×</span>
                     </button>
@@ -19,7 +19,7 @@
                             <label for="exampleFormControlInput1">Asunto</label>
                             <textarea type="" class="form-control" id="exampleFormControlInput1"  rows="3" placeholder="Ingrese detalles" wire:model="details" name="details">
                                 </textarea>
-                            {{$details}}
+                            
                             @error('details') <span class="text-danger error">{{ $message }}</span>@enderror
                         
                         </div>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
-                    <button type="button" wire:click.prevent="store()" class="btn btn-primary close-modal">Agregar</button>
+                    <button type="button" wire:click.prevent="store()" class="btn btn-primary close-modal" data-dismiss="modal">Agregar</button>
                 </div>
             </div>
 
