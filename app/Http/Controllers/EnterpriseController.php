@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Rules\CheckStudents;
 
 
 
@@ -23,7 +24,12 @@ use Illuminate\Support\Facades\DB;
 
 class EnterpriseController extends Controller
 {
-    /**
+  public function __construct()
+  {
+      $this->middleware('auth');
+
+  }  
+  /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -136,6 +142,31 @@ class EnterpriseController extends Controller
     public function update(Request $request, $enterprise_id)
     {
       
+      $request->validate([
+        'short_name'=>'required|max:40',
+        'long_name' => 'required',
+        'address'=>'required|max:40',
+        'phone'=>'required|max:40',
+        'email'=>['required', 'string', 'email', 'max:255','email:rfc,filter,dns'],
+        'type'=>'required|max:40',
+        'logo'=>'mimes:png,jpg,jpeg,gif,bmp,webp',      
+        'adviser_id'=>'required',
+        'project_id'=>'required',
+  
+    ]);
+
+    if($request->students){
+      $count=count($request->students);
+      $count2=User::where('enterprise_id',$enterprise_id)->get()->count();
+      $a= $count+$count2;
+    }
+    else{
+      $count2=User::where('enterprise_id',$enterprise_id)->get()->count();
+      $a= $count2;
+    }
+   
+  
+    if(($a)< 6 && ($a)>2){
       $user=Auth::user()->roles->where('name','Estudiante');
       if($user->count()){
         $enterprise=Enterprise::find($enterprise_id);
@@ -181,7 +212,13 @@ class EnterpriseController extends Controller
          }
         
          return redirect()->route('user.enterpriseproject.show',$enterprise->projectEnterprises1->first()->id);   
+    }     
     }
+    else{
+      return redirect()->route('user.enterpriseproject.edit',$enterprise_id)->with('info','los socios deben deben ser de 3 a 5'); 
+    }
+     // dd($request->students);
+     
     
   }
 

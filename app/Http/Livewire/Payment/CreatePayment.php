@@ -54,8 +54,8 @@ class CreatePayment extends Component
                 'imageable_type'=>Payment::class    
             ]);
             $this->deliveries->storeAs('pagos',$var,'public');
-            $nameDocument=$this->deliveries->getClientOriginalName();
-            $this->deliveries->storeAs('pagos', $var, 'ftp');
+            //$nameDocument=$this->deliveries->getClientOriginalName();
+            //$this->deliveries->storeAs('pagos', $var, 'ftp');
             //Storage::disk('ftp')->put('pagos'.'/'.$nameDocument, fopen($this->deliveries, 'r+'));
           }
           $this->emit('userStore'); 

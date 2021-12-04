@@ -60,6 +60,7 @@ class ListEnterprise extends Component
   public function show ($id){
     //dd($id);
     
+    
     $this->idP = $id;
   
     $this->render();
