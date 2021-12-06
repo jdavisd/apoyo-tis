@@ -71,8 +71,8 @@ class AnnouncementController extends Controller
             $nameDocument=$document2->getClientOriginalName();
 
             $document->name = $document2->getClientOriginalName();
-            $document2=$request->file('document')->storeAs('Anuncios',$document2->getClientOriginalName(),'public');
-            //Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
+            //$document2=$request->file('document')->storeAs('Anuncios',$document2->getClientOriginalName(),'public');
+            Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
             $announcement->save();
             $document->imageable_id= $announcement->id;
             $document->imageable_type= Announcement::class;
@@ -133,15 +133,15 @@ class AnnouncementController extends Controller
         $announcement->period = $request->period;
         $announcement->description = $request->description;
         if($request->hasFile('document')){
-            //Storage::disk('ftp')->delete('anuncios/'.$document->name); 
-            unlink(storage_path('app/public/anuncios/'.$document->name));
+            Storage::disk('ftp')->delete('anuncios/'.$document->name); 
+            //unlink(storage_path('app/public/anuncios/'.$document->name));
             $document2=$request->file('document');
             $var = DB::table('documents')
               ->where('document_id', $document->document_id)
               ->update(['name' => $document2->getClientOriginalName()]);
-            $document2=$request->file('document')->storeAs('anuncios',$document2->getClientOriginalName(),'public');
-            //$nameDocument=$document2->getClientOriginalName();
-            //Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
+            //$document2=$request->file('document')->storeAs('anuncios',$document2->getClientOriginalName(),'public');
+            $nameDocument=$document2->getClientOriginalName();
+            Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
         }
         $announcement->save();
         return redirect()->route('anuncio.index')->with('infoUpdate','Se actualizo el anuncio');

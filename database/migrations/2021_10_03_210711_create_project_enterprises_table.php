@@ -15,7 +15,7 @@ class CreateProjectEnterprisesTable extends Migration
     {
         Schema::create('project_enterprises', function (Blueprint $table) {
             $table->id();
-            $table->enum('status',[1,2,3,4,5])->default(1);
+            $table->string('status');
             $table->timestamps();
 
            $table->unsignedBigInteger('users_id');

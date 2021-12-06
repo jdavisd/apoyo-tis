@@ -2,7 +2,7 @@
    
    
    <div>
-    <button class ="btn btn-danger mx-1" wire:click="$emit('leave')" >Borrar</button></td>
+    <button class ="btn btn-danger mx-1 float-right mr-5" wire:click="$emit('leave')" >Salirse</button></td>
     @livewireScripts
    </div>
   
@@ -12,7 +12,7 @@
 
         Swal.fire({
   title: 'Estas seguro de salir?',
-  text: "Si quedan menos de dos estudiantes la empresa sera eliminada !",
+  text: "Si quedan menos de tres estudiantes la empresa sera eliminada !",
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',

@@ -21,7 +21,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=>'admin.home','description'=>'administracion ventana principal'])->syncRoles(['Admin']);
         Permission::create(['name'=>'user.home','description'=>'pagina principal anuncios'])->syncRoles(['Admin','Consultor','Estudiante']);
         Permission::create(['name'=>'empresa','description'=>'postular grupo empresa'])->syncRoles(['Estudiante']);
-        Permission::create(['name'=>'user.password.edit','description'=>'Editar contraseña de usuario'])->syncRoles(['Admin','Consultor']);
+        Permission::create(['name'=>'user.password.edit','description'=>'Editar contraseña de usuario'])->syncRoles(['Admin','Consultor','Estudiante']);
        /* Permission::create(['name'=>'admin.roles.create','description'=>'registrar y administrar empresas']);
         Permission::create(['name'=>'admin.roles.destroy','description'=>'registrar y administrar empresas']);
         Permission::create(['name'=>'admin.roles.destroy','description'=>'registrar y administrar empresas']);
@@ -41,6 +41,10 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=>'proyecto.index','description'=>'ver los proyectos creados'])->syncRoles(['Consultor']);
         Permission::create(['name'=>'empresas.registradas','description'=>'ver las empresas registradas en TIS'])->syncRoles(['Consultor','Admin','Estudiante']);
         Permission::create(['name'=>'trabajos','description'=>'ver las empresas del consultor'])->syncRoles(['Consultor']);
-        Permission::create(['name'=>'propuesta.create','description'=>'registrar una nueva propuesta'])->syncRoles(['Estudiante']);
+
+        //vista show-enterprise
+        Permission::create(['name'=>'propuesta.create','description'=>'registrar y eliminar una propuesta'])->syncRoles(['Estudiante']);
+        Permission::create(['name'=>'enterprise.edit','description'=>'editar datos o salirse de una grupo empresa'])->syncRoles(['Estudiante']);
+        Permission::create(['name'=>'propuesta.qualify','description'=>'acceptar o rechazar una propuesta'])->syncRoles(['Consultor']);
     }                                  
 }

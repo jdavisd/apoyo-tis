@@ -18,7 +18,7 @@
                                     <a class="btn btn-primary mx-2" href="{{asset('storage/anuncios').'/'.$doc->name}}" target="blank_">Ver Documento</a>
                                 @endcan
                                 @can('anuncio.destroy')
-                                    <button class ="btn btn-danger mx-1" wire:click="$emit('deleteUser',{{$doc->id}})" >Borrar</button>
+                                    <button class ="btn btn-danger mx-1" wire:click="$emit('deleteUser',{{$doc->document_id}})" >Borrar</button>
                                 @endcan
                                 @can('anuncio.edit')
                                     <a class="btn btn-primary mx-2" href="{{route('anuncio.edit',$doc->document_id)}}">Editar</a>    

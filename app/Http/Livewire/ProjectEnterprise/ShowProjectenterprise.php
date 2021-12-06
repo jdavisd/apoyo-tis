@@ -3,14 +3,21 @@
 namespace App\Http\Livewire\ProjectEnterprise;
 
 use App\Models\Document;
+use App\Models\Enterprise;
 use App\Models\Payment;
 use Livewire\Component;
 use App\Models\ProjectEnterprise;
 use App\Models\User;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\MailController;
+
+
 
 class ShowProjectenterprise extends Component
 {
+    use WithFileUploads;
     public $project;
     public $sort='created_at';
     public $order='desc'; 
@@ -19,8 +26,16 @@ class ShowProjectenterprise extends Component
     public $enterprise;
     public $socios;
     public $logo;
-    protected $listeners=['accept','render','reject','delete'=>'delete'];
+    protected $listeners=['accept','render','reject','delete'=>'delete','contrato'];
     public $idP;
+    public $observar;
+    public $asunto;
+    public $idPago;
+    public $estado = '';
+    public $contAsunto;
+    public $contAdjunto;
+
+    
 
     public function mount($id)
     {
@@ -28,7 +43,8 @@ class ShowProjectenterprise extends Component
         $this->idP=$id;
     }
     public function render()
-    {
+    {   
+        
         //$this->project=ProjectEnterprise::find(1);
         //$this->reset=['documents'];
         $this->project = ProjectEnterprise::find( $this->idP);
@@ -47,35 +63,103 @@ class ShowProjectenterprise extends Component
     
         return view('livewire.project-enterprise.show-projectenterprise');
     }
-  
 
     public function delete($id){
-
         $document = Document::where('document_id', "=" , $id)->first();
         $payment = Payment::find($document->imageable_id);
-       //Storage::disk('ftp')->delete('anuncios/'.$document->name); 
-         unlink(storage_path('app/public/pagos/'.$document->name));
+        Storage::disk('ftp')->delete('pagos/'.$document->name); 
+         //unlink(storage_path('app/public/pagos/'.$document->name));
         DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
        $payment->delete();
        $this->render();
       //return redirect()->route('anuncio.index')->with('infoDelete','Se elimino el anuncio');
     }
 
-
-      public function accept($id){
-        
+    public function accept($id){
         $payment = Payment::find($id);
-       $payment->status = 'Aceptado';
+        $payment->status = 'Aceptado';
         $payment->save();
+        // $this->estado = true;
         $this->render();   
-     }
-  
+    }
 
-    public function reject($id){
-        $payment = Payment::find($id);
-        $payment->status = 'Rechazado';
+    protected $rules=[
+        'observar' => 'nullable|mimes:pdf',
+        'asunto'=>'required',
+    ];
+    public function reject(){
+        $this->validate();
+        // dd($this->idPago);
+        $payment = Payment::find($this->idPago);
+        
+        if(!$this->observar==null){
+            // dd($this->observar);
+            $var = 'observaciones'.'.'.$this->observar->getClientOriginalName();
+            $this->observar->storeAs('pagos',$var,'public');
+            $details=[
+                'title'=>'Correo de observacion de propuesta',
+                'list'=>[$this->asunto],       
+                'action'=>'PlataformaTIS',
+                'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
+                ];
+            $mc = new MailController;
+            $mc->observar($this->enterprise->email,$details,$var);
+            unlink(storage_path('app/public/pagos/'.$var));
+        }else{
+            $details=[
+            'title'=>'Correo de observacion de propuesta',
+            'list'=>[$this->asunto],
+                     
+            'action'=>'PlataformaTIS',
+            'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
+            ];
+            $mc = new MailController;
+            $mc->observar($this->enterprise->email,$details,null);
+        }
+        
+        // dd($this->observar);
+        // $this->estado = false;
+        $payment->status = $this->estado;
         $payment->save();
+        $this->emit('hideObservar');
         $this->render();
+    }
+
+    public function contrato(){
+
+         $this->validate([
+            'contAdjunto' => 'required|mimes:pdf',
+             'contAsunto' =>'required',
+             
+         ]);
+        // dd($this->contAdjunto);
+        if(!$this->contAdjunto==null){
+            
+            $var = 'contrato'.'.'.$this->contAdjunto->getClientOriginalName();
+            $this->contAdjunto->storeAs('pagos',$var,'public');
+            $details=[
+                'title'=>'Contratacion de servicios',
+                'list'=>[$this->contAsunto],
+                         
+                'action'=>'PlataformaTIS',
+                'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
+                ];
+            $mc = new MailController;
+            $mc->observar($this->enterprise->email,$details,$var);
+            unlink(storage_path('app/public/pagos/'.$var));
+        }
+     
+
+        $this->project->status = 'Contratado';
+        $this->project->save();        
+        $this->emit('hideContrato');
+        $this->render();
+    }
+
+    public function setPago($id , $estado){
+        // dd($id);
+        $this->estado = $estado;
+        $this->idPago = $id;
     }
     
 }

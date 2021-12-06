@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\ProjectEnterprise;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class CreatePayment extends Component
 {
@@ -52,7 +53,10 @@ class CreatePayment extends Component
                 'imageable_id'=>$payment->id,  
                 'imageable_type'=>Payment::class    
             ]);
-            $this->deliveries->storeAs('Pagos',$var,'public');
+            $this->deliveries->storeAs('pagos',$var,'public');
+            //$nameDocument=$this->deliveries->getClientOriginalName();
+            //$this->deliveries->storeAs('pagos', $var, 'ftp');
+            //Storage::disk('ftp')->put('pagos'.'/'.$nameDocument, fopen($this->deliveries, 'r+'));
           }
           $this->emit('userStore'); 
           $this->reset(['details','deliveries','payment']);

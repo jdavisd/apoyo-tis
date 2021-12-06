@@ -1,7 +1,15 @@
 <div>
-  <div class="row justify-content-center">
-    @livewire('project-enterprise.leave-project')
-    <div class="col-md-8">
+  <div class="row">
+    <div class="col">
+      @can('enterprise.edit')
+        @livewire('project-enterprise.leave-project')
+        <a class="btn btn-primary float-right mr-4" href="{{route('user.enterpriseproject.edit',$project->id)}}"> Editar</a>
+      @endcan
+    </div>
+  </div>
+    <div class="row justify-content-center">
+      
+    <div class="col-md-11">  
       <div>  
         <div class="row justify-content-center">
         <h1>{{$enterprise->short_name}}</h1>
@@ -10,8 +18,10 @@
               <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
             </svg>
         </button>
+        
       </div>
-     <a class="btn btn-secundary"href="{{route('user.enterpriseproject.edit',$project->id)}}"> Editar</a>
+     
+     {{-- <button class ="btn btn-success mx-1" wire:click="$emit('salirse',{{$enterprise->id}})" >Salir</button> --}}
         <!-- Modal -->
         <div wire:ignore.self class="modal fade"  wire:mode="open" id="detalles" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document" style="width:1250px;">
@@ -87,6 +97,81 @@
                 </div>
             </div>
         </div>
+
+
+        <div wire:ignore.self class="modal fade"  wire:mode="open" id="observar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Notificar</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true close-btn">×</span>
+                      </button>
+                  </div>
+                 <div class="modal-body">
+                      <form>
+                          <div class="form-group">
+                              <label for="exampleFormControlInput1">Mensaje</label>
+                              <textarea type="" class="form-control" id="exampleFormControlInput1"  rows="3" placeholder="Ingrese detalles" wire:model="asunto" name="asunto">
+                                  </textarea>
+                              
+                              @error('asunto') <span class="text-danger error">{{ $message }}</span>@enderror
+                          
+                          </div>
+                        
+                          <div class="form-group">
+                              <label for="exampleFormControlInput2">Adjunto(opcional)</label>
+                              <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="observar"  name="observar" accept="application/pdf">
+                              @error('observar') <span class="text-danger error">{{ $message }}</span>@enderror
+                          </div>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
+                      <button type="button" wire:click="$emit('reject')" class="btn btn-primary close-modal">Agregar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div wire:ignore.self class="modal fade"  wire:mode="open" id="contrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">contrato</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true close-btn">×</span>
+                    </button>
+                </div>
+               <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Mensaje</label>
+                            <textarea type="" class="form-control" id="exampleFormControlInput1"  rows="3" placeholder="Ingrese detalles" wire:model="contAsunto" name="contAsunto">
+                                </textarea>
+                            
+                            @error('contAsunto') <span class="text-danger error">{{ $message }}</span>@enderror
+                        
+                        </div>
+                      
+                        <div class="form-group">
+                            <label for="exampleFormControlInput2">contrato</label>
+                            <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="contAdjunto"  name="contAdjunto" accept="application/pdf">
+                            @error('contAdjunto') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
+                    <button type="button" wire:click="$emit('contrato')" class="btn btn-primary close-modal">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      
+
+
     </div>
       
     </div>
@@ -105,14 +190,8 @@
               <tr>
                   <th>Fecha</th>
                   <th>Asunto</th>
-                  <th>Documento</th>
-                  @can('proyecto.index')
-                    <th>Accion</th>
-                  @endcan
-                  @can('propuesta.create')
-                    <th>Estado</th>
-                  @endcan
-                  
+                  <th>Estado</th>    
+                  <th>Accion</th>   
               </tr>
           </thead>
           <tbody>
@@ -122,42 +201,65 @@
                 <td>{{$item->details}}</td>
                 {{-- <td><a class="btn btn-primary mx-2" href="{{route('file',$item->name)}}">Descargar</a></td> --}}
                 <td>
-                  <a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver</a>
-                  <button class ="btn btn-danger mx-1" wire:click="$emit('acceptar',{{$item->document_id}})" >Eliminar</button>
-                  {{-- <button class ="btn btn-danger mx-1" wire:click="test({{$item->document_id}})" >Eliminar</button> --}}
-                  {{$item->document_id}}
-                </td>
-                <td>
-                  @can('proyecto.index')
-                  <button class ="btn btn-success mx-1" wire:click="$emit('acceptar',{{$item->id}})" >Aprobar</button>
-               
-                  <a class="btn btn-danger mx-1" wire:click="$emit('rechazar',{{$item->id}})" >Rechazar</a>
-                  {{$item->status}}
+                  {{-- {{$estado}} --}}
+                  @can('propuesta.qualify')
+                    @if ($item->status == 'Por revisar')
+                    <button type="button" class="btn btn-danger" wire:click="setPago({{$item->id}},'Rechazado')" data-toggle="modal" data-target="#observar" >Rechazar</button>
+                    
+                    {{-- <a class="btn btn-danger mx-1" wire:click="$emit('rechazar',{{$item->id}})"> Rechazar</a> --}}
+                      <button class ="btn btn-success mx-1" wire:click="setPago({{$item->id}},'Aceptado')"data-toggle="modal" data-target="#observar">Aprobar</button>
+                    @else
+                    {{$item->status}}
+                    @endif
                   @endcan
                   @can('propuesta.create')
                     {{$item->status}}
                   @endcan
                 </td>
+                <td>
+                  <a class="btn btn-primary mx-2" href="{{asset('storage/pagos').'/'.$item->name}}" target="blank_">Ver</a>
+                  @can('propuesta.create')
+                    <button class ="btn btn-danger mx-1" wire:click="$emit('borrar',{{$item->document_id}})" >Eliminar</button>
+                  @endcan
+                  
+                  {{-- <button class ="btn btn-danger mx-1" wire:click="test({{$item->document_id}})" >Eliminar</button> --}}
+              
+                </td>
+                
                 </tr>
               @endforeach
           </tbody>
       </table>
    </div>
   <div class="card-footer">
-    
+    @if ($project->status != 'Contratado')
+      <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#contrato" >Emitir Contrato</button>
+    @else       
+        <h2>{{$project->status}}</h2>
+    @endif
   </div>
 @livewireScripts
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="text/javascript">
-  window.livewire.on('userStore', () => {
+    window.livewire.on('userStore', () => {
       $('#exampleModal').modal('hide');
-  });
+      });
+  </script>
+  <script type="text/javascript">
+    window.livewire.on('hideObservar', () => {
+      $('#observar').modal('hide');
+      });
+  </script>
+   <script type="text/javascript">
+    window.livewire.on('hideContrato', () => {
+      $('#contrato').modal('hide');
+      });
   </script>
   <script>
             livewire.on('acceptar',  userI=>{
                Swal.fire({
          title: 'Estas seguro?',
-         text: "No podras revertir los cambios!",
+         text: "Se enviara un correo de aprovacion a la grupo empresa",
          icon: 'warning',
          showCancelButton: true,
          confirmButtonColor: '#3085d6',
@@ -165,10 +267,10 @@
          confirmButtonText: 'Si'
         }).then((result) => {
          if (result.isConfirmed) {
-           Livewire.emitTo('project-enterprise.show-projectenterprise','accept',userI);
+           livewire.emitTo('project-enterprise.show-projectenterprise','accept',userI);
            Swal.fire(
-             'Eliminado!',
-             'La publicación ha sido eliminada.'
+             'Aprobado!',
+             'La propuesta ha sido aprobada.'
            )
          }
         });
@@ -181,7 +283,7 @@
             livewire.on('rechazar',  userID=>{   
                Swal.fire({
          title: 'Estas seguro?',
-         text: "No podras revertir los cambios!",
+         text: "Se enviara un correo a la empresa",
          icon: 'warning',
          showCancelButton: true,
          confirmButtonColor: '#3085d6',
@@ -189,20 +291,37 @@
          confirmButtonText: 'Aceptar'
         }).then((result) => {
          if (result.isConfirmed) {
-           Livewire.emitTo('project-enterprise.show-projectenterprise','reject',userID);
+           livewire.emitTo('project-enterprise.show-projectenterprise','reject',userID);
            Swal.fire(
-             'Eliminado!',
-             'La publicación ha sido eliminada.'
+             'Rechazado!',
+             'La propuesta ha rechazada.'
            )
          }
         });    
             })
-          </script>
+    </script>
 
-          <script>
-            livewire.on('borrar',  docID=>{
-              Livewire.emit('delete',userID);
-          
-            })
-  </script></script>
+<script>
+  livewire.on('borrar',  userID=>{   
+     Swal.fire({
+title: 'Estas seguro?',
+text: "No podras revertir los cambios!",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+confirmButtonText: 'Aceptar'
+}).then((result) => {
+if (result.isConfirmed) {
+ livewire.emitTo('project-enterprise.show-projectenterprise','delete',userID);
+ Swal.fire(
+   'Eliminado!',
+   'La publicación ha sido eliminada.'
+ )
+}
+});    
+  })
+</script>
+
+
 </div>
