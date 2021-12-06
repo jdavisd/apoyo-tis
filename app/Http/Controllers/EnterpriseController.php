@@ -91,7 +91,8 @@ class EnterpriseController extends Controller
           //Storage::disk('ftp')->put('logos'.'/'.$nameDocument, fopen($request->file('logo'), 'r+'));
            $enterprise->projectEnterprises1()->create([
            'users_id'=>$request->adviser_id,
-           'project_id'=>$request->project_id    
+           'project_id'=>$request->project_id,
+           'status'=>'Postulante'    
          ]
          );
       

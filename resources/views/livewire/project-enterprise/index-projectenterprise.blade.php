@@ -110,7 +110,9 @@
                 <td> {{$project->short_name}} </td>
                 <td> {{$project->name}} </td>
                 <td> {{$project->period}} </td>
-                <td> {{$project->status}} </td>
+                <td>
+                  {{$project->status}}
+                </td>
                 <td> <a class="btn btn-primary mx-2" href="{{route('user.enterpriseproject.show',$project->id)}}">Ver</a>  </td>
                
               </tr>

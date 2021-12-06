@@ -97,6 +97,81 @@
                 </div>
             </div>
         </div>
+
+
+        <div wire:ignore.self class="modal fade"  wire:mode="open" id="observar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Notificar</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true close-btn">×</span>
+                      </button>
+                  </div>
+                 <div class="modal-body">
+                      <form>
+                          <div class="form-group">
+                              <label for="exampleFormControlInput1">Mensaje</label>
+                              <textarea type="" class="form-control" id="exampleFormControlInput1"  rows="3" placeholder="Ingrese detalles" wire:model="asunto" name="asunto">
+                                  </textarea>
+                              
+                              @error('asunto') <span class="text-danger error">{{ $message }}</span>@enderror
+                          
+                          </div>
+                        
+                          <div class="form-group">
+                              <label for="exampleFormControlInput2">Adjunto(opcional)</label>
+                              <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="observar"  name="observar" accept="application/pdf">
+                              @error('observar') <span class="text-danger error">{{ $message }}</span>@enderror
+                          </div>
+                      </form>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
+                      <button type="button" wire:click="$emit('reject')" class="btn btn-primary close-modal">Agregar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div wire:ignore.self class="modal fade"  wire:mode="open" id="contrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">contrato</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true close-btn">×</span>
+                    </button>
+                </div>
+               <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleFormControlInput1">Mensaje</label>
+                            <textarea type="" class="form-control" id="exampleFormControlInput1"  rows="3" placeholder="Ingrese detalles" wire:model="contAsunto" name="contAsunto">
+                                </textarea>
+                            
+                            @error('contAsunto') <span class="text-danger error">{{ $message }}</span>@enderror
+                        
+                        </div>
+                      
+                        <div class="form-group">
+                            <label for="exampleFormControlInput2">contrato</label>
+                            <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="contAdjunto"  name="contAdjunto" accept="application/pdf">
+                            @error('contAdjunto') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
+                    <button type="button" wire:click="$emit('contrato')" class="btn btn-primary close-modal">Agregar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      
+
+
     </div>
       
     </div>
@@ -126,11 +201,13 @@
                 <td>{{$item->details}}</td>
                 {{-- <td><a class="btn btn-primary mx-2" href="{{route('file',$item->name)}}">Descargar</a></td> --}}
                 <td>
-                  {{$estado}}
+                  {{-- {{$estado}} --}}
                   @can('propuesta.qualify')
                     @if ($item->status == 'Por revisar')
-                      <a class="btn btn-danger mx-1" wire:click="$emit('rechazar',{{$item->id}})"> Rechazar</a>
-                      <button class ="btn btn-success mx-1" wire:click="$emit('acceptar',{{$item->id}})" >Aprobar</button>
+                    <button type="button" class="btn btn-danger" wire:click="setPago({{$item->id}},'Rechazado')" data-toggle="modal" data-target="#observar" >Rechazar</button>
+                    
+                    {{-- <a class="btn btn-danger mx-1" wire:click="$emit('rechazar',{{$item->id}})"> Rechazar</a> --}}
+                      <button class ="btn btn-success mx-1" wire:click="setPago({{$item->id}},'Aceptado')"data-toggle="modal" data-target="#observar">Aprobar</button>
                     @else
                     {{$item->status}}
                     @endif
@@ -155,13 +232,27 @@
       </table>
    </div>
   <div class="card-footer">
-    
+    @if ($project->status != 'Contratado')
+      <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#contrato" >Emitir Contrato</button>
+    @else       
+        <h2>{{$project->status}}</h2>
+    @endif
   </div>
 @livewireScripts
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script type="text/javascript">
     window.livewire.on('userStore', () => {
       $('#exampleModal').modal('hide');
+      });
+  </script>
+  <script type="text/javascript">
+    window.livewire.on('hideObservar', () => {
+      $('#observar').modal('hide');
+      });
+  </script>
+   <script type="text/javascript">
+    window.livewire.on('hideContrato', () => {
+      $('#contrato').modal('hide');
       });
   </script>
   <script>
