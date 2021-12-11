@@ -8,11 +8,13 @@ use Livewire\Component;
 use App\Models\ProjectEnterprise;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
+
 use Illuminate\Support\Facades\Storage;
 
 class CreatePayment extends Component
 {
     use WithFileUploads;
+    
     public $project;
     public $enterprise;
     public $details;

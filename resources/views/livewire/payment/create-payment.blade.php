@@ -29,6 +29,7 @@
                             <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="deliveries"  name="deliveries" accept="application/pdf">
                             @error('deliveries') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">

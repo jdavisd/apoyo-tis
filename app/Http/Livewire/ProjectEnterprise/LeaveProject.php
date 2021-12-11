@@ -36,6 +36,16 @@ class LeaveProject extends Component
         return redirect()->route('user.home');
 
     }
+    // $enterprise_id=Auth::user()->enterprise_id;
+         
+    //     $count=User::where('enterprise_id',$enterprise_id)->get()->count();
+    //     if($count<3) {
+    //         //dd($enterprise_id);
+    //         //Enterprise::find($enterprise_id)->delete();
+    //         ProjectEnterprise::where('enterprise_id',$enterprise_id)->delete();
+    //     }
+    //     User::where('id',Auth::user()->id)->update(['enterprise_id' => NULL]); 
+    //     return redirect()->route('user.home');
 
 
 }
