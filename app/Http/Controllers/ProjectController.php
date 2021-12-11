@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ProjectController extends Controller
 {
@@ -45,6 +46,7 @@ class ProjectController extends Controller
             'name'=>['required', 'max:40', 'min:6'],
             'period'=>['required'],
             'code'=>['required'],
+            'datetime'=>['required']
           ]);
         $request=Project::create($request->all());
         return redirect()->route('proyecto.index')->with('infoCreate','Se creo el proyecto');
@@ -70,6 +72,9 @@ class ProjectController extends Controller
     public function edit( $id)
     {
         $project=Project::find($id);
+       // $datetime=Carbon::createFromFormat('m/d/Y H:i:s', $project->datetime);
+       // $data['transaction_date'] =  $data = $request->all();
+       // $data['transaction_date'] = Carbon::createFromFormat('m/d/Y', $request->transaction_date)->format('Y-m-d');
         return view ('projects.edit',compact('project'));
     }
 

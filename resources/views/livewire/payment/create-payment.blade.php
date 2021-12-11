@@ -1,5 +1,5 @@
 <div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >
+    <button type="button"  class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" >
         Adicionar
     </button>
 
@@ -42,4 +42,20 @@
 
     </div>
     @livewireScripts
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+    livewire.on('noPermit' ,() =>{
+
+      Swal.fire({
+  icon: 'error',
+  title: 'No pudes editar la empresa',
+  text: 'El plazo de cambios se vencio',
+ 
+})
+
+    })
+
+
+   
+  </script>   
 </div>
