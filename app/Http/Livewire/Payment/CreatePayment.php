@@ -44,7 +44,7 @@ class CreatePayment extends Component
 
         $this->validate();
         $project=Project::find($this->project->project_id);
-        $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
+        $currentlyDate = Carbon::now()->format('m-d-Y H:i:s');  
         if($currentlyDate>$project->datetime){
            $this->emit('noPermit');
         }

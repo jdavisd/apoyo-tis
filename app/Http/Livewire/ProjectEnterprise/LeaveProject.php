@@ -26,7 +26,7 @@ class LeaveProject extends Component
     }
     public function canleave(){
         $project=Project::find($this->idP);
-        $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
+        $currentlyDate = Carbon::now()->format('m-d-Y H:i:s');  
         if($currentlyDate>$project->datetime){
            $this->emit('noPermitLeave');
         }
