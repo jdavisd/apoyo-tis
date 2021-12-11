@@ -237,7 +237,7 @@
             <small class="text-danger" style="font-weight: bold;"">Debe seleccionar entre 3 a 5 socios</small>         
           @enderror
                          
-                                    <input name="" id=""  wire:click.prevent="verifyDate" class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
+                                    <input name="" id=""   class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
                            
                            
                        

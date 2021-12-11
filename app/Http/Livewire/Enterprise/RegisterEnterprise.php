@@ -17,6 +17,8 @@ class RegisterEnterprise extends Component
     public $search; 
     public $open=true;
     public $selected;
+    protected $listeners=['verifyDate'];
+
     public function updatingSearch(){
         $this->resetPage();
       }
@@ -43,16 +45,5 @@ class RegisterEnterprise extends Component
         
     
     }
-    public function verifyDate(){
-      if(!$this->selected){
-        $projectR = Project::all()->first();
-        $this->selected=$projectR->id;
-      }
-      $project=Project::find($this->selected);
-      $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
-      if($currentlyDate>$project->datetime){
-         $this->emit('noPermit');
-      }
-   
-  }
+  
 }

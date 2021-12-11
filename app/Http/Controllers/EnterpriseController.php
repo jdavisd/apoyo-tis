@@ -17,6 +17,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\Rules\CheckStudents;
+use Carbon\Carbon;
 
 
 
@@ -62,6 +63,12 @@ class EnterpriseController extends Controller
      */
     public function store(StoreEnterprise $request)
     {
+      $project=Project::find($request->project_id);
+      $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
+      if($currentlyDate<$project->datetime){
+         return redirect()->route('empresa.create')->with('info','La Fecha de postulacion ya paso');
+      }
+       
       $user=Auth::user()->roles->where('name','Estudiante');
       if($user->count()){
         $enterprise=Enterprise::create([
@@ -155,7 +162,11 @@ class EnterpriseController extends Controller
         'project_id'=>'required',
   
     ]);
-
+    $project=Project::find($request->project_id);
+    $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
+    if($currentlyDate>$project->datetime){
+       return redirect()->back()->with('error','La Fecha de postulacion ya paso');
+    }
     if($request->students){
       $count=count($request->students);
       $count2=User::where('enterprise_id',$enterprise_id)->get()->count();
