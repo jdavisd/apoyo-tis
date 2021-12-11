@@ -43,6 +43,18 @@
                           @enderror
                       </div>
                   </div>
+                {{\Carbon\Carbon::parse($project->datetime)->format('m/d/Y H:i:s')}}
+                {{$project->datetime}}
+                  <div class="row my-3">
+                    <label class="col-md-4 text-md-right" for="datetime">Fecha limite de entrega</label>
+                    <div class="col-md-6">
+                        <input class="form-control @error('datetime') is-invalid @enderror" type="datetime-local" name="datetime"
+                        value="{{old('datetime', \Carbon\Carbon::parse($project->datetime)->format('m/d/Y H:i:s'))}}"  id="" aria-describedby="helpId" placeholder="">
+                        @error('datetime')
+                            <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                        @enderror
+                    </div>
+                </div>
                  
                   <div class="row my-3">
                       <div class="col-md-7 text-md-right"> 

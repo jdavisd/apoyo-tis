@@ -9,7 +9,8 @@ use App\Models\ProjectEnterprise;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
-
+use Carbon\Carbon;
+use App\Models\Project;
 class CreatePayment extends Component
 {
     use WithFileUploads;
@@ -39,8 +40,15 @@ class CreatePayment extends Component
 
         return view('livewire.payment.create-payment');
     }
-    public function store(Request $request){
+    public function store(){
+
         $this->validate();
+        $project=Project::find($this->project->project_id);
+        $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
+        if($currentlyDate>$project->datetime){
+           $this->emit('noPermit');
+        }
+        else{
         $payment=Payment::create([
             'project_enterprise_id' => $this->project->id,
             'details'=>$this->details,
@@ -67,6 +75,9 @@ class CreatePayment extends Component
         //     'date'=>$this->date,    
         //   ]
         //   );
+        }
 
     }
+  
+
 }

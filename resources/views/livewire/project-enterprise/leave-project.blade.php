@@ -2,7 +2,7 @@
    
    
    <div>
-    <button class ="btn btn-danger mx-1 float-right mr-5" wire:click="$emit('leave')" >Salirse</button></td>
+    <button class ="btn btn-danger mx-1 float-right mr-5" wire:click.prevent="canleave()" >Salirse</button></td>
     @livewireScripts
    </div>
   
@@ -37,5 +37,20 @@
 
     
    </script>
+     <script>
+      livewire.on('noPermitLeave' ,() =>{
+  
+        Swal.fire({
+    icon: 'error',
+    title: 'No pudes salir la empresa',
+    text: 'El plazo de cambios se vencio',
+   
+  })
+  
+      })
+  
+  
+     
+    </script>   
    
 </div>

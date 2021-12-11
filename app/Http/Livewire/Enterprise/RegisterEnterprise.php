@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Carbon\Carbon;
 class RegisterEnterprise extends Component
 {
     use WithPagination;
@@ -15,6 +16,7 @@ class RegisterEnterprise extends Component
     public $hola;
     public $search; 
     public $open=true;
+    public $selected;
     public function updatingSearch(){
         $this->resetPage();
       }
@@ -41,4 +43,16 @@ class RegisterEnterprise extends Component
         
     
     }
+    public function verifyDate(){
+      if(!$this->selected){
+        $projectR = Project::all()->first();
+        $this->selected=$projectR->id;
+      }
+      $project=Project::find($this->selected);
+      $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
+      if($currentlyDate>$project->datetime){
+         $this->emit('noPermit');
+      }
+   
+  }
 }

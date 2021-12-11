@@ -29,7 +29,7 @@
                          
          <div class="row my-3">{!! Form::label('project_id', 'Proyecto', ['class' => 'col-md-4 text-md-right']) !!}
             <div class="col-md-6">
-            {!! Form::select ('project_id', $project, null, ['class' => 'form-control ' . ($errors->has('project_id') ? ' is-invalid' : null)]) !!}
+            {!! Form::select ('project_id', $project,null, ['wire:model'=>'selected','class' => 'form-control ' . ($errors->has('project_id') ? ' is-invalid' : null)]) !!}
             @error('project_id')
             <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
           @enderror
@@ -237,7 +237,7 @@
             <small class="text-danger" style="font-weight: bold;"">Debe seleccionar entre 3 a 5 socios</small>         
           @enderror
                          
-                                    <input name="" id="" class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
+                                    <input name="" id=""  wire:click.prevent="verifyDate" class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
                            
                            
                        
@@ -258,7 +258,23 @@
                      </div>   
                 </div>
             </div> 
-        </div>    
+        </div>  
+
       </div>   
-                                
+          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+    livewire.on('noPermit' ,() =>{
+
+      Swal.fire({
+  icon: 'error',
+  title: 'No pudes editar la empresa',
+  text: 'El plazo de cambios se vencio',
+ 
+})
+
+    })
+
+
+   
+  </script>                           
     </div> 
