@@ -50,7 +50,8 @@ class RegisterEnterprise extends Component
       }
       $project=Project::find($this->selected);
       $currentlyDate = Carbon::now()->format('Y-m-d H:i:s');  
-      // dd($currentlyDate,$project->datetime);
+      dd($currentlyDate,$project->datetime);
+      // dd($project->datetime);
       if($currentlyDate>$project->datetime){
          $this->emit('noPermit');
       }

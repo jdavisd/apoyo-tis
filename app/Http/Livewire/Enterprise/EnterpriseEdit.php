@@ -67,7 +67,7 @@ class EnterpriseEdit extends Component
     }
     public function verifyDate(){
         $project=Project::find($this->projectID[0]);
-        $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
+        $currentlyDate = Carbon::now()->format('Y-m-d H:i:s');  
         if($currentlyDate>$project->datetime){
            $this->emit('noPermit');
         }

@@ -3,7 +3,7 @@
     <div class="col">
       @can('enterprise.edit')
         @livewire('project-enterprise.leave-project',['id'=>$idP])
-        <a class="btn btn-primary float-right mr-4" href="{{route('user.enterpriseproject.edit',$project->id)}}"> Editar</a>
+        <a class="btn btn-primary float-right mr-4" href="{{route('user.enterpriseproject.edit',$project->enterprise_id)}}"> Editar</a>
       @endcan
     </div>
   </div>
