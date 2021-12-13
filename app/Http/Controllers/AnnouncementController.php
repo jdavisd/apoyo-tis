@@ -8,9 +8,15 @@ use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class AnnouncementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +24,8 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        $documents = Document::OfType('App\Models\Announcement')->join('announcements','announcements.id',"=",'documents.imageable_id')->get();
+        $documents = Document::OfType('App\Models\Announcement')
+        ->join('announcements','announcements.id',"=",'documents.imageable_id')->get();
         return view('announcements.index',compact('documents'));
     }
 
@@ -29,6 +36,8 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
+
+        
         return view('announcements.create');
     }
 
@@ -62,8 +71,8 @@ class AnnouncementController extends Controller
             $nameDocument=$document2->getClientOriginalName();
 
             $document->name = $document2->getClientOriginalName();
-            $document2=$request->file('document')->storeAs('Anuncios',$document2->getClientOriginalName(),'public');
-            //Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'w+'));
+            //$document2=$request->file('document')->storeAs('Anuncios',$document2->getClientOriginalName(),'public');
+            Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
             $announcement->save();
             $document->imageable_id= $announcement->id;
             $document->imageable_type= Announcement::class;

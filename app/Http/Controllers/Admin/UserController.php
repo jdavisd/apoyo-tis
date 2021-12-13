@@ -6,10 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Auth;
 
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -75,13 +81,16 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255','email:rfc,dns,filter'],
+            'email' => ['required', 'string', 'email', 'max:255','email:rfc,filter,dns'],
+            'roles'=> ['required', 'min:1', 'max:1'],
         ]);
          $user->roles()->sync($request->roles); 
          $user->name = $request->name;
          $user->email = $request->email;
+         
          $user->save();
-        return redirect()->route('admin.users.edit',$user)->with('info','Usuario editado correctamente');
+        // return redirect()->route('admin.users.edit',$user)->with('info','Usuario editado correctamente');
+        return redirect()->route('admin.users.index')->with('info','Usuario actualizado correctamente');
     }
 
     /**
@@ -92,6 +101,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if(Auth::user()->id==$id){
+            return redirect()->route('admin.users.index')->with('info','No puede eliminar este usuario');
+        }
         $user = User::find($id);
         $user->delete();
         return redirect()->route('admin.users.index')->with('info','Usuario eliminado correctamente');

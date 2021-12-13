@@ -15,6 +15,11 @@ use Spatie\Permission\Models\Role;
 
 class ImportuserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -55,7 +60,7 @@ class ImportuserController extends Controller
 
          // dd($import->failures()); 
         
-        return  back()->with('info','Usuarios registrados correctamente');
+         return redirect()->route('admin.users.index')->with('info','Usuarios registrados correctamente');
     }
 
     /**

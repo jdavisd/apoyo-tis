@@ -1,4 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
+
+@section('title', 'Apoyo')
+
+@section('content_header')
+    <h1>Crear usuario</h1>
+@stop
 
 @section('content')
 <div class="container">
@@ -61,6 +67,25 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">Roles:</label>
+                            <div class="">
+                                @foreach ($roles as $role)
+                                <label class="col-md-6 col-form-label text-md">
+                                    {!! Form::checkbox('roles[]', $role->id,null, ['class'=>'mr-1']) !!}
+                                    {{$role->name}}
+                                </label>
+                                @endforeach 
+                            
+                            <div class="col-md-12 col-form-label text-md ">
+                                @error('roles')
+                                    <small class="text-danger" style="font-weight: bold;"">Debe seleccionar un unico rol</small>         
+                                @enderror
+                            </div>
+                            </div>
+                        </div>
+
+    
                         @can('user.notificar')
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">
@@ -88,4 +113,12 @@
         </div>
     </div>
 </div>
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

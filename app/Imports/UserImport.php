@@ -65,7 +65,8 @@ class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
         return [
             'name' => ['required'],
             //'email' => ['unique:users,email','required','email:rfc,dns,filter']
-            'email' => ['unique:users,email','required']
+            //'email' => ['unique:users,email','required','email:rfc,dns,filter','string']
+             'email' => ['unique:users,email','required']
         ];
         
     }

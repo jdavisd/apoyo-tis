@@ -86,7 +86,7 @@
                 </svg>
                 @endif
                 </th>
-                <th><div class="accordion" id="accordionExample">
+                {{-- <th><div class="accordion" id="accordionExample">
                   <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
                       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -100,19 +100,21 @@
                     </div>
                   </div>
                   
-                </div></th>
+                </div></th> --}}
           
                </thead>
            <tbody>
+           
                @foreach ($projects as $project)
                <tr>
                 <td> {{$project->short_name}} </td>
                 <td> {{$project->name}} </td>
                 <td> {{$project->period}} </td>
-                <td> {{$project->status}} </td>
-                <td> <a class="btn btn-primary mx-2" href="{{route('user.enterpriseproject.show',$project->id)}}">Editar</a>  </td>
-                {{$project}}
-              
+                <td>
+                  {{$project->status}}
+                </td>
+                <td> <a class="btn btn-primary mx-2" href="{{route('user.enterpriseproject.show',$project->id)}}">Ver</a>  </td>
+               
               </tr>
                @endforeach
       

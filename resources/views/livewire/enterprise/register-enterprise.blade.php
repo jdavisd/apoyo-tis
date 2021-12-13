@@ -4,7 +4,7 @@
 
     @livewireScripts
      <div class="row justify-content-center">
-    
+  
       <div class="col-md-8">
             <div class="card">
                 <div class="card-header"><strong class="h5">Postular</strong></div>
@@ -29,7 +29,7 @@
                          
          <div class="row my-3">{!! Form::label('project_id', 'Proyecto', ['class' => 'col-md-4 text-md-right']) !!}
             <div class="col-md-6">
-            {!! Form::select ('project_id', $project, null, ['class' => 'form-control ' . ($errors->has('project_id') ? ' is-invalid' : null)]) !!}
+            {!! Form::select ('project_id', $project,null, ['wire:model'=>'selected','class' => 'form-control ' . ($errors->has('project_id') ? ' is-invalid' : null)]) !!}
             @error('project_id')
             <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
           @enderror
@@ -37,7 +37,7 @@
               </div>
           
               <div class="row my-3">
-                <label for=""class="col-md-4 text-md-right">Telefono</label>
+                <label for=""class="col-md-4 text-md-right">Teléfono</label>
                 <div class="col-md-6">
                 <input type="number"class="form-control   @error('phone') is-invalid @enderror" name="phone" value=" {{old('phone')}}" id="" aria-describedby="helpId" placeholder="">        
                 @error('phone')
@@ -46,7 +46,7 @@
               </div>
               </div>
               <div class="row my-3">
-                <label for=""class="col-md-4 text-md-right">Correo Electronico</label>
+                <label for=""class="col-md-4 text-md-right">Correo Electrónico</label>
                 <div class="col-md-6">
                 <input type="email"
                 class="form-control  @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" id="" aria-describedby="helpId" placeholder="">
@@ -67,7 +67,7 @@
               </div>
               </div>
               <div class="row my-3">
-                <label for=""class="col-md-4 text-md-right">Direccion</label>
+                <label for=""class="col-md-4 text-md-right">Dirección</label>
                 <div class="col-md-6">
                 <input type="text"
                 class="form-control  @error('address') is-invalid @enderror" name="address" value=" {{old('long_name')}}" id="" aria-describedby="helpId" placeholder="">
@@ -97,7 +97,7 @@
               </div>
           -->
               <div class="row my-3">
-                <label for=""class="col-md-4 text-md-right">tipo sociedad</label>
+                <label for=""class="col-md-4 text-md-right">Tipo sociedad</label>
                 <div class="col-md-6">
                 <input type="text"
                 class="form-control  @error('type') is-invalid @enderror" name="type" value="{{old('type')}}" id="" aria-describedby="helpId" placeholder="" >
@@ -109,10 +109,11 @@
               <div class="row my-3">
                 <label for="" class="col-md-4 text-md-right">Logo</label>
                 <div class="col-md-6">
-                <input type="file" class="form-control @error('logo') is-invalid @enderror " name="logo"  id="" aria-describedby="helpId" placeholder="">
+                <input type="file" class="form-control @error('logo') is-invalid @enderror " name="logo"  id="" aria-describedby="helpId" placeholder="" accept="image/*">
                 @error('logo')
                   <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
                       @enderror
+                      
                                       </div>
               </div>
            
@@ -123,7 +124,8 @@
                 <div class="col-md-6">    
                               <button type="button" class="btn btn-outline-secondary form-control  " data-toggle="modal" data-target="#exampleModal">
                                   Añadir socios
-                              </button>     
+                              </button> 
+                                 
                               </div>        
                               <div wire:ignore.self class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog modal-lg" role="document">
@@ -139,11 +141,12 @@
                                      
               <input type="text" name="hola" id="" wire:model="search" class="form-control" placeholder="Ingrese nombre o correo">
             
-           
               <div>
            
+                
+                {{-- @if ( $users->currentPage()==1 ) --}}
+                @if ($users->count() )
                 <h5>Añadidos</h5>
-                @if ($users->count())
                 <div class="table table-light table-responsive">
                     <table class="table">
                         <thead class="thead-light">
@@ -154,6 +157,7 @@
                         </thead>
                         <tbody>
                            @foreach ($users as $user)
+                         
                          <tr>
                              <td> {{$user->name}}</td>
                              <td>{{$user->email}}</td>
@@ -168,14 +172,14 @@
                 <div  class="card-body">
                     <strong>No hay postulantes añadidos</strong>
                 </div>
-    
+              </div>
                 @endif 
-         
-    
-            </div>
-            @if ($students->count())
-         
-          
+                {{-- @endif --}}
+           
+            
+              </div>
+           
+            @if ($students->count() )
            <div class="table table-light table-responsive" >
               <table class="table table-light "
                 <thead class="thead-light">
@@ -190,9 +194,7 @@
                      <tr>
                       <td>{{$student->name}}</td>
                       <td>{{$student->email}}</td>
-                      <td><div class="mt-1">
-                       
-                       
+                      <td><div class="mt-1">  
                         <label  class="inline-flex items-center">
                             {!! Form::checkbox('students[]', $student->id,null, ['class'=>'mr-1','wire:model'=>'level','wire:click'=>'levelClicked']) !!}
     
@@ -203,12 +205,12 @@
                   
                  </tbody>
              </table>
-              
+             <div class="card-footer">
+              {{$students->links()}}
+          </div>
            </div>
           
-               <div class="card-footer">
-                   {{$students->links()}}
-               </div>
+               
                
                    
                @else
@@ -231,8 +233,11 @@
             
              <br>
             </div>
+            @error('students')
+            <small class="text-danger" style="font-weight: bold;"">Debe seleccionar entre 3 a 5 socios</small>         
+          @enderror
                          
-                                    <input name="" id="" class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
+                                    <input name="" id=""   class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
                            
                            
                        
@@ -253,7 +258,23 @@
                      </div>   
                 </div>
             </div> 
-        </div>    
+        </div>  
+
       </div>   
-                                
+          <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script>
+    livewire.on('noPermit' ,() =>{
+
+      Swal.fire({
+  icon: 'error',
+  title: 'No pudes editar la empresa',
+  text: 'El plazo de cambios se vencio',
+ 
+})
+
+    })
+
+
+   
+  </script>                           
     </div> 

@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Carbon\Carbon;
 class RegisterEnterprise extends Component
 {
     use WithPagination;
@@ -15,18 +16,25 @@ class RegisterEnterprise extends Component
     public $hola;
     public $search; 
     public $open=true;
+    public $selected;
     public function updatingSearch(){
         $this->resetPage();
       }
+      public function updatingLevel(){
+        $this->resetPage();
+      }
+      
     public function render()
     {
        $project = Project::pluck('name','id');
        $adviser = User::role('Consultor')->get();   
        $adviser= $adviser->pluck('name','id');
-       $students = User::role('Estudiante')->get();
        $this->level[]=Auth::user()->id;
        $users=User::whereIn('id',$this->level)->paginate();
-       $students=User::where('name','LIKE','%'. $this->search .'%')->orWhere('email','LIKE','%'. $this->search .'%')->whereNotIn('id',[Auth::user()->id ])->role('Estudiante')->paginate();
+       $students=User::where('name','LIKE','%'. $this->search .'%')
+       ->where([['name','LIKE','%'. $this->search .'%'],['enterprise_id', NULL]])
+       ->orWhere([['email','LIKE','%'. $this->search .'%'],['enterprise_id', NULL]])
+       ->whereNotIn('id',[Auth::user()->id ])->role('Estudiante')->paginate();
        return view('livewire.enterprise.register-enterprise',compact('project','adviser','students','users'));        
     }
     public function levelClicked()
@@ -35,4 +43,18 @@ class RegisterEnterprise extends Component
         
     
     }
+    public function verifyDate(){
+      if(!$this->selected){
+        $projectR = Project::all()->first();
+        $this->selected=$projectR->id;
+      }
+      $project=Project::find($this->selected);
+      $currentlyDate = Carbon::now()->format('Y-m-d H:i:s');  
+      dd($currentlyDate,$project->datetime);
+      // dd($project->datetime);
+      if($currentlyDate>$project->datetime){
+         $this->emit('noPermit');
+      }
+   
+  }
 }

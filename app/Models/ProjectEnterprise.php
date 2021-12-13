@@ -8,7 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectEnterprise extends Model
 {
     use HasFactory;
-    protected $fillable=['users_id','project_id'];
+    protected $fillable=['users_id','project_id','status'];
+
+    
     public function announcement(){
         return $this->belongsTo(Announcement::class);
     }

@@ -10,6 +10,11 @@ use Illuminate\Validation\Rule;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +23,7 @@ class RoleController extends Controller
     public function index()
     {
        //$roles=Role::all();
-        $roles=Role::all()->whereNotIn('name',['Postulante']);
+        $roles=Role::all()->whereNotIn('name',['Postulante','Admin']);
    
         return view('admin.roles.index',compact('roles'));
     }
@@ -43,7 +48,8 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-          'name'=>'[required]'
+            'name'=>['required','unique:roles,name'],
+            'permissions' => 'required|min:1'
         ]);
 
         $role=Role::create($request->all());
@@ -84,11 +90,15 @@ class RoleController extends Controller
      */
     public function update(Request $request, $role)
     {
+        $request->validate([
+            'permissions' => 'required|min:1'
+          ]);
           //$role=Role::create($request->all());
           $roles1=Role::find($role);
           $roles1->syncPermissions( $request->permissions);
          // $role->permissions()->sync( $request->permissions);
-          return redirect()->route('admin.roles.edit',$role)->with('info','Se actualizo el rol');
+          return redirect()->route('admin.roles.index')->with('info','Rol actualizado correctamente');
+          
     }
 
     /**
@@ -100,6 +110,6 @@ class RoleController extends Controller
     public function destroy(Role $role)
     {
         $role->delete();
-        return redirect()->route('admin.roles.index')->with('info','Se elimino el rol');
+        return redirect()->route('admin.roles.index')->with('info','Rol eliminado correctamente');
     }
 }

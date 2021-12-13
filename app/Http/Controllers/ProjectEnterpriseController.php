@@ -7,6 +7,13 @@ use Illuminate\Http\Request;
 
 class ProjectEnterpriseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+       // $this->middleware('can:Consultor');
+
+
+    }
     /**
      * Display a listing of the resource.
      *
@@ -56,9 +63,10 @@ class ProjectEnterpriseController extends Controller
      * @param  \App\Models\ProjectEnterprise  $projectEnterprise
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProjectEnterprise $projectEnterprise)
+    public function edit($id)
     {
-        //
+        
+        return view('ProjectEnterprise.edit',compact('id'));
     }
 
     /**
@@ -70,7 +78,7 @@ class ProjectEnterpriseController extends Controller
      */
     public function update(Request $request, ProjectEnterprise $projectEnterprise)
     {
-        //
+        
     }
 
     /**

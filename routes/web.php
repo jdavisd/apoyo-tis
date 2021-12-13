@@ -10,9 +10,9 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProjectEnterpriseController;
 use App\Http\Controllers\UserController;
 use App\Models\ProjectEnterprise;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-
-
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +32,11 @@ Route::resource('empresa', EnterpriseController::class)->names('empresa');
 Route::resource('proyecto', ProjectController::class);
 Route::resource('anuncio', AnnouncementController::class);
 Route::resource('trabajos',ProjectEnterpriseController::class)->names('user.enterpriseproject');
+Route::get('files/{filename}', function($filename) {
+    return Storage::disk('local')->download('public/pagos'.'/'.$filename);
+   // return back();
+  })->name('file');
+
 //Route::resource('editar-usuario', UserController::class)->names('user.password');
 
 //Route::get('enviar',[MailController::class,'sendMail']);

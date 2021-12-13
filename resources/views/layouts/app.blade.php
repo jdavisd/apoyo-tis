@@ -41,18 +41,47 @@
                          {{-- <a class="nav-link" href="{{ route('login') }}">{{ __('Empresas') }}</a> --}}
                     </li>  -->
                     @can('empresa')
+                    @if (Auth::user()->enterprise_id==null)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('empresa.create') }}">{{ __('Postularse') }}</a>
                    </li> 
+                    @endif
+                    
                     @endcan  
                    
                    
                     @can('anuncio.create')
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('anuncio.create') }}">{{ __('Anuncios') }}</a>
+                        <a class="nav-link" href="{{ route('anuncio.create') }}">{{ __('Publicar') }}</a>
                    </li>
                    @endcan 
-                   
+
+                   @can('proyecto.index')
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('proyecto.index') }}">{{ __('Proyectos') }}</a>
+                    </li>
+                   @endcan
+                    
+                    @can('empresas.registradas')
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{ route('empresa.index') }}">{{ __('Empresas Registradas') }}</a>
+                        </li>
+                    @endcan
+                    
+                        @can('trabajos')
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('user.enterpriseproject.index') }}">{{ __('Trabajos') }}</a>
+                        </li>
+                        @endcan
+                    
+                        @auth
+                            @if (Auth::user()->enterprise_id)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('user.enterpriseproject.show',Auth::user()->enterprise_id) }}">{{ __('Trabajo') }}</a>
+                                </li>
+                            @endif
+                        @endauth
+                    
 
                     </ul>
 
@@ -79,7 +108,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-menu dropdown-menu-right" aria-lfabelledby="navbarDropdown">
                                     @can('admin.home')
                                     <a class="dropdown-item" href="{{ route('admin.home') }}">
                                    

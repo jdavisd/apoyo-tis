@@ -32,15 +32,19 @@
          @error('email')
              <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
          @enderror
+         
+         @if (Auth::user()->id!=$user->id)
          <label class="" for="">Roles:</label>
-     @foreach ($roles as $role)
+         @foreach ($roles as $role)
          <div>
              <label >
                  {!! Form::checkbox('roles[]', $role->id,null, ['class'=>'mr-1']) !!}
                  {{$role->name}}
              </label>
          </div>
-     @endforeach
+     @endforeach 
+         @endif
+
      {!! Form::submit('Editar Usuario', ['class'=>'btn btn-primary mt-2']) !!}
      {!! Form::close() !!}
      </div>

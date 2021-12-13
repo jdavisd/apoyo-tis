@@ -15,7 +15,7 @@ class CreateProjectEnterprisesTable extends Migration
     {
         Schema::create('project_enterprises', function (Blueprint $table) {
             $table->id();
-            $table->enum('status',[1,2,3,4,5])->default(1);
+            $table->string('status')->nullable();
             $table->timestamps();
 
            $table->unsignedBigInteger('users_id');
@@ -23,7 +23,7 @@ class CreateProjectEnterprisesTable extends Migration
             $table->unsignedBigInteger('project_id');
             
 
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('users_id')->references('id')->on('users');
             $table->foreign('enterprise_id')->references('id')->on('enterprises')->onDelete('cascade');
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
 

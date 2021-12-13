@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
-
-
 <div class="row justify-content-center">
   <div class="col-md-8">
       <div class="card">
@@ -41,7 +38,16 @@
                           @enderror
                       </div>
                   </div>
-                 
+                  <div class="row my-3">
+                    <label class="col-md-4 text-md-right" for="datetime">Fecha limite de entrega</label>
+                    <div class="col-md-6">
+                        <input class="form-control @error('datetime') is-invalid @enderror" type="datetime-local" name="datetime"
+                        value="{{old('datetime')}}"  id="" aria-describedby="helpId" placeholder="">
+                        @error('datetime')
+                            <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                        @enderror
+                    </div>
+                </div>
                   <div class="row my-3">
                       <div class="col-md-7 text-md-right"> 
                           <button class="btn btn-primary" type="submit">Guardar</button>
