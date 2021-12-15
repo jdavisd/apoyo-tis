@@ -64,8 +64,9 @@ class EnterpriseController extends Controller
     public function store(StoreEnterprise $request)
     {
       $project=Project::find($request->project_id);
-      $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
-      if($currentlyDate<$project->datetime){
+      $currentlyDate = Carbon::now()->format('Y-m-d H:i:s');
+      //dd($currentlyDate, $project->datetime);
+      if($currentlyDate>$project->datetime){
          return redirect()->route('empresa.create')->with('info','La Fecha de postulacion ya paso');
       }
        
@@ -163,7 +164,7 @@ class EnterpriseController extends Controller
   
     ]);
     $project=Project::find($request->project_id);
-    $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
+    $currentlyDate = Carbon::now()->format('Y-m-d H:i:s');  
     if($currentlyDate>$project->datetime){
        return redirect()->back()->with('error','La Fecha de postulacion ya paso');
     }

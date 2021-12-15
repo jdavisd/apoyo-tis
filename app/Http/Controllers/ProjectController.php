@@ -91,6 +91,7 @@ class ProjectController extends Controller
         $project->name=$request->name;
         $project->period=$request->period;
         $project->code=$request->code;
+        $project->datetime=$request->datetime;
         $project->save();
         return redirect()->route('proyecto.index')->with('infoUpdate','Se actualizo el proyecto');
     }

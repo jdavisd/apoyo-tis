@@ -43,8 +43,6 @@
                           @enderror
                       </div>
                   </div>
-                {{\Carbon\Carbon::parse($project->datetime)->format('m/d/Y g:i A')}}
-              
                   <div class="row my-3">
                     <label class="col-md-4 text-md-right" for="datetime">Fecha limite de entrega</label>
                     <div class="col-md-6">

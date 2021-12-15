@@ -27,4 +27,7 @@ class ProjectEnterprise extends Model
     public function payment(){
         return $this->hasMany(Payment::class);
     }
+    public function paymentPlan(){
+        return $this->hasMany(PaymentPlan::class);
+    }
 }

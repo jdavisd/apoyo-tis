@@ -25,8 +25,9 @@ class LeaveProject extends Component
       $this->idP=$id;
     }
     public function canleave(){
-        $project=Project::find($this->idP);
-        $currentlyDate = Carbon::now()->format('m-d-Y H:i:s');  
+        $project=ProjectEnterprise::find($this->idP)->project;
+        // dd($project->id);
+        $currentlyDate = Carbon::now()->format('Y-m-d H:i:s');  
         if($currentlyDate>$project->datetime){
            $this->emit('noPermitLeave');
         }
@@ -38,28 +39,20 @@ class LeaveProject extends Component
 
     public function leaveEnterprise()
     {
-     
-            $enterprise_id=Auth::user()->enterprise_id;
-            $count=User::where('enterprise_id',$enterprise_id)->get()->count();
-            if($count<3) {
-    
-                $count=User::where('enterprise_id',$enterprise_id)->get();
-                foreach($count as $user){
-                    User::where('id',$user->id)->update(['enterprise_id' => NULL]);
-                    User::where('id',$user->id)->update(['enterprise_id' => NULL]);
-                }
-                Enterprise::find($enterprise_id)->delete();
-                ProjectEnterprise::where('enterprise_id',$enterprise_id)->delete();
-    
-            }else{
-                User::where('id',Auth::user()->id)->update(['enterprise_id' => NULL]);
+        $enterprise_id=Auth::user()->enterprise_id;
+        $count=User::where('enterprise_id',$enterprise_id)->get()->count();
+        if($count==3) {
+
+            $count=User::where('enterprise_id',$enterprise_id)->get();
+            foreach($count as $user){
+                User::where('id',$user->id)->update(['enterprise_id' => NULL]);
             }
-            
-            return redirect()->route('user.home');
-    
+            Enterprise::find($enterprise_id)->delete();
+        }else{
+            User::where('id',Auth::user()->id)->update(['enterprise_id' => NULL]);
         }
-    
         
-     
+        return redirect()->route('user.home');
+    }  
 
 }

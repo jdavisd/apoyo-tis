@@ -65,11 +65,5 @@ class EnterpriseEdit extends Component
         $this->users=User::whereIn('id',$this->level)->get();
     
     }
-    public function verifyDate(){
-        $project=Project::find($this->projectID[0]);
-        $currentlyDate = Carbon::now()->format('m/d/Y H:i:s');  
-        if($currentlyDate>$project->datetime){
-           $this->emit('noPermit');
-        }
-    }
+ 
 } 

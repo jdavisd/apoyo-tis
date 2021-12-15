@@ -230,6 +230,9 @@
               @endforeach
           </tbody>
       </table>
+      <div>
+        @livewire('payment-plan.payment',['id'=>$idP])
+      </div>
    </div>
   <div class="card-footer">
     @if ($project->status != 'Contratado')

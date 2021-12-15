@@ -1,13 +1,14 @@
 <div>
     <div class=" row justify-content-center">
      
-    <div class="card col-8">
+    <div class="card col-12">
 
        <div class="card-header">
            <input type="text" name="search" class="form-control" placeholder="Ingrese nombre de su proyecto"wire:model="search" id="">  
            <a class="btn btn-primary mx-2" href="{{route('proyecto.create')}}">Crear</a> 
         </div>
        <div class="card-body">
+         <div class="table-responsive">
            <table class="table table-striped">
                <thead>
                    <th style="cursor: pointer;" wire:click="order('name')" >Nombre  
@@ -87,6 +88,7 @@
       
           </tbody>
         </table>
+      </div>
        </div>
        <div class="card-footer">
         {{$projects->links()}}

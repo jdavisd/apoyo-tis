@@ -95,7 +95,13 @@ class ShowProjectenterprise extends Component
         if(!$this->observar==null){
             // dd($this->observar);
             $var = 'observaciones'.'.'.$this->observar->getClientOriginalName();
-            $this->observar->storeAs('pagos',$var,'public');
+           // $this->observar->storeAs('pagos',$var,'public');
+            $image = [
+                'name' => $this->observar->getClientOriginalName(),
+                'path' => $this->observar->getRealPath(),
+            ];
+            
+            Storage::disk('ftp')->put('pagos/'.$image['name'], file_get_contents($image['path']), 'r+');
             $details=[
                 'title'=>'Correo de observacion de propuesta',
                 'list'=>[$this->asunto],       
@@ -104,6 +110,7 @@ class ShowProjectenterprise extends Component
                 ];
             $mc = new MailController;
             $mc->observar($this->enterprise->email,$details,$var);
+
             unlink(storage_path('app/public/pagos/'.$var));
         }else{
             $details=[

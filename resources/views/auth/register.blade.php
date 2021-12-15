@@ -79,7 +79,7 @@
                             
                             <div class="col-md-12 col-form-label text-md ">
                                 @error('roles')
-                                    <small class="text-danger" style="font-weight: bold;"">Debe seleccionar almenos un rol</small>         
+                                    <small class="text-danger" style="font-weight: bold;"">Debe seleccionar un unico rol</small>         
                                 @enderror
                             </div>
                             </div>

@@ -37,7 +37,7 @@
               </div>
           
               <div class="row my-3">
-                <label for=""class="col-md-4 text-md-right">Telefono</label>
+                <label for=""class="col-md-4 text-md-right">Teléfono</label>
                 <div class="col-md-6">
                 <input type="number"class="form-control   @error('phone') is-invalid @enderror" name="phone" value=" {{old('phone')}}" id="" aria-describedby="helpId" placeholder="">        
                 @error('phone')
@@ -46,7 +46,7 @@
               </div>
               </div>
               <div class="row my-3">
-                <label for=""class="col-md-4 text-md-right">Correo Electronico</label>
+                <label for=""class="col-md-4 text-md-right">Correo Electrónico</label>
                 <div class="col-md-6">
                 <input type="email"
                 class="form-control  @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" id="" aria-describedby="helpId" placeholder="">
@@ -67,7 +67,7 @@
               </div>
               </div>
               <div class="row my-3">
-                <label for=""class="col-md-4 text-md-right">Direccion</label>
+                <label for=""class="col-md-4 text-md-right">Dirección</label>
                 <div class="col-md-6">
                 <input type="text"
                 class="form-control  @error('address') is-invalid @enderror" name="address" value=" {{old('long_name')}}" id="" aria-describedby="helpId" placeholder="">
@@ -97,7 +97,7 @@
               </div>
           -->
               <div class="row my-3">
-                <label for=""class="col-md-4 text-md-right">tipo sociedad</label>
+                <label for=""class="col-md-4 text-md-right">Tipo sociedad</label>
                 <div class="col-md-6">
                 <input type="text"
                 class="form-control  @error('type') is-invalid @enderror" name="type" value="{{old('type')}}" id="" aria-describedby="helpId" placeholder="" >

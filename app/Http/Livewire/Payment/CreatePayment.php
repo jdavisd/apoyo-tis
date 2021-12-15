@@ -8,12 +8,14 @@ use Livewire\Component;
 use App\Models\ProjectEnterprise;
 use Illuminate\Http\Request;
 use Livewire\WithFileUploads;
+
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Models\Project;
 class CreatePayment extends Component
 {
     use WithFileUploads;
+    
     public $project;
     public $enterprise;
     public $details;
@@ -44,7 +46,7 @@ class CreatePayment extends Component
 
         $this->validate();
         $project=Project::find($this->project->project_id);
-        $currentlyDate = Carbon::now()->format('m-d-Y H:i:s');  
+        $currentlyDate = Carbon::now()->format('Y-m-d H:i:s');  
         if($currentlyDate>$project->datetime){
            $this->emit('noPermit');
         }
