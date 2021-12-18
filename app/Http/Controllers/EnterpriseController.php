@@ -18,10 +18,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\Rules\CheckStudents;
 use Carbon\Carbon;
-
-
-
-
+use DateTimeZone;
 
 class EnterpriseController extends Controller
 {
@@ -64,7 +61,7 @@ class EnterpriseController extends Controller
     public function store(StoreEnterprise $request)
     {
       $project=Project::find($request->project_id);
-      $currentlyDate = Carbon::now()->format('Y-m-d H:i:s');
+      $currentlyDate = Carbon::now()->addSeconds(30)->format('Y-m-d H:i:s');
       //dd($currentlyDate, $project->datetime);
       if($currentlyDate>$project->datetime){
          return redirect()->route('empresa.create')->with('info','La Fecha de postulacion ya paso');
@@ -212,8 +209,8 @@ class EnterpriseController extends Controller
            $document2=$request->file('logo');
            $nameDocument=$document2->getClientOriginalName();
            $document->name = $document2->getClientOriginalName();
-           $document2=$request->file('logo')->storeAs('logos',$document2->getClientOriginalName(),'public');
-          //Storage::disk('ftp')->put('logos'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
+           //$document2=$request->file('logo')->storeAs('logos',$document2->getClientOriginalName(),'public');
+           Storage::disk('ftp')->put('logos'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
            
 
          

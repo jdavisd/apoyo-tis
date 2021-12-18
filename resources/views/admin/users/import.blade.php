@@ -79,7 +79,7 @@
                           </div>
                           @endforeach
                           @error('roles')
-                          <small class="text-danger" style="font-weight: bold;"">Debe seleccionar almenos un rol</small>         
+                          <small class="text-danger" style="font-weight: bold;"">Debe seleccionar un rol</small>         
                           @enderror
                           <div>
                               <label >

@@ -46,5 +46,6 @@ class RoleSeeder extends Seeder
         Permission::create(['name'=>'propuesta.create','description'=>'registrar y eliminar una propuesta'])->syncRoles(['Estudiante']);
         Permission::create(['name'=>'enterprise.edit','description'=>'editar datos o salirse de una grupo empresa'])->syncRoles(['Estudiante']);
         Permission::create(['name'=>'propuesta.qualify','description'=>'acceptar o rechazar una propuesta'])->syncRoles(['Consultor']);
+        Permission::create(['name'=>'contract.emit','description'=>'Emitir contrato a la grupo empresa'])->syncRoles(['Consultor']);
     }                                  
 }

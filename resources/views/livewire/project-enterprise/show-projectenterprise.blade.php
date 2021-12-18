@@ -135,7 +135,7 @@
       </div>
 
       <div wire:ignore.self class="modal fade"  wire:mode="open" id="contrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">contrato</h5>
@@ -144,16 +144,16 @@
                     </button>
                 </div>
                <div class="modal-body">
-                    <form>
+                    <form action="" method="POST">
+                      @csrf
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Mensaje</label>
-                            <textarea type="" class="form-control" id="exampleFormControlInput1"  rows="3" placeholder="Ingrese detalles" wire:model="contAsunto" name="contAsunto">
-                                </textarea>
+                        <textarea class="form-control" id="textid" name="text"  rows="10" col="30"wire:model="contAsunto"></textarea>
                             
                             @error('contAsunto') <span class="text-danger error">{{ $message }}</span>@enderror
                         
                         </div>
-                      
+             
                         <div class="form-group">
                             <label for="exampleFormControlInput2">contrato</label>
                             <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="contAdjunto"  name="contAdjunto" accept="application/pdf">
@@ -163,7 +163,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
-                    <button type="button" wire:click="$emit('contrato')" class="btn btn-primary close-modal">Agregar</button>
+                    <button class="btn btn-primary" type="submit">Publicar</button>
+                    <button type="button" wire:click="contrato()" class="btn btn-primary close-modal">Agregar</button>
                 </div>
             </div>
         </div>
@@ -232,11 +233,14 @@
       </table>
    </div>
   <div class="card-footer">
+    @can('contract.emit')
     @if ($project->status != 'Contratado')
-      <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#contrato" >Emitir Contrato</button>
-    @else       
-        <h2>{{$project->status}}</h2>
-    @endif
+    <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#contrato" >Emitir Contrato</button>
+  @else       
+      <h2>{{$project->status}}</h2>
+  @endif
+    @endcan
+    
   </div>
 @livewireScripts
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
