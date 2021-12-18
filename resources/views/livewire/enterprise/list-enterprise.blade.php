@@ -1,11 +1,12 @@
 <div>   
     
   <div class=" row justify-content-center">
-  <div class="card col-8">
+  <div class="card col-12">
      <div class="card-header">
          <input type="text" name="search" class="form-control" placeholder="Ingrese nombre de grupo empresa"wire:model="search" id="">
      </div>
      <div class="card-body">
+       <div class="table-repsonsive">
          <table class="table table-striped">
              <thead>
                  <th style="cursor: pointer;" wire:click="order('short_name')" >  Nombre corto  
@@ -107,6 +108,7 @@
     
         </tbody>
       </table>
+    </div>
      </div>
      <div class="card-footer">
       {{$enterprises->links()}}

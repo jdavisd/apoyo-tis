@@ -231,6 +231,12 @@
               @endforeach
           </tbody>
       </table>
+      <div>
+        @livewire('payment-plan.payment',['id'=>$idP])
+      </div>
+      <div>
+        @livewire('calendar.calendar-table',['id'=>$idP])
+      </div>
    </div>
   <div class="card-footer">
     @can('contract.emit')

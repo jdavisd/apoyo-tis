@@ -8,6 +8,7 @@
        @if ($users->count())
            
        <div class="card-body">
+         <div  class="table-responsive">
           <table class="table table-striped"
             <thead >
                  <tr>
@@ -38,7 +39,8 @@
               
              </tbody>
          </table>
-          </table>
+         
+        </div>
        </div>
       
            <div class="card-footer">
