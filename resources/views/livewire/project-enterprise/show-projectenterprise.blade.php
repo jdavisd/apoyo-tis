@@ -233,6 +233,9 @@
       <div>
         @livewire('payment-plan.payment',['id'=>$idP])
       </div>
+      <div>
+        @livewire('calenda.calendar-table',['id'=>$idP])
+      </div>
    </div>
   <div class="card-footer">
     @if ($project->status != 'Contratado')
