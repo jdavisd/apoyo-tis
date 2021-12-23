@@ -2,9 +2,11 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\User;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use Livewire\WithPagination;
+
 class RolesIndex extends Component
 {
     protected $paginationTheme='bootstrap';
@@ -20,5 +22,18 @@ class RolesIndex extends Component
         $role = Role::find($id);
         $role->delete();
         $this->render();
+    }
+    public function askdeleteRoles($id){
+        $role = Role::find($id);
+        $users = User::role($role->name)->count(); 
+        if($users>0){
+            $this->emit('notPermit');
+        }
+        else{
+           
+            $this->emit('deleteRoles');
+        }
+
+
     }
 }

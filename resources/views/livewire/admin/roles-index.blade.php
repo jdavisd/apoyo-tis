@@ -21,7 +21,7 @@
                         
                             @if ($role->name!='Admin')
                             <td width="10px">  
-                                <button class ="btn btn-danger mx-1" wire:click="$emit('deleteUser',{{$role->id}})" >Borrar</button></td>
+                                <button class ="btn btn-danger mx-1" wire:click="askdeleteRoles({{$role->id}})" >Borrar</button></td>
                             @endif
                      
                       </tr>
@@ -38,7 +38,7 @@
           @livewireScripts
           <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
           <script>
-            livewire.on('deleteUser',  userID=>{
+            livewire.on('deleteRoles',  userID=>{
         
                Swal.fire({
          title: 'Estas seguro?',
@@ -57,6 +57,21 @@
            )
          }
         });
+        
+            })
+        
+        
+           
+          </script>
+          <script>
+            livewire.on('notPermit' ,() =>{
+        
+              Swal.fire({
+          icon: 'error',
+          title: 'No pudes eliminar este rol',
+          text: 'El rol tiene uno o mas usuarios',
+         
+        })
         
             })
         
