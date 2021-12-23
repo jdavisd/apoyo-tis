@@ -118,7 +118,7 @@ class AnnouncementController extends Controller
     public function update(Request $request,$document)
     {
         $request->validate([
-            'title'=>['required', 'max:30', 'min:6'],
+            'title'=>['required', 'max:30', 'min:6','unique:announcements,title'],
             'code'=>['required'],
             'period'=>['required'],
             'description'=>['required'],
