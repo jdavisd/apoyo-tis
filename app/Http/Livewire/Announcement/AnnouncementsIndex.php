@@ -15,8 +15,10 @@ class AnnouncementsIndex extends Component
 
     public function render()
     {
-        $this->documents = Document::OfType('App\Models\Announcement')
-        ->join('announcements','announcements.id',"=",'documents.imageable_id')->get();
+        
+        $this->documents = Announcement::leftjoin('documents','documents.imageable_id','=','announcements.id')
+        ->where('documents.imageable_type','=','App\Models\Announcement')->get();
+        // dump($this->documents);
         return view('livewire.announcement.announcements-index');
     }
     public function delete($id){

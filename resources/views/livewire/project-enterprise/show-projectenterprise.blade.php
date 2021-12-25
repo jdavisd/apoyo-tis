@@ -144,8 +144,7 @@
                     </button>
                 </div>
                <div class="modal-body">
-                    <form action="" method="POST">
-                      @csrf
+                    <form>
                         <div class="form-group">
                             <label for="exampleFormControlInput1">Mensaje</label>
                         <textarea class="form-control" id="textid" name="text"  rows="10" col="30"wire:model="contAsunto"></textarea>
@@ -163,7 +162,6 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
-                    <button class="btn btn-primary" type="submit">Publicar</button>
                     <button type="button" wire:click="contrato()" class="btn btn-primary close-modal">Agregar</button>
                 </div>
             </div>

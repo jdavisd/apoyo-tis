@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Adviser;
 use App\Models\Announcement;
 use App\Models\Document;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -36,7 +37,6 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-
         
         return view('announcements.create');
     }
@@ -54,7 +54,7 @@ class AnnouncementController extends Controller
             'code'=>['required'],
             'period'=>['required'],
             'description'=>['required'],
-            'document'=>['required','mimes:pdf']
+            'document'=>['nullable','mimes:pdf']
           ]);
 
         $announcement= new Announcement();
@@ -71,8 +71,8 @@ class AnnouncementController extends Controller
             $nameDocument=$document2->getClientOriginalName();
 
             $document->name = $document2->getClientOriginalName();
-            //$document2=$request->file('document')->storeAs('Anuncios',$document2->getClientOriginalName(),'public');
-            Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
+            $document2=$request->file('document')->storeAs('Anuncios',$document2->getClientOriginalName(),'public');
+            //Storage::disk('ftp')->put('anuncios'.'/'.$nameDocument, fopen($request->file('document'), 'r+'));
             $announcement->save();
             $document->imageable_id= $announcement->id;
             $document->imageable_type= Announcement::class;

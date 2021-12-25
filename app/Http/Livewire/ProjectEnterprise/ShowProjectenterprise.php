@@ -166,12 +166,7 @@ class ShowProjectenterprise extends Component
          //$long_name = base64_decode($long_name);
         //  dd($long_name);
         $pdf = PDF::loadView('emails.contract',compact('long_name'));
-        Storage::put('public/pagos/pzasd.pdf', $pdf->output());
-        //  dd($pdf->download('asdsad.pdf'));
-
-        // $pdf->save('myfile.pdf');
-
-        //Storage::put('app/public/pagos/contrato.pdf', $pdf);
+        Storage::put('public/pagos/contrato'.'.'.$this->enterprise->short_name.'.pdf', $pdf->output());
 
         if(!$this->contAdjunto==null){
             $var = 'contrato'.'.'.$this->contAdjunto->getClientOriginalName();
@@ -180,19 +175,30 @@ class ShowProjectenterprise extends Component
             $this->contAdjunto->storeAs('pagos', $var, 'ftp');
             $details=[
                 'title'=>'Contratacion de servicios',
-                'list'=>[$this->contAsunto],
-
+                // 'list'=>[$this->contAsunto],
+                
                 'action'=>'PlataformaTIS',
                 'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
                 ];
             $mc = new MailController;
             $mc->observar($this->enterprise->email,$details,$var);
             //unlink(storage_path('app/public/pagos/'.$var));
-            Storage::disk('ftp')->delete('pagos/'.$var);
+            //Storage::disk('ftp')->delete('pagos/'.$var);
         }
+        $var = 'contrato'.'.'.$this->enterprise->short_name.'.pdf';
+        $details=[
+            'title'=>'Contratacion de servicios',
+            // 'list'=>[$this->contAsunto],
+
+            'action'=>'PlataformaTIS',
+            'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
+            ];
+        $mc = new MailController;
+        $mc->observar($this->enterprise->email,$details,$var);
         //$this->project->status = 'Contratado';
         //$this->project->save();
         //reset(['pdf']);
+        unlink(storage_path('app/public/pagos/'.$var));
         $this->emit('hideContrato');
         $this->render();
     }

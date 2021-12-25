@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Validation\Rule;
 
 class ProjectController extends Controller
 {
@@ -43,10 +44,10 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>['required', 'max:40', 'min:6'],
+            'name'=>['required', 'max:40', 'min:6','unique:projects,name'],
             'period'=>['required'],
             'code'=>['required'],
-            'datetime'=>['required']
+            'datetime'=>['required','after:2 hours']
           ]);
         $request=Project::create($request->all());
         return redirect()->route('proyecto.index')->with('infoCreate','Se creo el proyecto');
@@ -86,8 +87,15 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
         $project=Project::find($id);
+        $request->validate([
+        'name'=>['required', 'max:40', 'min:6',Rule::unique('projects')->ignore($project)],
+        'period'=>['required'],
+        'code'=>['required'],
+        'datetime'=>['required','before: 4 months','after: tomorrow']
+        ]);
+
         $project->name=$request->name;
         $project->period=$request->period;
         $project->code=$request->code;
