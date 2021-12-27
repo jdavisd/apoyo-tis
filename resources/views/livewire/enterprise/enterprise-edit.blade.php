@@ -9,13 +9,13 @@
           <div class="card">
               <div class="card-header"><strong class="h5">Editar</strong></div>
                    <div class="card-body">
-                     
+                    <small class="text-danger">Los campos con * son obligatorios</small>
                        <form method="POST" action="{{route('empresa.update',$enterprise->id,$project1->id)}}" enctype="multipart/form-data">
                           @csrf
                           @method('put')
                           {{-- {{$level[0]}}-{{$level[1]}}-{{$level[2]}}-{{$level[3]}}-{{$level[4]}} --}}
                           <div class="row my-3">
-                              <label for=""class="col-md-4 text-md-right">Nombre Corto</label>
+                              <label for=""class="col-md-4 text-md-right">Nombre Corto: *</label>
                               <div class="col-md-6">
                                 <input type="text"
                                   class="form-control  @error('short_name') is-invalid @enderror" name="short_name"  value="{{old('short_name',$enterprise->short_name)}}"  id="" aria-describedby="helpId" placeholder="">
@@ -26,11 +26,11 @@
                           </div> 
                            
   
-  
+                          
   
   
                        
-       <div class="row my-3">{!! Form::label('project_id', 'Proyecto', ['class' => 'col-md-4 text-md-right']) !!}
+       <div class="row my-3">{!! Form::label('project_id', 'Proyecto:', ['class' => 'col-md-4 text-md-right']) !!}
           <div class="col-md-6">
           {!! Form::select ('project_id', $project, $projectID, ['class' => 'form-control ' . ($errors->has('project_id') ? ' is-invalid' : null)]) !!}
           @error('project_id')
@@ -40,7 +40,7 @@
             </div>
         
             <div class="row my-3">
-              <label for=""class="col-md-4 text-md-right">Telefono</label>
+              <label for=""class="col-md-4 text-md-right">Telefono: *</label>
               <div class="col-md-6">
               <input type=""class="form-control   @error('phone') is-invalid @enderror" name="phone" value=" {{old('phone',intval($enterprise->phone))}}" id="" aria-describedby="helpId" placeholder="">        
               @error('phone')
@@ -49,7 +49,7 @@
             </div>
             </div>
             <div class="row my-3">
-              <label for=""class="col-md-4 text-md-right">Correo Electronico</label>
+              <label for=""class="col-md-4 text-md-right">Correo Electronico: *</label>
               <div class="col-md-6">
               <input type="email"
               class="form-control  @error('email') is-invalid @enderror" name="email" value="{{old('email',$enterprise->email)}}" id="" aria-describedby="helpId" placeholder="">
@@ -60,7 +60,7 @@
             </div>
          
             <div class="row my-3">
-              <label for=""class="col-md-4 text-md-right">Nombre largo</label>
+              <label for=""class="col-md-4 text-md-right">Nombre largo: *</label>
               <div class="col-md-6">
               <input type="text"
               class="form-control   @error('long_name') is-invalid @enderror" name="long_name"  value=" {{old('long_name',$enterprise->long_name)}}" id="" aria-describedby="helpId" placeholder="">
@@ -70,7 +70,7 @@
             </div>
             </div>
             <div class="row my-3">
-              <label for=""class="col-md-4 text-md-right">Direccion</label>
+              <label for=""class="col-md-4 text-md-right">Dirección: *</label>
               <div class="col-md-6">
               <input type="text"
               class="form-control  @error('address') is-invalid @enderror" name="address" value=" {{old('address',$enterprise->address)}}" id="" aria-describedby="helpId" placeholder="">
@@ -82,7 +82,7 @@
           
         
   
-            <div class="row my-3">{!! Form::label('adviser_id', 'Consultor',['class' => 'col-md-4 text-md-right']) !!}
+            <div class="row my-3">{!! Form::label('adviser_id', 'Consultor: *',['class' => 'col-md-4 text-md-right']) !!}
               <div class="col-md-6">
               {!! Form::select ('adviser_id', $adviser, $adviserID, ['class' => 'form-control ' . ($errors->has('adviser_id') ? ' is-invalid' : null)]) !!}
             
@@ -100,7 +100,7 @@
             </div>
         -->
             <div class="row my-3">
-              <label for=""class="col-md-4 text-md-right">tipo sociedad</label>
+              <label for=""class="col-md-4 text-md-right">Tipo sociedad: *</label>
               <div class="col-md-6">
               <input type="text"
               class="form-control  @error('type') is-invalid @enderror" name="type" value="{{old('type',$enterprise->type)}}" id="" aria-describedby="helpId" placeholder="" >

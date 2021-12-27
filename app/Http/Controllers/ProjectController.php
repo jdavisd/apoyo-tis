@@ -45,9 +45,9 @@ class ProjectController extends Controller
     {
         $request->validate([
             'name'=>['required', 'max:40', 'min:6','unique:projects,name'],
-            'period'=>['required'],
+            'period'=>['required','unique:projects,period'],
             'code'=>['required'],
-            'datetime'=>['required','after:2 hours']
+            'datetime'=>['required','before: 4 months','after: tomorrow']
           ]);
         $request=Project::create($request->all());
         return redirect()->route('proyecto.index')->with('infoCreate','Se creo el proyecto');

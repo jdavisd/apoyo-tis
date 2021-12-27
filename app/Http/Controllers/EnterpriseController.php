@@ -60,13 +60,13 @@ class EnterpriseController extends Controller
      */
     public function store(StoreEnterprise $request)
     {
-      $project=Project::find($request->project_id);
+      $project=Project::where('projects.name','=',$request->project)->first();
       $currentlyDate = Carbon::now()->addSeconds(30)->format('Y-m-d H:i:s');
       //dd($currentlyDate, $project->datetime);
       if($currentlyDate>$project->datetime){
          return redirect()->route('empresa.create')->with('info','La Fecha de postulacion ya paso');
       }
-       
+        
       $user=Auth::user()->roles->where('name','Estudiante');
       if($user->count()){
         $enterprise=Enterprise::create([
@@ -96,7 +96,7 @@ class EnterpriseController extends Controller
           //Storage::disk('ftp')->put('logos'.'/'.$nameDocument, fopen($request->file('logo'), 'r+'));
            $enterprise->projectEnterprises1()->create([
            'users_id'=>$request->adviser_id,
-           'project_id'=>$request->project_id,
+           'project_id'=>$project->id,
            'status'=>'Postulante'    
          ]
          );

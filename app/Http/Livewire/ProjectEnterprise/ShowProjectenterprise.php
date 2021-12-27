@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\MailController;
 use Barryvdh\DomPDF\Facade as PDF;
+use Carbon\Carbon;
+use Spatie\Permission\Models\Role;
+
 // use PDF;
 
 class ShowProjectenterprise extends Component
@@ -47,6 +50,7 @@ class ShowProjectenterprise extends Component
         // $this->contAsunto = null;
         $cont = Storage::disk('local')->get('public/pagos/contract.txt');
         $this->contAsunto =mb_convert_encoding($cont,'UTF-8','ISO-8859-1');
+        
 
     }
     public function render()
@@ -58,8 +62,10 @@ class ShowProjectenterprise extends Component
         $file= fopen('../storage/app/public/pagos/contract.txt',"r");
         $cont = Storage::disk('local')->get('public/pagos/contract.txt');
         $cont2 =mb_convert_encoding($cont,'UTF-8','ISO-8859-1');
+        
         // dd($cont2);
-
+        
+   
         $this->project = ProjectEnterprise::find( $this->idP);
         $this->enterprise = $this->project->enterprise()->first();
         $this->payment=$this->project->payment()->get();
@@ -73,16 +79,28 @@ class ShowProjectenterprise extends Component
         ->select('documents.document_id','payments.created_at','payments.details','documents.name','payments.id','payments.status','payments.created_at')
         ->orderBy($this->sort,$this->order)
         ->get();
-
+        $this->contAsunto = $this->cast($this->contAsunto);
         return view('livewire.project-enterprise.show-projectenterprise',compact('cont2'));
     }
 
     public function cast($texto){
-        $text='';
-        for ($i=0; $i < strlen($texto); $i++) { 
-            $text=$text.$texto[$i];
+        $text = str_replace('long_name',$this->enterprise->long_name,$texto);
+        $text = str_replace('type',$this->enterprise->type,$text);
+        $text = str_replace('short_name',$this->enterprise->short_name,$text);
+        $text = str_replace('project',$this->project->project()->first()->name,$text);
+        $advisers =User::role('Consultor')->get()->pluck('name'); 
+        $var='';
+        foreach ($advisers as $key) {
+            $var = 'Lic. '.$key.' ,'.$var;
         }
-        // dd($text);
+        $text = str_replace('advisers',$var,$text);
+        $manager = User::Where('enterprise_id','=',$this->idP)->latest()->first()->name;
+        $text = str_replace('manager',$manager,$text);
+        setlocale(LC_ALL, "sv_SE.UTF-8");
+        Carbon::setLocale(config('app.locale'));
+        $text = str_replace('date',Carbon::now()->format('d m Y'),$text);
+        // dump(Carbon::now()->format('d F Y'));
+
         return $text;
     }
 
@@ -117,7 +135,7 @@ class ShowProjectenterprise extends Component
         if(!$this->observar==null){
             // dd($this->observar);
             $var = 'observaciones'.'.'.$this->observar->getClientOriginalName();
-           // $this->observar->storeAs('pagos',$var,'public');
+            $this->observar->storeAs('pagos',$var,'public');
             $image = [
                 'name' => $this->observar->getClientOriginalName(),
                 'path' => $this->observar->getRealPath(),
@@ -188,16 +206,15 @@ class ShowProjectenterprise extends Component
         $var = 'contrato'.'.'.$this->enterprise->short_name.'.pdf';
         $details=[
             'title'=>'Contratacion de servicios',
-            // 'list'=>[$this->contAsunto],
+            'list'=>[''],
 
             'action'=>'PlataformaTIS',
             'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
             ];
         $mc = new MailController;
         $mc->observar($this->enterprise->email,$details,$var);
-        //$this->project->status = 'Contratado';
-        //$this->project->save();
-        //reset(['pdf']);
+        $this->project->status = 'Contratado';
+        $this->project->save();
         unlink(storage_path('app/public/pagos/'.$var));
         $this->emit('hideContrato');
         $this->render();

@@ -48,7 +48,7 @@
         @enderror
          @endif
 
-     {!! Form::submit('Editar Usuario', ['class'=>'btn btn-primary mt-2']) !!}
+     {!! Form::submit('Guardar Cambios', ['class'=>'btn btn-primary mt-2']) !!}
      {!! Form::close() !!}
      </div>
  </div>

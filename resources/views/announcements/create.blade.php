@@ -8,6 +8,7 @@
         <div class="card">
             <div class="card-header"><strong class="h5">Realizar una publicación</strong></div>
             <div class="card-body">
+                <small class="text-danger">Los campos con * son obligatorios</small>
                 <form action="{{route('anuncio.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row my-3">
@@ -51,7 +52,7 @@
                         </div>
                     </div>
                     <div class="row my-3">
-                        <label class="col-md-4 text-md-right" for="document">Adjuntar:</label>
+                        <label class="col-md-4 text-md-right" for="document">Adjuntar: *</label>
                         <div class="col-md-6">
                             <input class="form-control @error('document') is-invalid @enderror" type="file" name="document" accept=".pdf"
                             value="{{old('document')}}"  id="" aria-describedby="helpId" placeholder="">

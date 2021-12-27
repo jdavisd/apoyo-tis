@@ -33,7 +33,7 @@ class StoreEnterprise extends FormRequest
             'type'=>'required|max:40',
             'logo'=>'required|mimes:png,jpg,jpeg,gif,bmp,webp',      
             'adviser_id'=>'required',
-            'project_id'=>'required',
+            'project'=>'required',
             'students'=>'required|min:2|max:4',
         ];
     }

@@ -26,7 +26,9 @@ class RegisterEnterprise extends Component
       
     public function render()
     {
-       $project = Project::pluck('name','id');
+      
+       $project = Project::latest()->first()->name;
+       $this->selected= Project::latest()->first()->id;
        $adviser = User::role('Consultor')->get();   
        $adviser= $adviser->pluck('name','id');
        $this->level[]=Auth::user()->id;
