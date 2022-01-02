@@ -58,6 +58,8 @@ return [
             'username' => env('FTP_USERNAME'),
             'password' => env('FTP_PASSWORD'),
             'root' => 'public_html/storage',
+            'visibility' => 'public',
+            'permPublic' => 0777,
             
         ],
 
