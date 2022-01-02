@@ -13,8 +13,8 @@ class Payment extends Component
     protected $listeners=['delete','renderP'=>'render'];
     public $rules=
     ['payment.dueDate'=>['required','before:4 months','after: tomorrow'],
-     'payment.percentage'=>'required',
-     'payment.amount'=>'required',
+     'payment.percentage'=>'required|numeric|between:1,100',
+     'payment.amount'=>'required|numeric|min:1',
      'payment.description'=>'required'
      ];
     public function mount($id){
@@ -43,6 +43,7 @@ class Payment extends Component
       else{  
         $this->validate();
         $this->payment->save();
+        $this->emit('hideEditPayment');
         $this->emit('editAlert');
         $this->render();
       }  

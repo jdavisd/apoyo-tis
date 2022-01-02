@@ -72,7 +72,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
-                    <button type="button" wire:click="update()" class="btn btn-primary close-modal" data-dismiss="modal">Guardar</button>
+                    <button type="button" wire:click="update()" class="btn btn-primary close-modal" >Guardar</button>
                 </div>
             </div>
 
@@ -121,4 +121,9 @@
     })
         })
       </script>  
+      <script type="text/javascript">
+        window.livewire.on('hideEditPayment', () => {
+          $('#editPayment').modal('hide');
+          });
+      </script>
 </div>
