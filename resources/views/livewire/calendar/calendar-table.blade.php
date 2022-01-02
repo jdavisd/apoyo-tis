@@ -3,7 +3,10 @@
         <h2 class="text-center">Calendario de entregas</h2>
     </div>
     <div class="row justify-content-center">
+        @can('calendar.create')
         @livewire('calendar.calendar-create',['id'=>$idP])
+        @endcan
+   
     </div>
     <div class="row">
         <table class="table table-light">
@@ -22,8 +25,13 @@
                 <td>{{$item->dueDate}}</td>
                 <td>{{$item->description}}</td>
                 <td>
+
+                    @can('calendar.edit')
                     <button class="btn btn-primary" wire:click="edit({{$item}})" data-toggle="modal" data-target="#editCalendar">Editar</button>
+                    @endcan
+                    @can('calendar.delete')
                     <button class="btn btn-danger"   wire:click="$emit('deleteCalendarAlert',{{$item}})">Eliminar</button>
+                    @endcan
                 </td>
               </tr>
               @endforeach
@@ -60,7 +68,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
-                    <button type="button" wire:click="update()" class="btn btn-primary close-modal" data-dismiss="modal">Guardar</button>
+                    <button type="button" wire:click="update()" class="btn btn-primary close-modal" >Guardar</button>
                 </div>
             </div>
 
@@ -109,4 +117,9 @@
     })
         })
       </script>  
+          <script type="text/javascript">
+            window.livewire.on('hideEditCalendar', () => {
+              $('#editCalendar').modal('hide');
+              });
+          </script>
 </div>

@@ -11,10 +11,10 @@ class PaymentCreate extends Component
 {
     public $dueDate,$description,$percentage,$amount,$ProjectEnterprise;
     protected $rules=[
-        'dueDate' => 'required',
+        'dueDate' => ['required','before:4 months','after: tomorrow'],
         'description'=>'required',
-        'percentage'=>'required',
-        'amount'=>'required',
+        'percentage'=>'required|numeric|between:1,100',
+        'amount'=>'required|numeric|min:1',
     ];
 
     public function mount($id){
@@ -41,6 +41,7 @@ class PaymentCreate extends Component
             ]);
             $this->reset(['dueDate','description','percentage','amount']);
             $this->emit('renderP');
+            $this->emit('hideCreatePayment');
             $this->emit('createAlert');
         }
     }    

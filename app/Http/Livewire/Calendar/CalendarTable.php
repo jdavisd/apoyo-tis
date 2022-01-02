@@ -13,8 +13,8 @@ class CalendarTable extends Component
     public $idP,$calendar;
     protected $listeners=['delete','renderC'=>'render'];
     public $rules=
-    ['calendar.dueDate'=>'required',
-     'calendar.sprint'=>'required',
+    ['calendar.dueDate'=>['required','before:4 months','after: tomorrow'],
+     'calendar.sprint'=>'required|numeric|between:1,100',
      'calendar.description'=>'required'
      ];
     public function mount($id){
@@ -43,6 +43,7 @@ class CalendarTable extends Component
         else{  
           $this->validate();
           $this->calendar->save();
+          $this->emit('hideEditCalendar');
           $this->emit('editAlertCalendar');
           $this->render();
         }   

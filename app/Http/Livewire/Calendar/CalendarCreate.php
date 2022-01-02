@@ -13,9 +13,9 @@ class CalendarCreate extends Component
     
     public $dueDate,$description,$sprint,$ProjectEnterprise;
     protected $rules=[
-        'dueDate' => 'required',
+        'dueDate' => ['required','before:4 months','after: tomorrow'],
         'description'=>'required',
-        'sprint'=>'required',
+        'sprint'=>'required|numeric|between:1,10',
     ];
 
     public function mount($id){
@@ -41,7 +41,9 @@ class CalendarCreate extends Component
             ]);
             $this->reset(['dueDate','description','sprint']);
             $this->emit('renderC');
+            $this->emit('hideCreateCalendar');
             $this->emit('createAlertCalendar');
+           
         }
     }    
 }

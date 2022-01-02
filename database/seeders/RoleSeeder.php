@@ -17,10 +17,17 @@ class RoleSeeder extends Seeder
         $name1=Role::create(['name'=>'Admin']);
         $name2= Role::create(['name'=>'Consultor']);
         $name3=Role::create(['name'=>'Estudiante']);
-        $name3=Role::create(['name'=>'Postulante']);
         Permission::create(['name'=>'admin.home','description'=>'administracion ventana principal'])->syncRoles(['Admin']);
         Permission::create(['name'=>'user.home','description'=>'pagina principal anuncios'])->syncRoles(['Admin','Consultor','Estudiante']);
         Permission::create(['name'=>'empresa','description'=>'postular grupo empresa'])->syncRoles(['Estudiante']);
+       
+        Permission::create(['name'=>'paymentplan.create','description'=>'crear plan de pagos de grupo empresa'])->syncRoles(['Estudiante']);
+        Permission::create(['name'=>'paymentplan.edit','description'=>'editar plan de pagos de grupo empresa'])->syncRoles(['Estudiante']);
+        Permission::create(['name'=>'paymentplan.delete','description'=>'eliminar plan de pagos de grupo empresa'])->syncRoles(['Estudiante']);
+        Permission::create(['name'=>'calendar.create','description'=>'crear calendario de grupo empresa'])->syncRoles(['Estudiante']);
+        Permission::create(['name'=>'calendar.edit','description'=>'crear calendario de grupo empresa'])->syncRoles(['Estudiante']);
+        Permission::create(['name'=>'calendar.delete','description'=>'crear calendario de grupo empresa'])->syncRoles(['Estudiante']);
+
         Permission::create(['name'=>'user.password.edit','description'=>'Editar contraseña de usuario'])->syncRoles(['Admin','Consultor','Estudiante']);
        /* Permission::create(['name'=>'admin.roles.create','description'=>'registrar y administrar empresas']);
         Permission::create(['name'=>'admin.roles.destroy','description'=>'registrar y administrar empresas']);

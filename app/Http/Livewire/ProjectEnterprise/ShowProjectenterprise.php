@@ -170,6 +170,7 @@ class ShowProjectenterprise extends Component
         $payment->status = $this->estado;
         $payment->save();
         $this->emit('hideObservar');
+        $this->emit('sendSuccessfully');
         $this->render();
     }
 
@@ -206,6 +207,7 @@ class ShowProjectenterprise extends Component
         Storage::disk('ftp')->delete('pagos/'.$var);
         //unlink(storage_path('app/public/pagos/'.$var));
         $this->emit('hideContrato');
+        $this->emit('sendSuccessfully');
         $this->render();
     }
 
