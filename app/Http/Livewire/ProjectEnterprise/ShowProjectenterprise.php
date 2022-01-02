@@ -15,6 +15,7 @@ use App\Http\Controllers\MailController;
 use Barryvdh\DomPDF\Facade as PDF;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
 
 // use PDF;
 
@@ -48,7 +49,7 @@ class ShowProjectenterprise extends Component
         // $this->contAsunto='adwdasdwadawdawdwd'.$this->contAsunto;
         //dump($this->contAsunto);
         // $this->contAsunto = null;
-        $cont = Storage::disk('local')->get('public/pagos/contract.txt');
+        $cont = Storage::disk('ftp')->get('pagos/contract.txt');
         $this->contAsunto =mb_convert_encoding($cont,'UTF-8','ISO-8859-1');
         
 
@@ -59,9 +60,9 @@ class ShowProjectenterprise extends Component
         //$this->project=ProjectEnterprise::find(1);
         //$this->reset=['documents'];
         
-        $file= fopen('../storage/app/public/pagos/contract.txt',"r");
-        $cont = Storage::disk('local')->get('public/pagos/contract.txt');
-        $cont2 =mb_convert_encoding($cont,'UTF-8','ISO-8859-1');
+        //$file= fopen('../storage/app/public/pagos/contract.txt',"r");
+        //$cont = Storage::disk('ftp')->get('public/pagos/contract.txt');
+        //$cont2 =mb_convert_encoding($cont,'UTF-8','ISO-8859-1');
         
         // dd($cont2);
         
@@ -80,7 +81,7 @@ class ShowProjectenterprise extends Component
         ->orderBy($this->sort,$this->order)
         ->get();
         $this->contAsunto = $this->cast($this->contAsunto);
-        return view('livewire.project-enterprise.show-projectenterprise',compact('cont2'));
+        return view('livewire.project-enterprise.show-projectenterprise');
     }
 
     public function cast($texto){
@@ -94,7 +95,7 @@ class ShowProjectenterprise extends Component
             $var = 'Lic. '.$key.' ,'.$var;
         }
         $text = str_replace('advisers',$var,$text);
-        $manager = User::Where('enterprise_id','=',$this->idP)->latest()->first()->name;
+        $manager = User::Where('enterprise_id','=',$this->idP)->latest('name')->first()->name;
         $text = str_replace('manager',$manager,$text);
         setlocale(LC_ALL, "sv_SE.UTF-8");
         Carbon::setLocale(config('app.locale'));
@@ -135,13 +136,13 @@ class ShowProjectenterprise extends Component
         if(!$this->observar==null){
             // dd($this->observar);
             $var = 'observaciones'.'.'.$this->observar->getClientOriginalName();
-            $this->observar->storeAs('pagos',$var,'public');
+            //$this->observar->storeAs('pagos',$var,'public');
             $image = [
-                'name' => $this->observar->getClientOriginalName(),
+                'name' => 'observaciones'.'.'.$this->observar->getClientOriginalName(),
                 'path' => $this->observar->getRealPath(),
             ];
             
-            Storage::disk('ftp')->put('pagos/'.$image['name'], file_get_contents($image['path']), 'r+');
+            Storage::disk('ftp')->put('pagos/'.$image['name'], file_get_contents($image['path']));
             $details=[
                 'title'=>'Correo de observacion de propuesta',
                 'list'=>[$this->asunto],
@@ -174,36 +175,23 @@ class ShowProjectenterprise extends Component
 
     public function contrato(){
 
-        //  $this->validate([
-        //     // 'contAdjunto' => 'required|mimes:pdf',
-        //      'contAsunto' =>'required',
-        //  ]);
+          $this->validate([
+              
+              'contAsunto' =>'required',
+         ]);
         
         // $users=Storage::disk('local')->get('public/pagos/contract.txt');
         $long_name=$this->contAsunto;
          //$long_name = base64_decode($long_name);
         //  dd($long_name);
-        $pdf = PDF::loadView('emails.contract',compact('long_name'));
-        Storage::put('public/pagos/contrato'.'.'.$this->enterprise->short_name.'.pdf', $pdf->output());
-
-        if(!$this->contAdjunto==null){
-            $var = 'contrato'.'.'.$this->contAdjunto->getClientOriginalName();
-            //$this->contAdjunto->storeAs('pagos',$var,'public');
-
-            $this->contAdjunto->storeAs('pagos', $var, 'ftp');
-            $details=[
-                'title'=>'Contratacion de servicios',
-                // 'list'=>[$this->contAsunto],
-                
-                'action'=>'PlataformaTIS',
-                'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
-                ];
-            $mc = new MailController;
-            $mc->observar($this->enterprise->email,$details,$var);
-            //unlink(storage_path('app/public/pagos/'.$var));
-            //Storage::disk('ftp')->delete('pagos/'.$var);
-        }
         $var = 'contrato'.'.'.$this->enterprise->short_name.'.pdf';
+        $var =  str_replace(' ','-',$var);
+        $pdf = PDF::loadView('emails.contract',compact('long_name'));
+        Storage::disk('ftp')->put('pagos/'.$var, $pdf->output());
+
+        
+        
+        //$var = Str::slug($var,'-');
         $details=[
             'title'=>'Contratacion de servicios',
             'list'=>[''],
@@ -213,9 +201,10 @@ class ShowProjectenterprise extends Component
             ];
         $mc = new MailController;
         $mc->observar($this->enterprise->email,$details,$var);
-        $this->project->status = 'Contratado';
+        $this->project->status = 'Contratado';  
         $this->project->save();
-        unlink(storage_path('app/public/pagos/'.$var));
+        Storage::disk('ftp')->delete('pagos/'.$var);
+        //unlink(storage_path('app/public/pagos/'.$var));
         $this->emit('hideContrato');
         $this->render();
     }
