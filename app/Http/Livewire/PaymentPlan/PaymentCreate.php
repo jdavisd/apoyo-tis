@@ -11,7 +11,7 @@ class PaymentCreate extends Component
 {
     public $dueDate,$description,$percentage,$amount,$ProjectEnterprise;
     protected $rules=[
-        'dueDate' => 'required',
+        'dueDate' => ['required','before:4 months','after: tomorrow'],
         'description'=>'required',
         'percentage'=>'required',
         'amount'=>'required',

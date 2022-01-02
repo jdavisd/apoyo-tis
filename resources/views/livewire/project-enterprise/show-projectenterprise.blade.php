@@ -326,6 +326,15 @@ if (result.isConfirmed) {
 });    
   })
 </script>
-
+<script>
+  livewire.on('sendSuccesfully',  ()=>{   
+   Swal.fire({
+     icon: 'success',
+     title: 'El mensaje se envio con exito',
+     showConfirmButton: false,
+     timer: 1500
+   })
+    })  
+</script>
 
 </div>

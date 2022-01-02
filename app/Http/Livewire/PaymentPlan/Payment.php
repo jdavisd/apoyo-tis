@@ -12,7 +12,7 @@ class Payment extends Component
     public $idP,$payment;
     protected $listeners=['delete','renderP'=>'render'];
     public $rules=
-    ['payment.dueDate'=>'required',
+    ['payment.dueDate'=>['required','before:4 months','after: tomorrow'],
      'payment.percentage'=>'required',
      'payment.amount'=>'required',
      'payment.description'=>'required'

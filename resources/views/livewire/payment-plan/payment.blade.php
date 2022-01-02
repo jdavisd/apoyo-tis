@@ -3,7 +3,9 @@
         <h2 class="text-center">Pagos</h2>
     </div>
     <div class="row justify-content-center">
+        @can('paymentplan.create')
         @livewire('payment-plan.payment-create',['id'=>$idP])
+        @endcan
     </div>
     <div class="row">
         <table class="table table-light">
@@ -24,8 +26,12 @@
                 <td>{{$item->amount}}</td>
                 <td>{{$item->description}}</td>
                 <td>
+                    @can('paymentplan.edit')
                     <button class="btn btn-primary" wire:click="edit({{$item}})" data-toggle="modal" data-target="#editPayment">Editar</button>
+                    @endcan
+                    @can('paymentplan.delete')
                     <button class="btn btn-danger"   wire:click="$emit('deletePaymentAlert',{{$item}})">Eliminar</button>
+                    @endcan
                 </td>
               </tr>
               @endforeach

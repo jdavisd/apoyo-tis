@@ -13,7 +13,7 @@ class CalendarTable extends Component
     public $idP,$calendar;
     protected $listeners=['delete','renderC'=>'render'];
     public $rules=
-    ['calendar.dueDate'=>'required',
+    ['calendar.dueDate'=>['required','before:4 months','after: tomorrow'],
      'calendar.sprint'=>'required',
      'calendar.description'=>'required'
      ];
