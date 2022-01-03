@@ -9,6 +9,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Hash;
 
 class AnnouncementController extends Controller
@@ -117,16 +118,18 @@ class AnnouncementController extends Controller
      */
     public function update(Request $request,$document)
     {
+
+        $document = Document::where('document_id', "=" , $document)->first();
+        $announcement = Announcement::find($document->imageable_id);
         $request->validate([
-            'title'=>['required', 'max:30', 'min:6','unique:announcements,title'],
+            'title'=>['required', 'max:30', 'min:6',Rule::unique('announcements')->ignore($announcement)],
             'code'=>['required'],
             'period'=>['required'],
             'description'=>['required'],
             'document'=>['mimes:pdf']
         ]);
 
-        $document = Document::where('document_id', "=" , $document)->first();
-        $announcement = Announcement::find($document->imageable_id);
+       
         
         $announcement->title = $request->title;
         $announcement->code = $request->code;
