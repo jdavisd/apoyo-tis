@@ -22,7 +22,7 @@ class UsersIndex extends Component
     public function render()
     {
        // $users=User::where('name','LIKE','%'. $this->search .'%')->orWhere('email','LIKE','%'. $this->search .'%')->paginate();
-        $users=User::query()->whereHas("roles", function($q){ $q->whereNotIn("name", ["Admin"])->where('name','LIKE','%'. $this->search .'%'); })->orWhere('email','LIKE','%'. $this->search .'%')->whereNotIn("name", ["Admin"])->paginate();
+       $users=User::query()->where('name','LIKE','%'. $this->search .'%')->whereHas("roles", function($q){ $q->whereNotIn("name", ["Admin"]); })->orWhere('email','LIKE','%'. $this->search .'%')->whereHas("roles", function($q){ $q->whereNotIn("name", ["Admin"]); })->paginate();
         return view('livewire.admin.users-index',compact('users'));
     }
     public function delete($id){
