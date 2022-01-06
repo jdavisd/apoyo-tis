@@ -14,7 +14,6 @@ class ProjectEnterprise extends Model
     public function announcement(){
         return $this->belongsTo(Announcement::class);
     }
-
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -26,5 +25,11 @@ class ProjectEnterprise extends Model
     }
     public function payment(){
         return $this->hasMany(Payment::class);
+    }
+    public function paymentPlan(){
+        return $this->hasMany(PaymentPlan::class);
+    }
+    public function calendar(){
+        return $this->hasMany(Calendar::class);
     }
 }

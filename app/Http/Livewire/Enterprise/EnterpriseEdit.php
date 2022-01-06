@@ -41,8 +41,9 @@ class EnterpriseEdit extends Component
     public function render()
     {
      
-       $this->project = Project::pluck('name','id');
+       
        $this->projectID=ProjectEnterprise::where('enterprise_id',$this->idP)->pluck('project_id');
+       $this->project = Project::find($this->projectID)->pluck('name','id');
        $this->adviserID=ProjectEnterprise::where('users_id',$this->idP)->pluck('users_id');
        $adviser = User::role('Consultor')->get();   
        $adviser= $adviser->pluck('name','id');
@@ -65,11 +66,5 @@ class EnterpriseEdit extends Component
         $this->users=User::whereIn('id',$this->level)->get();
     
     }
-    public function verifyDate(){
-        $project=Project::find($this->projectID[0]);
-        $currentlyDate = Carbon::now()->format('Y-m-d H:i:s');  
-        if($currentlyDate>$project->datetime){
-           $this->emit('noPermit');
-        }
-    }
+ 
 } 

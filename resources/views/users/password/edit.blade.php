@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends(Auth::user()->hasRole('Admin') ? 'adminlte::page' : 'layouts.app')
 @section('content')
 @if (session('message-sucess'))
     <div class="alert alert-success" role="alert">
@@ -53,19 +52,21 @@
       
    
     
-         <input   class="btn btn-primary" style="display: block; margin: 0 auto ;" type="submit" value="Enviar">
+         <input   class="btn btn-primary" style="display: block; margin: 0 auto ;" type="submit" value="Guardar Cambios">
      
     </form>
-                  
-       
- 
-
      </div>
-
-
    </div>
    
 </div>
 </div>
 </div>
-@endsection
+@stop
+
+@section('css')
+    <link rel="stylesheet" href="/css/admin_custom.css">
+@stop
+
+@section('js')
+    <script> console.log('Hi!'); </script>
+@stop

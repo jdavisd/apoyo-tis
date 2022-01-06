@@ -13,6 +13,7 @@
                             <p class="card-text">{{$doc->code}}</p>
                             <p class="card-text">{{$doc->period}}</p>
                             <p class="card-text">{{$doc->description}}</p>
+                            @if ($doc->document_id)
                             <div class="row align-self-end"  >
                                 @can('anuncio.document')
                                     <a class="btn btn-primary mx-2" href="{{asset('storage/anuncios').'/'.$doc->name}}" target="blank_">Ver Documento</a>
@@ -24,6 +25,8 @@
                                     <a class="btn btn-primary mx-2" href="{{route('anuncio.edit',$doc->document_id)}}">Editar</a>    
                                 @endcan
                             </div> 
+                            @endif
+                            
                         </div>          
                     </div>          
                 </div>

@@ -3,7 +3,7 @@
 @section('title', 'Apoyo')
 
 @section('content_header')
-{{-- <a class="btn btn-primary btn-sm float-right" href="{{route('admin.roles.create')}}">Nuevo rol</a> --}}
+<a class="btn btn-primary btn-sm float-right" href="{{route('admin.roles.create')}}">Nuevo rol</a>
     <h1>Roles</h1>
     
 @stop

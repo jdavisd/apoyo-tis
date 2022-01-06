@@ -188,7 +188,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '/',
+    'dashboard_url' => 'admin/users',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -225,6 +225,7 @@ return [
     */
 
     'menu' => [
+        
         // Navbar items:
         [
             'type'         => 'navbar-search',
@@ -234,7 +235,7 @@ return [
         [
             'type'         => 'fullscreen-widget',
             'topnav_right' => false,
-        ],
+        ], 
 
         // Sidebar items:
         ['header' => 'USUARIOS'],
@@ -250,6 +251,7 @@ return [
             'icon' => 'fas fa-fw fa-user-cog',
             'can'=>'admin.roles',
         ],
+        
        /* [
             'type' => 'sidebar-menu-search',
             'text' => 'search',

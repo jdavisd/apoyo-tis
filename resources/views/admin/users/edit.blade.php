@@ -43,9 +43,12 @@
              </label>
          </div>
      @endforeach 
+     @error('roles')
+         <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">Debe seleccionar un unico rol</small></div>         
+        @enderror
          @endif
 
-     {!! Form::submit('Editar Usuario', ['class'=>'btn btn-primary mt-2']) !!}
+     {!! Form::submit('Guardar Cambios', ['class'=>'btn btn-primary mt-2']) !!}
      {!! Form::close() !!}
      </div>
  </div>

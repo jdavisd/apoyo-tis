@@ -155,7 +155,10 @@ return [
         'code'=>'código',
         'period'=>'gestión',
         'description'=>'descripción',
-        'document'=>'adjuntar'
+        'document'=>'adjuntar',
+        'dueDate'=>'Fecha',
+        'amount'=>'monto', 
+        'percentage '=>'porcentaje'
     ],
 
 ];
