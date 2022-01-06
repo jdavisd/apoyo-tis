@@ -231,6 +231,9 @@
           </tbody>
       </table>
    </div>
+   <div>
+    @livewire('calendar.calendar-table',['id'=>$idP])
+   </div>
   <div class="card-footer">
     @if ($project->status != 'Contratado')
       <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#contrato" >Emitir Contrato</button>
