@@ -143,9 +143,9 @@ class ShowProjectenterprise extends Component
             
             Storage::disk('ftp')->put('pagos/'.$image['name'], file_get_contents($image['path']), 'r+');
             $details=[
-                'title'=>'Correo de observacion de propuesta',
+                'title'=>'Correo de observación de propuesta',
                 'list'=>[$this->asunto],
-                'action'=>'PlataformaTIS',
+                'action'=>'Sistema de apoyo TIS',
                 'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
                 ];
             $mc = new MailController;
@@ -154,10 +154,10 @@ class ShowProjectenterprise extends Component
             Storage::disk('ftp')->delete('pagos/'.$var);
             }else{
             $details=[
-            'title'=>'Correo de observacion de propuesta',
+            'title'=>'Correo de observación de propuesta',
             'list'=>[$this->asunto],
 
-            'action'=>'PlataformaTIS',
+            'action'=>'Sistema de apoyo TIS',
             'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
             ];
             $mc = new MailController;
@@ -193,10 +193,10 @@ class ShowProjectenterprise extends Component
 
             $this->contAdjunto->storeAs('pagos', $var, 'ftp');
             $details=[
-                'title'=>'Contratacion de servicios',
+                'title'=>'Contratación de servicios',
                 // 'list'=>[$this->contAsunto],
                 
-                'action'=>'PlataformaTIS',
+                'action'=>'Sistema de apoyo TIS',
                 'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
                 ];
             $mc = new MailController;
@@ -206,10 +206,10 @@ class ShowProjectenterprise extends Component
         }
         $var = 'contrato'.'.'.$this->enterprise->short_name.'.pdf';
         $details=[
-            'title'=>'Contratacion de servicios',
+            'title'=>'Contratación de servicios',
             'list'=>[''],
 
-            'action'=>'PlataformaTIS',
+            'action'=>'Sistema de apoyo TIS',
             'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
             ];
         $mc = new MailController;

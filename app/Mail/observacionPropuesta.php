@@ -31,11 +31,11 @@ class observacionPropuesta extends Mailable
     public function build()
     {
         if($this->path){
-            return $this->subject('Observacion de propuesta')->view('emails.observaciones')
+            return $this->subject('Observación de propuesta')->view('emails.observaciones')
             // ->attach(storage_path('app/public/pagos/'.$this->path));
             ->attach(asset('storage/pagos').'/'.$this->path);
         }else{
-            return $this->subject('Observacion de propuesta')->view('emails.observaciones');
+            return $this->subject('Observación de propuesta')->view('emails.observaciones');
         }
         
 

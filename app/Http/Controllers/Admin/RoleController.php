@@ -22,9 +22,10 @@ class RoleController extends Controller
      */
     public function index()
     {
+
        //$roles=Role::all();
         $roles=Role::all()->whereNotIn('name',['Postulante','Admin']);
-   
+        
         return view('admin.roles.index',compact('roles'));
     }
 
@@ -54,7 +55,7 @@ class RoleController extends Controller
 
         $role=Role::create($request->all());
         $role->permissions()->sync( $request->permissions);
-        return redirect()->route('admin.roles.index',$role)->with('info','Se creo el rol');
+        //return redirect()->route('admin.roles.index',$role)->with('info','Se creo el rol');
 
     }
 
