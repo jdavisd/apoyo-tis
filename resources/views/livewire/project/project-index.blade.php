@@ -135,7 +135,7 @@
         confirmButtonText: 'Aceptar',
   icon: 'error',
   title: 'No pudes eliminar este proyecto',
-  text: 'El proyecto tiene uno o mas usuarios',
+  text: 'El proyecto tiene uno o mas grupo empresas',
  
 })
 
