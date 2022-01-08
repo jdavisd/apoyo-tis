@@ -41,6 +41,7 @@ class UserImport implements ToModel,WithHeadingRow,WithValidation,SkipsOnFailure
             'name'=>$row['name'],
             'email'=>$row['email'],
             'password'=>Hash::make($row['email']),
+            'group'=>$row['group']
         ]);      
         if($this->roles){
             $user->roles()->sync($this->roles);

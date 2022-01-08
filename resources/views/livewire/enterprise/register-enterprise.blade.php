@@ -3,52 +3,44 @@
 
 
     @livewireScripts
-     <div class="row justify-content-center">
-  
+    <div class="row justify-content-center">
       <div class="col-md-8">
-            <div class="card">
-                <div class="card-header"><strong class="h5">Postular</strong></div>
-                     <div class="card-body">
-                      <small class="text-danger">Los campos con * son obligatorios</small>
-                         <form method="POST" action="{{route('empresa.store')}}" enctype="multipart/form-data">
-                            @csrf
-                            <div class="row my-3">
-                                <label for=""class="col-md-4 text-md-right">Nombre Corto: *</label>
-                                <div class="col-md-6">
-                                  <input type="text"
-                                    class="form-control  @error('short_name') is-invalid @enderror" name="short_name"  value="{{old('short_name')}}"  id="" aria-describedby="helpId" placeholder="">
-                                   @error('short_name')
-                                    <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
-                                                  @enderror
-                                   </div>
-                            </div> 
-                             
-    
-    
-    
-                            <div class="row my-3">
-                              <label for=""class="col-md-4 text-md-right">Proyecto: </label>
-                              <div class="col-md-6">
-                                <input type="text"
-                                  class="form-control  @error('project') is-invalid @enderror" name="project"  value="{{$project}}"  id="project" aria-describedby="helpId" placeholder="" readonly>
-                                 @error('project')
-                                  <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
-                                                @enderror
-                                 </div>
-                          </div> 
+        <div class="card">
+          <div class="card-header"><strong class="h5">Postular empresa</strong></div>
+            <div class="card-body">
+              <small class="text-danger">Los campos con * son obligatorios</small>
+                <form method="POST" action="{{route('empresa.store')}}" enctype="multipart/form-data">
+                  @csrf
+                  <div class="row my-3">
+                    <label for=""class="col-md-4 text-md-right">Nombre Corto: *</label>
+                    <div class="col-md-6">
+                      <input type="text" class="form-control  @error('short_name') is-invalid @enderror" name="short_name"  value="{{old('short_name')}}">
+                      @error('short_name')
+                      <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                      @enderror
+                    </div>
+                  </div> 
+
+                  <div class="row my-3">
+                    <label for=""class="col-md-4 text-md-right">Proyecto: </label>
+                      <div class="col-md-6">
+                        <input type="text" class="form-control  @error('project') is-invalid @enderror" name="project"  @if ($project)value="{{$project->name}}" @endif   id="project" aria-describedby="helpId" placeholder="" readonly>
+                         @error('project')
+                           <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                         @enderror
+                      </div>
+                  </div> 
              
-                            
-         
-          
-              <div class="row my-3">
-                <label for=""class="col-md-4 text-md-right">Teléfono: *</label>
-                <div class="col-md-6">
-                <input type="number"class="form-control   @error('phone') is-invalid @enderror" name="phone" value=" {{old('phone')}}" id="" aria-describedby="helpId" placeholder="">        
-                @error('phone')
-                <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
-              @enderror
-              </div>
-              </div>
+                  <div class="row my-3">
+                    <label for=""class="col-md-4 text-md-right">Teléfono: *</label>
+                    <div class="col-md-6">
+                      <input type="number"class="form-control   @error('phone') is-invalid @enderror" name="phone" value=" {{old('phone')}}" id="" aria-describedby="helpId" placeholder="">        
+                      @error('phone')
+                      <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                      @enderror
+                    </div>
+                  </div>
+
               <div class="row my-3">
                 <label for=""class="col-md-4 text-md-right">Correo Electrónico</label>
                 <div class="col-md-6">
@@ -70,6 +62,7 @@
               @enderror
               </div>
               </div>
+
               <div class="row my-3">
                 <label for=""class="col-md-4 text-md-right">Dirección: *</label>
                 <div class="col-md-6">
@@ -80,10 +73,8 @@
               @enderror
              </div>
               </div>
-            
-          
-    
-              <div class="row my-3">{!! Form::label('adviser_id', 'Consultor: *',['class' => 'col-md-4 text-md-right']) !!}
+              
+              <div class="row my-3">{!! Form::label('adviser_id', 'Consultor: ',['class' => 'col-md-4 text-md-right']) !!}
                 <div class="col-md-6">
                 {!! Form::select ('adviser_id', $adviser, null, ['class' => 'form-control ' . ($errors->has('adviser_id') ? ' is-invalid' : null)]) !!}
               
@@ -179,8 +170,6 @@
               </div>
                 @endif 
                 {{-- @endif --}}
-           
-            
               </div>
            
             @if ($students->count() )
@@ -213,18 +202,13 @@
               {{$students->links()}}
           </div>
            </div>
-          
-               
-               
-                   
+    
                @else
                    <div  class="card-body">
                        <strong>No hay se añadio postulantes</strong>
                    </div>
-             
                @endif
-        
-      
+
                                           </div>
                                           <div class="modal-footer">
                                               <button type="button" class="btn btn-primary close-btn" data-dismiss="modal">Guardar</button>
@@ -234,20 +218,13 @@
                                       </div>
                                   </div>
                               </div>
-            
              <br>
             </div>
             @error('students')
             <small class="text-danger" style="font-weight: bold;"">Debe seleccionar entre 3 a 5 socios</small>         
           @enderror
                          
-                                    <input name="" id=""   class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">
-                           
-                           
-                       
-                         
-                    
-                        
+                                    <input name="" id=""   class="btn btn-primary"  style="display: block; margin: 0 auto;"  type="submit" value="Guardar">                
              
               <!--
               <div class="mb-3">

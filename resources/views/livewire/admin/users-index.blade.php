@@ -15,6 +15,7 @@
                      <th>ID</th>
                      <th>Nombre</th>
                      <th>Correo</th>
+                     <th>Grupo</th>
                      <th></th>
                  </tr>
              </thead>
@@ -24,6 +25,7 @@
                   <td>{{$user->id}}</td>
                   <td>{{$user->name}}</td>
                   <td>{{$user->email}}</td>
+                  <td>{{$user->group}}</td>
                   
                   <td class="row">
                       <a class ="btn btn-primary mx-1" href="{{route('admin.users.edit',$user)}}">Editar</a>

@@ -67,7 +67,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles=Role::all();
+        $roles=Role::get();
         return view('admin.users.edit',compact('user','roles'));
     }
 
@@ -83,9 +83,10 @@ class UserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255','email:rfc,filter,dns'],
-            'roles'=> ['required', 'min:1', 'max:1'],
+            'role'=> ['required'],
+            'group'=> ['required|numeric|gt:0']
         ]);
-         $user->roles()->sync($request->roles); 
+         $user->roles()->sync($request->role); 
          $user->name = $request->name;
          $user->email = $request->email;
          

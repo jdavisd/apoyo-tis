@@ -27,15 +27,16 @@ class RegisterEnterprise extends Component
     public function render()
     {
       
-       $project = Project::latest()->first()->name;
-       $this->selected= Project::latest()->first()->id;
-       $adviser = User::role('Consultor')->get();   
+       $project = Project::latest()->first();
+      //  dump(Auth::user()->group);
+      if($project){$this->selected= Project::latest()->first()->id;}
+       $adviser = User::role('Consultor')->where('group',Auth::user()->group)->get();   
        $adviser= $adviser->pluck('name','id');
        $this->level[]=Auth::user()->id;
        $users=User::whereIn('id',$this->level)->paginate();
        $students=User::where('name','LIKE','%'. $this->search .'%')
-       ->where([['name','LIKE','%'. $this->search .'%'],['enterprise_id', NULL]])
-       ->orWhere([['email','LIKE','%'. $this->search .'%'],['enterprise_id', NULL]])
+       ->where([['name','LIKE','%'. $this->search .'%'],['enterprise_id', NULL],['group', Auth::user()->group ]])
+       ->orWhere([['email','LIKE','%'. $this->search .'%'],['enterprise_id', NULL],['group', Auth::user()->group ]])
        ->whereNotIn('id',[Auth::user()->id ])->role('Estudiante')->paginate();
        return view('livewire.enterprise.register-enterprise',compact('project','adviser','students','users'));        
     }

@@ -48,7 +48,7 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>['required','unique:roles,name'],
+            'name'=>['required','unique:roles,name','alpha'],
             'permissions' => 'required|min:1'
         ]);
 
@@ -91,12 +91,16 @@ class RoleController extends Controller
     public function update(Request $request, $role)
     {
         $request->validate([
-            'permissions' => 'required|min:1'
+            'name' => 'required|alpha',
+            'permissions' => 'required|min:1',
+            
           ]);
           //$role=Role::create($request->all());
           $roles1=Role::find($role);
+          $roles1->name = $request->name;
           $roles1->syncPermissions( $request->permissions);
          // $role->permissions()->sync( $request->permissions);
+            $roles1->save();
           return redirect()->route('admin.roles.index')->with('info','Rol actualizado correctamente');
           
     }
