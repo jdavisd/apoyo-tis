@@ -84,12 +84,12 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255','email:rfc,filter,dns'],
             'role'=> ['required'],
-            'group'=> ['required|numeric|gt:0']
+            'group'=> 'required|numeric|gt:0'
         ]);
          $user->roles()->sync($request->role); 
          $user->name = $request->name;
          $user->email = $request->email;
-         
+         $user->group = $request->group;
          $user->save();
         // return redirect()->route('admin.users.edit',$user)->with('info','Usuario editado correctamente');
         return redirect()->route('admin.users.index')->with('info','Usuario actualizado correctamente');

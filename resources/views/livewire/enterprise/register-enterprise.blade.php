@@ -42,7 +42,7 @@
                   </div>
 
               <div class="row my-3">
-                <label for=""class="col-md-4 text-md-right">Correo Electrónico</label>
+                <label for=""class="col-md-4 text-md-right">Correo Electrónico: *</label>
                 <div class="col-md-6">
                 <input type="email"
                 class="form-control  @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" id="" aria-describedby="helpId" placeholder="">

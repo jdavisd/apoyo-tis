@@ -69,15 +69,17 @@
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#616871',
-  cancelButtonText: 'Cancelar'
-  confirmButtonText: 'Si'
+  cancelButtonText: 'Cancelar',
+  confirmButtonText: 'Si',
 }).then((result) => {
   if (result.isConfirmed) {
     livewire.emitTo('admin.users-index','delete',userID);
-    Swal.fire(
-      'Eliminado!',
-      'El usuario ha sido eliminado.'
-    )
+    Swal.fire({
+      title:'Eliminado!',
+      text:'El usuario ha sido eliminado.',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Aceptar',
+    })
   }
 });
 
