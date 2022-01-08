@@ -81,7 +81,7 @@
                 <td> {{$project->period}} </td>
                 <td> {{$project->code}} </td>
                 <td><a class="btn btn-primary mx-2" href="{{route('proyecto.edit',$project->id)}}">Editar</a>
-                  <button class ="btn btn-danger mx-1 mr-1" wire:click="$emit('deleteUser',{{$project->id}})" >Borrar</button></td>
+                  <button class ="btn btn-danger mx-1 mr-1" wire:click="askdeleteUser({{$project->id}})" >Borrar</button></td>
               
                </tr>
                @endforeach
@@ -117,10 +117,27 @@
    Livewire.emitTo('project.project-index','delete',userID);
    Swal.fire(
      'Eliminado!',
-     'El usuario ha sido eliminado.'
+     'El proyecto ha sido eliminado.'
    )
  }
 });
+
+    })
+
+
+   
+  </script>
+   <script>
+    livewire.on('notPermit' ,() =>{
+
+      Swal.fire({
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Aceptar',
+  icon: 'error',
+  title: 'No pudes eliminar este proyecto',
+  text: 'El proyecto tiene uno o mas usuarios',
+ 
+})
 
     })
 
