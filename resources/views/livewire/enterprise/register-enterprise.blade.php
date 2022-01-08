@@ -273,6 +273,8 @@
   icon: 'error',
   title: 'No pudes editar la empresa',
   text: 'El plazo de cambios se vencio',
+  confirmButtonText: 'Aceptar'
+
  
 })
 

@@ -49,6 +49,7 @@
    icon: 'error',
    title: 'No pudes editar la empresa',
    text: 'El plazo de cambios se vencio', 
+   confirmButtonText: 'Aceptar'
  })
      })
    </script>   
@@ -56,7 +57,7 @@
         livewire.on('createAlertCalendar',  ()=>{   
          Swal.fire({
            icon: 'success',
-           title: 'La entrega ha sido creado',
+           title: 'La entrega de calendario ha sido creada',
            showConfirmButton: false,
            timer: 1500
          })

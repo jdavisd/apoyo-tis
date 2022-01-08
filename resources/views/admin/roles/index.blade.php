@@ -1,14 +1,15 @@
-@extends('adminlte::page')
+@extends('layouts.appadmin')
 
 @section('title', 'Apoyo')
 
 @section('content_header')
 {{-- <a class="btn btn-primary btn-sm float-right" href="{{route('admin.roles.create')}}">Nuevo rol</a> --}}
-    <h1>Roles</h1>
+   
     
 @stop
 
 @section('content')
+<h2 class="text-center">Roles</h2>
 @if (session('info'))
     <div class="alert alert-success" role="alert">
         <strong>{{session('info')}}</strong>

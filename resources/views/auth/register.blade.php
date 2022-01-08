@@ -1,12 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.appadmin')
 
-@section('title', 'Apoyo')
 
-@section('content_header')
-    <h1>Crear usuario</h1>
-@stop
 
 @section('content')
+<h2 class="text-center" >Crear usuario</h2>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

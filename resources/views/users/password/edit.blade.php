@@ -1,4 +1,4 @@
-@extends(Auth::user()->hasRole('Admin') ? 'adminlte::page' : 'layouts.app')
+@extends(Auth::user()->hasRole('Admin') ? 'layouts.appadmin' : 'layouts.app')
 @section('content')
 @if (session('message-sucess'))
     <div class="alert alert-success" role="alert">

@@ -16,7 +16,7 @@
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
+  cancelButtonColor: '#616871',
   confirmButtonText: 'Si',
   cancelButtonText: 'Cancelar'
   
@@ -44,6 +44,7 @@
     icon: 'error',
     title: 'No pudes salir la empresa',
     text: 'El plazo de cambios se vencio',
+    confirmButtonText: 'Aceptar'
    
   })
   

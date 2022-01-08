@@ -1,22 +1,17 @@
-@extends('adminlte::page')
+@extends('layouts.appadmin')
 
-@section('title', 'Apoyo')
 
-@section('content_header')
-    <h1>Editar usuario</h1>
-@stop
 
 @section('content')
+<h2 class="text-center">Editar usuario</h2>
 @if (session('info'))
     <div class="alert alert-success" role="alert">
         <strong>{{session('info')}}</strong>
     </div>
 @endif
-    
- <div class="card">
+<div class="row justify-content-center" >
+ <div class="card col-md-8">
      <div class="card-body">
-  
-
      {!! Form::model($user, ['route'=>['admin.users.update',$user],'method'=>'put']) !!}
        
      <label class="" for="name">Nombre:</label>
@@ -52,6 +47,7 @@
      {!! Form::close() !!}
      </div>
  </div>
+</div>
 @stop
 
 @section('css')

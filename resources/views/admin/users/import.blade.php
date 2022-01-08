@@ -1,12 +1,11 @@
-@extends('adminlte::page')
+@extends('layouts.appadmin')
 
-@section('title', 'Apoyo')
 
-@section('content_header')
-    <h1>Importar usuarios</h1>
-@stop
+
+
 
 @section('content')
+<h2 class="text-center">Importar usuarios</h2>
 @if (session('info'))
     <div class="alert alert-success" role="alert">
         <strong>{{session('info')}}</strong>
@@ -14,9 +13,9 @@
 @endif
 <section style="padding-top:60;">
     <div class="container">
-       <div class="row">
+       <div class="row  justify-content-center">
           <div class="col-md-8 offset-md3">
-              <div class="card">
+              <div class="card ">
                  <!-- <div class="card-header">
                      <h3>Importar usuarios</h3>
                   </div>-->
