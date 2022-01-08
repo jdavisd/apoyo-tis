@@ -1,13 +1,10 @@
-@extends('adminlte::page')
+@extends('layouts.appadmin')
 
-@section('title', 'Apoyo')
 
-@section('content_header')
-    <h1>Editar Rol</h1>
-@stop
 
 @section('content')
-@if (session('info'))
+    <h2 class="text-center">Editar Rol</h2>
+    @if (session('info'))
     <div class="alert alert-success" role="alert">
         <strong>{{session('info')}}</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

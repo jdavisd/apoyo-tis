@@ -1,5 +1,5 @@
-<div>
-   <div class="card">
+<div class="row justify-content-center">
+   <div class="card col-md-12  ">
     <div class="card-header">
      <input wire:model="search" class="form-control"placeholder="Ingrese nombre o correo del usuario">
      <a class="btn btn-primary my-3" href="{{route('admin.usersimport.create')}}">Importar Usuarios</a>
@@ -68,7 +68,8 @@
   icon: 'warning',
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
-  cancelButtonColor: '#d33',
+  cancelButtonColor: '#616871',
+  cancelButtonText: 'Cancelar'
   confirmButtonText: 'Si'
 }).then((result) => {
   if (result.isConfirmed) {
@@ -93,6 +94,7 @@
   icon: 'error',
   title: 'No pudes eliminar este usuario',
   text: 'Es un consultor con mas de 10 empresas',
+  confirmButtonText: 'Aceptar',
  
 })
 

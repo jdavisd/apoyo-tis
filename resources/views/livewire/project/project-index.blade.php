@@ -108,8 +108,10 @@
  icon: 'warning',
  showCancelButton: true,
  confirmButtonColor: '#3085d6',
- cancelButtonColor: '#d33',
- confirmButtonText: 'Si'
+ cancelButtonColor: '#616871',
+ confirmButtonText: 'Si',
+ cancelButtonText: 'Cancelar'
+
 }).then((result) => {
  if (result.isConfirmed) {
    Livewire.emitTo('project.project-index','delete',userID);

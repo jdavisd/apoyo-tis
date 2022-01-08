@@ -291,8 +291,9 @@
          icon: 'warning',
          showCancelButton: true,
          confirmButtonColor: '#3085d6',
-         cancelButtonColor: '#d33',
-         confirmButtonText: 'Aceptar'
+         cancelButtonColor: '#616871',
+         confirmButtonText: 'Aceptar',
+         cancelButtonText: 'Cancelar'
         }).then((result) => {
          if (result.isConfirmed) {
            livewire.emitTo('project-enterprise.show-projectenterprise','reject',userID);
@@ -313,8 +314,9 @@ text: "No podras revertir los cambios!",
 icon: 'warning',
 showCancelButton: true,
 confirmButtonColor: '#3085d6',
-cancelButtonColor: '#d33',
-confirmButtonText: 'Aceptar'
+cancelButtonColor: '#616871',
+confirmButtonText: 'Aceptar',
+cancelButtonText: 'Cancelar'
 }).then((result) => {
 if (result.isConfirmed) {
  livewire.emitTo('project-enterprise.show-projectenterprise','delete',userID);

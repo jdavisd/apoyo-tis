@@ -31,7 +31,7 @@ class RolesIndex extends Component
         }
         else{
            
-            $this->emit('deleteRoles');
+            $this->emit('deleteRoles',$id);
         }
 
 

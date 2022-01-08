@@ -1,12 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.appadmin')
 
-@section('title', 'Apoyo')
 
-@section('content_header')
-    <h1>Crear un rol</h1>
-@stop
 
 @section('content')
+<h2 class="text-center">Crear un rol</h2>
   <div class="card">
       <div class="card-body">
           

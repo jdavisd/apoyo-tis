@@ -90,7 +90,8 @@
   showCancelButton: true,
   confirmButtonColor: '#3085d6',
   cancelButtonColor: '#d33',
-  confirmButtonText: 'Aceptar'
+  confirmButtonText: 'Aceptar',
+  cancelButtonText: 'Cancelar'
   }).then((result) => {
   if (result.isConfirmed) {
    livewire.emitTo('payment-plan.payment','delete',item);
@@ -118,6 +119,7 @@
       icon: 'error',
       title: 'No pudes editar la empresa',
       text: 'El plazo de cambios se vencio', 
+      confirmButtonText: 'Aceptar',
     })
         })
       </script>  

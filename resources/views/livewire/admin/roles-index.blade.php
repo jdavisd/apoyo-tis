@@ -18,7 +18,7 @@
                        <tr>
                         <td>{{$role->id}}</td>
                         <td>{{$role->name}}</td>
-                        <td  width="10px"><a class ="btn btn-sm btn-primary" href="{{route('admin.roles.edit',$role)}}">Editar</a></td>
+                        <td  width="10px"><a class ="btn  btn-primary" href="{{route('admin.roles.edit',$role)}}">Editar</a></td>
                         
                             @if ($role->name!='Admin')
                             <td width="10px">  
@@ -47,8 +47,9 @@
          icon: 'warning',
          showCancelButton: true,
          confirmButtonColor: '#3085d6',
-         cancelButtonColor: '#d33',
-         confirmButtonText: 'Si'
+         cancelButtonColor: '#616871',
+         confirmButtonText: 'Si',
+         cancelButtonText: 'Cancelar'
         }).then((result) => {
          if (result.isConfirmed) {
            Livewire.emitTo('admin.roles-index','delete',userID);
@@ -68,6 +69,8 @@
             livewire.on('notPermit' ,() =>{
         
               Swal.fire({
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar',
           icon: 'error',
           title: 'No pudes eliminar este rol',
           text: 'El rol tiene uno o mas usuarios',
