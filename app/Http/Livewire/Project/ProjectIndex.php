@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Project;
 
 use App\Models\Project;
+use App\Models\ProjectEnterprise;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\DB;
@@ -40,9 +41,18 @@ class ProjectIndex extends Component
        $this->order='asc'; 
     }
   }
+  public function askdeleteUser($id){
+    $numProjects=ProjectEnterprise::where('id',$id)->count();
+    if($numProjects>0){
+      $this->emit('notPermit');
+    }
+    else{
+      $this->emit('deleteUser');
+    }
+  }
    public function delete($id){
     $project = Project::find($id);
-    $project->delete();
+    $project->delete(); 
     $this->render();
    }
 }
