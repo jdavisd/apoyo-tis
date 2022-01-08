@@ -15,7 +15,7 @@
                   <th>Sprint</th>
                   <th>Fecha</th>
                   <th>Entregable</th>    
-                  <th>Accion</th>   
+                  <th>Acción</th>   
               </tr>
           </thead>
           <tbody>

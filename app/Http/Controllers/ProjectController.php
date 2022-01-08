@@ -44,7 +44,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>['required', 'max:40', 'min:6','unique:projects,name'],
+            'name'=>['required','regex:/^[a-zA-Z]+$/u', 'max:40', 'min:6','unique:projects,name'],
             'period'=>['required','unique:projects,period'],
             'code'=>['required'],
             'datetime'=>['required','before: 4 months','after: tomorrow']

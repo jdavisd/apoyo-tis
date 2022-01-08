@@ -14,8 +14,8 @@ class Payment extends Component
     public $rules=
     ['payment.dueDate'=>['required','before:4 months','after: tomorrow'],
      'payment.percentage'=>'required|numeric|between:1,100',
-     'payment.amount'=>'required|numeric|min:1',
-     'payment.description'=>'required'
+     'payment.amount'=>'required|numeric|digits_between:1,6',
+     'payment.description'=>['required','regex:/^[a-zA-Z,0-9, ]+$/']
      ];
     public function mount($id){
        $this->projectEnterprise=ProjectEnterprise::find($id);

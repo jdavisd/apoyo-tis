@@ -14,7 +14,7 @@ class CalendarCreate extends Component
     public $dueDate,$description,$sprint,$ProjectEnterprise;
     protected $rules=[
         'dueDate' => ['required','before:4 months','after: tomorrow'],
-        'description'=>'required',
+        'description'=>['required','regex:/^[a-zA-Z,0-9, ]+$/'],
         'sprint'=>'required|numeric|between:1,10',
     ];
 

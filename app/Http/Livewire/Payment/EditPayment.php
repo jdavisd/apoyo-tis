@@ -22,7 +22,7 @@ class EditPayment extends Component
     protected $rules=[
         'deliveries' => 'required',
         'date'=>'required',  
-        'details'=>'required'
+        'details'=>['required','regex:/^[a-zA-Z,0-9, ]+$/']
 
     ];
     public function updated($propertyName){

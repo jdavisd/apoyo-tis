@@ -191,7 +191,7 @@
                   <th>Fecha</th>
                   <th>Asunto</th>
                   <th>Estado</th>    
-                  <th>Accion</th>   
+                  <th>Acción</th>   
               </tr>
           </thead>
           <tbody>
@@ -232,14 +232,19 @@
       </table>
    </div>
    <div>
+    @livewire('payment-plan.payment',['id'=>$idP])
+  </div>
+   <div>
     @livewire('calendar.calendar-table',['id'=>$idP])
    </div>
   <div class="card-footer">
+    @can('contract.emit')
     @if ($project->status != 'Contratado')
-      <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#contrato" >Emitir Contrato</button>
-    @else       
-        <h2>{{$project->status}}</h2>
-    @endif
+    <button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#contrato" >Emitir Contrato</button>
+  @else       
+      <h2>{{$project->status}}</h2>
+  @endif
+    @endcan
   </div>
 @livewireScripts
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

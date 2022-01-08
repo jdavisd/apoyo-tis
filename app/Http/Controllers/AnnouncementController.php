@@ -50,10 +50,12 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title'=>['required', 'max:40', 'min:6'],
+            'title'=>['required', 'regex:/^[a-zA-Z, ]+$/u','max:40', 'min:6'],
             'code'=>['required'],
+            //'period'=>['required','regex:/^[1-2][-][2][0][2][1]$/'],
             'period'=>['required'],
-            'description'=>['required'],
+            //'description'=>['required','regex:/^[a-zA-Z]+$/u'],
+            'description'=>['required','regex:/^[a-zA-Z,0-9, ]+$/'],
             'document'=>['nullable','mimes:pdf']
           ]);
 
@@ -118,10 +120,10 @@ class AnnouncementController extends Controller
     public function update(Request $request,$document)
     {
         $request->validate([
-            'title'=>['required', 'max:30', 'min:6','unique:announcements,title'],
+            'title'=>['required','regex:/^[a-zA-Z, ]+$/u', 'max:30', 'min:6','unique:announcements,title'],
             'code'=>['required'],
             'period'=>['required'],
-            'description'=>['required'],
+            'description'=>['required','regex:/^[a-zA-Z,0-9, ]+$/'],
             'document'=>['mimes:pdf']
         ]);
 

@@ -12,9 +12,10 @@ class PaymentCreate extends Component
     public $dueDate,$description,$percentage,$amount,$ProjectEnterprise;
     protected $rules=[
         'dueDate' => ['required','before:4 months','after: tomorrow'],
-        'description'=>'required',
+        'description'=>['required','regex:/^[a-zA-Z,0-9, ]+$/'],
         'percentage'=>'required|numeric|between:1,100',
-        'amount'=>'required|numeric|min:1',
+        'amount'=>'required|numeric|digits_between:1,6',
+        //'amount'=>'required|numeric|regex:/^[0-9]$/|max:6|min:1',
     ];
 
     public function mount($id){

@@ -24,7 +24,7 @@ class CreatePayment extends Component
     
     protected $rules=[
         'deliveries' => 'required|mimes:pdf',
-        'details'=>'required'
+        'details'=>['required','regex:/^[a-zA-Z,0-9, ]+$/']
 
     ];
     public function updated($propertyName){

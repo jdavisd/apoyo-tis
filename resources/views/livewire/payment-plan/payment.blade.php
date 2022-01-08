@@ -13,9 +13,9 @@
               <tr>
                   <th>Fecha</th>
                   <th>Porcentaje</th>
-                  <th>Costo</th>    
+                  <th>Costo (Bs)</th>    
                   <th>Entregable</th>
-                  <th>Accion</th>   
+                  <th>Acción</th>   
               </tr>
           </thead>
           <tbody>
