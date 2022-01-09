@@ -41,7 +41,7 @@ class observacionPropuesta extends Mailable
             ->attach(asset('storage/pagos').'/'.$this->path);
             }
         }else{
-            return $this->subject('Observacion de propuesta')->view('emails.observaciones');
+            return $this->subject('Observación de propuesta')->view('emails.observaciones');
         }
         
 

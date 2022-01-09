@@ -49,7 +49,8 @@ class ShowProjectenterprise extends Component
         // $this->contAsunto='adwdasdwadawdawdwd'.$this->contAsunto;
         //dump($this->contAsunto);
         // $this->contAsunto = null;
-        $cont = Storage::disk('ftp')->get('pagos/contract.txt');
+        //$cont = Storage::disk('ftp')->get('pagos/contract.txt');
+        $cont = Storage::disk('local')->get('public/pagos/contract.txt');
         $this->contAsunto =mb_convert_encoding($cont,'UTF-8','ISO-8859-1');
         
 
@@ -108,8 +109,8 @@ class ShowProjectenterprise extends Component
     public function delete($id){
         $document = Document::where('document_id', "=" , $id)->first();
         $payment = Payment::find($document->imageable_id);
-        Storage::disk('ftp')->delete('pagos/'.$document->name);
-         //unlink(storage_path('app/public/pagos/'.$document->name));
+        //Storage::disk('ftp')->delete('pagos/'.$document->name);
+        unlink(storage_path('app/public/pagos/'.$document->name));
         DB::table('documents')->where('document_id', "=" , $document->document_id)->delete();
        $payment->delete();
        $this->render();
@@ -136,29 +137,29 @@ class ShowProjectenterprise extends Component
         if(!$this->observar==null){
             // dd($this->observar);
             $var = 'observaciones'.'.'.$this->observar->getClientOriginalName();
-            //$this->observar->storeAs('pagos',$var,'public');
+            $this->observar->storeAs('pagos',$var,'public');
             $image = [
                 'name' => 'observaciones'.'.'.$this->observar->getClientOriginalName(),
                 'path' => $this->observar->getRealPath(),
             ];
             
-            Storage::disk('ftp')->put('pagos/'.$image['name'], file_get_contents($image['path']));
+            //Storage::disk('ftp')->put('pagos/'.$image['name'], file_get_contents($image['path']));
             $details=[
-                'title'=>'Correo de observacion de propuesta',
+                'title'=>'Correo de observación de propuesta',
                 'list'=>[$this->asunto],
-                'action'=>'PlataformaTIS',
+                'action'=>'Sistema de apoyo TIS',
                 'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
                 ];
             $mc = new MailController;
             $mc->observar($this->enterprise->email,$details,$var);
-            //unlink(storage_path('app/public/pagos/'.$var));
-            Storage::disk('ftp')->delete('pagos/'.$var);
+            unlink(storage_path('app/public/pagos/'.$var));
+            //Storage::disk('ftp')->delete('pagos/'.$var);
             }else{
             $details=[
-            'title'=>'Correo de observacion de propuesta',
+            'title'=>'Correo de observación de propuesta',
             'list'=>[$this->asunto],
 
-            'action'=>'PlataformaTIS',
+            'action'=>'Sistema de apoyo TIS',
             'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
             ];
             $mc = new MailController;
@@ -188,24 +189,25 @@ class ShowProjectenterprise extends Component
         $var = 'contrato'.'.'.$this->enterprise->short_name.'.pdf';
         $var =  str_replace(' ','-',$var);
         $pdf = PDF::loadView('emails.contract',compact('long_name'));
-        Storage::disk('ftp')->put('pagos/'.$var, $pdf->output());
+        //Storage::disk('ftp')->put('pagos/'.$var, $pdf->output());
+        Storage::put('public/pagos/pzasd.pdf', $pdf->output());
 
         
         
         //$var = Str::slug($var,'-');
         $details=[
-            'title'=>'Contratacion de servicios',
+            'title'=>'Contratación de servicios',
             'list'=>[''],
 
-            'action'=>'PlataformaTIS',
+            'action'=>'Sistema de apoyo TIS',
             'link'=>'http://servisoft.tis.cs.umss.edu.bo/'
             ];
         $mc = new MailController;
         $mc->observar($this->enterprise->email,$details,$var);
         $this->project->status = 'Contratado';  
         $this->project->save();
-        Storage::disk('ftp')->delete('pagos/'.$var);
-        //unlink(storage_path('app/public/pagos/'.$var));
+        //Storage::disk('ftp')->delete('pagos/'.$var);
+        unlink(storage_path('app/public/pagos/'.$var));
         $this->emit('hideContrato');
         $this->emit('sendSuccessfully');
         $this->render();

@@ -2,7 +2,7 @@
     <div>
         <div class="card"> 
             <div class="card-body">
-              <a class ="btn btn-sm btn-primary mb-2" href="{{route('admin.roles.create')}}">Crear rol</a>
+              {{-- <a class ="btn btn-sm btn-primary mb-2" href="{{route('admin.roles.create')}}">Crear rol</a> --}}
               
                 <table class="table table-striped"
                   <thead class="thead-light">

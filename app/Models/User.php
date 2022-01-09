@@ -6,7 +6,6 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Notifications\ResetPassword as ResetPasswordNotification;
@@ -19,6 +18,7 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+    
     protected $fillable = [
         'name',
         'email',
@@ -53,16 +53,5 @@ class User extends Authenticatable
     public function getId()
 {
   return $this->id;
-}
-public function announcements(){
-    return $this->hasMany(Announcement::class);
-}
-
-public function projectEnterprises(){
-    return $this->hasMany(ProjectEnterprise::class,'project_enterprises','users_id');
-    //'project_enterprises','users_id');
-}
-public function enterpriseUser(){
-    return $this->BelongTo(Enterprise::class);
 }
 }

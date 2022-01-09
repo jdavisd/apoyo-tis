@@ -22,9 +22,10 @@ class RoleController extends Controller
      */
     public function index()
     {
+
        //$roles=Role::all();
         $roles=Role::all()->whereNotIn('name',['Postulante','Admin']);
-   
+        
         return view('admin.roles.index',compact('roles'));
     }
 
@@ -48,7 +49,8 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>['required','unique:roles,name','alpha'],
+            // 'name'=>['required','unique:roles,name','alpha'],
+            'name'=>['regex:/^[a-zA-Z]+$/u','required','unique:roles,name'],
             'permissions' => 'required|min:1'
         ]);
 

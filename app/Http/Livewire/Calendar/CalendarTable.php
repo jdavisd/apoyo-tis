@@ -15,7 +15,7 @@ class CalendarTable extends Component
     public $rules=
     ['calendar.dueDate'=>['required','before:4 months','after: tomorrow'],
      'calendar.sprint'=>'required|numeric|between:1,100',
-     'calendar.description'=>'required'
+     'calendar.description'=>['required','regex:/^[a-zA-Z,0-9, ]+$/']
      ];
     public function mount($id){
        $this->projectEnterprise=ProjectEnterprise::find($id);

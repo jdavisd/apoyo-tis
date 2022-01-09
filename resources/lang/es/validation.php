@@ -167,7 +167,8 @@ return [
         'phone'=>'telefono',    
         'address'=>'direcciÃ³n',
         'details'=>'asunto',
-        'deliveries'=>'entregable',      
+        'deliveries'=>'entregable',
+        'group'=>'grupo',            
     ],
 
 ];

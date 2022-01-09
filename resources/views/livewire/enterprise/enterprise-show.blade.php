@@ -28,7 +28,7 @@
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="name" class="col-md-6 col-form-label text-md-right">Telefono:</label>
+                        <label for="name" class="col-md-6 col-form-label text-md-right">Teléfono:</label>
                         <div class="col-md-3">
                           <label for="name" class="col-form-label">{{$empresa->phone}}</label>
                         </div>

@@ -150,12 +150,13 @@ class EnterpriseController extends Controller
     {
       
       $request->validate([
-        'short_name'=>'required|max:40',
-        'long_name' => 'required',
-        'address'=>'required|max:40',
-        'phone'=>'required|max:40',
+        'short_name'=>['required','regex:/^[a-zA-Z]+$/u','max:20'],
+        'long_name' => ['required','regex:/^[a-zA-Z, ]+$/u','max:60'],
+        'address'=>'required|max:60',
+        'phone'=>['required','regex:/^[4,6,7][0-9]+$/','min:7','max:8'],
         'email'=>['required', 'string', 'email', 'max:255','email:rfc,filter,dns'],
-        'type'=>'required|max:40',
+        //'type'=>['required','max:10','regex:/^[A-Z]+$/'],
+        'type'=>'required|max:10|regex:/^[A-Z]+$/',
         'logo'=>'mimes:png,jpg,jpeg,gif,bmp,webp',      
         'adviser_id'=>'required',
         'project_id'=>'required',

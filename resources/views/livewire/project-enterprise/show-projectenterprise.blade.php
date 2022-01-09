@@ -135,7 +135,7 @@
       </div>
 
       <div wire:ignore.self class="modal fade"  wire:mode="open" id="contrato" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">contrato</h5>
@@ -146,19 +146,24 @@
                <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Contenido</label>
-                        <textarea class="form-control" id="textid" name="text"  rows="10" col="25"wire:model="contAsunto"></textarea>
+                            <label for="exampleFormControlInput1">Mensaje</label>
+                            <textarea type="" class="form-control" id="exampleFormControlInput1"  rows="3" placeholder="Ingrese detalles" wire:model="contAsunto" name="contAsunto">
+                                </textarea>
                             
                             @error('contAsunto') <span class="text-danger error">{{ $message }}</span>@enderror
                         
                         </div>
-             
-                        
+                      
+                        <div class="form-group">
+                            <label for="exampleFormControlInput2">contrato</label>
+                            <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="contAdjunto"  name="contAdjunto" accept="application/pdf">
+                            @error('contAdjunto') <span class="text-danger error">{{ $message }}</span>@enderror
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
-                    <button type="button" wire:click="contrato()" class="btn btn-primary close-modal">Emitir</button>
+                    <button type="button" wire:click="$emit('contrato')" class="btn btn-primary close-modal">Agregar</button>
                 </div>
             </div>
         </div>
@@ -186,7 +191,7 @@
                   <th>Fecha</th>
                   <th>Asunto</th>
                   <th>Estado</th>    
-                  <th>Accion</th>   
+                  <th>Acción</th>   
               </tr>
           </thead>
           <tbody>
@@ -225,12 +230,12 @@
               @endforeach
           </tbody>
       </table>
-      <div>
-        @livewire('payment-plan.payment',['id'=>$idP])
-      </div>
-      <div>
-        @livewire('calendar.calendar-table',['id'=>$idP])
-      </div>
+   </div>
+   <div>
+    @livewire('payment-plan.payment',['id'=>$idP])
+  </div>
+   <div>
+    @livewire('calendar.calendar-table',['id'=>$idP])
    </div>
   <div class="card-footer">
     @can('contract.emit')
@@ -240,7 +245,6 @@
       <h2>{{$project->status}}</h2>
   @endif
     @endcan
-    
   </div>
 @livewireScripts
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -328,15 +332,6 @@ if (result.isConfirmed) {
 });    
   })
 </script>
-<script>
-  livewire.on('sendSuccesfully',  ()=>{   
-   Swal.fire({
-     icon: 'success',
-     title: 'El mensaje se envio con exito',
-     showConfirmButton: false,
-     timer: 1500
-   })
-    })  
-</script>
+
 
 </div>

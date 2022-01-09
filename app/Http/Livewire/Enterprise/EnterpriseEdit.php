@@ -45,9 +45,11 @@ class EnterpriseEdit extends Component
        $this->projectID=ProjectEnterprise::where('enterprise_id',$this->idP)->pluck('project_id');
        $this->project = Project::find($this->projectID)->pluck('name','id');
        $this->adviserID=ProjectEnterprise::where('users_id',$this->idP)->pluck('users_id');
-       $adviser = User::role('Consultor')->get();   
-       $adviser= $adviser->pluck('name','id');
         $this->project1 = ProjectEnterprise::find( $this->idP);
+       $adviser = User::role('Consultor')->where('id',$this->project1->users_id)->get();
+       
+       $adviser= $adviser->pluck('name','id');
+       
         $enterprise = $this->project1->enterprise()->first();
        $this->logo= Document::OfType('App\Models\Enterprise')->where('imageable_id','=',$enterprise->id)->first();
        
