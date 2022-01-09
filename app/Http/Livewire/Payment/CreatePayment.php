@@ -69,7 +69,9 @@ class CreatePayment extends Component
           }
           $this->emit('userStore'); 
           $this->reset(['details','deliveries','payment']);
+          $this->emit('hideCreateDeliveries');
           $this->emit('render');
+         
 
         // $this->proyect->payment()->create([
         //     'details'=>$this->details,

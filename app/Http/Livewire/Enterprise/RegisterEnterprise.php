@@ -23,7 +23,7 @@ class RegisterEnterprise extends Component
     public $open=true;
     public $selected;
     public $short_name,$project,$phone,$email,$long_name,$address,$adviser_id,$type,$logo;
-    public $rules=[         'short_name'=>['required','max:40','unique:enterprises,short_name'],
+    public $rules=[ 'short_name'=>['required','max:40','unique:enterprises,short_name'],
     'long_name' => ['required','unique:enterprises,long_name'],
     'address'=>'required|max:40',
     'phone'=>'required|max:40',
@@ -50,10 +50,10 @@ public function mount(){
       $project = Project::latest()->first();
       if($project){$this->selected= Project::latest()->first()->id;}
        $adviser = User::role('Consultor')->where('group',Auth::user()->group)->get(); 
-
+        
        $adviser= $adviser->pluck('name','id');
        $this->adviser_id = User::role('Consultor')->where('group',Auth::user()->group)->first()->id; 
-     
+       dd( $adviser);
        $users=User::whereIn('id',$this->level)->paginate();
        $students=User::where('name','LIKE','%'. $this->search .'%')
        ->where([['name','LIKE','%'. $this->search .'%'],['enterprise_id', NULL],['group', Auth::user()->group ]])

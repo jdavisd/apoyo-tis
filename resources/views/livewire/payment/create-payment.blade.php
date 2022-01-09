@@ -26,7 +26,7 @@
                       
                         <div class="form-group">
                             <label for="exampleFormControlInput2">Entregables</label>
-                            <input type="file" class="form-control" id="exampleFormControlInput2" wire:model="deliveries"  name="deliveries" accept="application/pdf">
+                            <input type="file" class="form-control"  wire:model="deliveries"  id="{{ $deliveries }}" name="deliveries" accept="application/pdf">
                             @error('deliveries') <span class="text-danger error">{{ $message }}</span>@enderror
                         </div>
 
@@ -34,7 +34,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Cerrar</button>
-                    <button type="button" wire:click.prevent="store()" class="btn btn-primary close-modal" data-dismiss="modal">Agregar</button>
+                    <button type="button" wire:click.prevent="store()" class="btn btn-primary close-modal" >Agregar</button>
                 </div>
             </div>
 
@@ -58,5 +58,10 @@
 
 
    
-  </script>   
+  </script>  
+      <script type="text/javascript">
+        window.livewire.on('hideCreateDeliveries', () => {
+          $('#exampleModal').modal('hide');
+          });
+      </script> 
 </div>
