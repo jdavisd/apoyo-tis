@@ -15,6 +15,7 @@
                      <th>ID</th>
                      <th>Nombre</th>
                      <th>Correo</th>
+                     <th>Grupo</th>
                      <th></th>
                  </tr>
              </thead>
@@ -24,6 +25,7 @@
                   <td>{{$user->id}}</td>
                   <td>{{$user->name}}</td>
                   <td>{{$user->email}}</td>
+                  <td>{{$user->group}}</td>
                   
                   <td class="row">
                       <a class ="btn btn-primary mx-1" href="{{route('admin.users.edit',$user)}}">Editar</a>
@@ -72,10 +74,12 @@
 }).then((result) => {
   if (result.isConfirmed) {
     livewire.emitTo('admin.users-index','delete',userID);
-    Swal.fire(
-      'Eliminado!',
-      'El usuario ha sido eliminado.'
-    )
+    Swal.fire({
+      title:'Eliminado!',
+      text:'El usuario ha sido eliminado.',
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: 'Aceptar',
+    })
   }
 });
 

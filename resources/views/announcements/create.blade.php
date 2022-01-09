@@ -31,7 +31,7 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="row my-3">
+                    {{-- <div class="row my-3">
                         <label class="col-md-4 text-md-right" for="date">Gestión: *</label>
                         <div class="col-md-6">
                             <input class="form-control @error('period') is-invalid @enderror" type="text" name="period"
@@ -40,7 +40,23 @@
                                 <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
                             @enderror
                         </div>
+                    </div> --}}
+
+
+                    <div class="row my-3">
+                        <label class="col-md-4 text-md-right" for="period">Gestión: *</label>
+                        <div class="col-md-6">
+                            <select name='period' class="form-control @error('period') is-invalid @enderror" type="text" 
+                            value="{{old('period')}}">
+                                <option value='I/{{\Carbon\Carbon::now()->format('Y')}}'>I/{{\Carbon\Carbon::now()->format('Y')}}</option>
+                                <option value='II/{{\Carbon\Carbon::now()->format('Y')}}'>II/{{\Carbon\Carbon::now()->format('Y')}}</option>
+                            </select>
+                            @error('period')
+                                  <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>         
+                              @enderror
+                        </div>   
                     </div>
+
                     <div class="row my-3">
                         <label class="col-md-4 text-md-right" for="description">Descripción: *</label>
                         <div class="col-md-6">

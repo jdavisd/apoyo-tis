@@ -31,6 +31,7 @@ class UsersIndex extends Component
       $this->render();
   }
   public function askUser($id){
+    // dump($id);
     $user = User::find($id);
     $count=ProjectEnterprise::where('users_id',$id)->get()->count();
     if($user->hasRole('Consultor') && $count>10 ){

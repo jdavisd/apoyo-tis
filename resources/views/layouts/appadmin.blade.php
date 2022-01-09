@@ -47,7 +47,7 @@ body {
             <div class="col-md-2">
                 <img src="{{asset('storage/nav/umss.png')}}" class="img-fluid" alt="Responsive image">
             </div>
-            <div class="col-md-8    " style="   background: -webkit-linear-gradient(rgb(102, 8, 44) 0%, rgb(18, 80, 131) 100%); font-family: 'Raleway',sans-serif; font-size: 40px; font-weight: 800; line-height: 72px; margin: 0 0 24px; text-align: center; text-transform: uppercase; -webkit-background-clip: text;
+            <div class="col-md-8    " style="   background: -webkit-linear-gradient(rgb(102, 8, 44) 0%, rgb(18, 80, 131) 100%); font-family: 'Merriweather', serif; font-size: 40px; font-weight: 800; line-height: 72px; margin: 0 0 24px; text-align: center; text-transform: uppercase; -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;">
                 <p >TALLER DE INGENIERIA DE SOFTWARE</p>
             </div>
@@ -58,7 +58,7 @@ body {
 
 
        </div>
-        <nav class="navbar navbar-expand-md navbar navbar-light" style="background-color: #e3f2fd;font-size: 1.3em !important;">
+        <nav class="navbar navbar-expand-md navbar navbar-light" style="background-color: #e3f2fd;font-size: 1.3em !important;font-family: 'Merriweather', serif;">
             
             <div class="container">
                 @can('admin.users')
@@ -153,7 +153,9 @@ body {
              
               <div class="text-center p-3" style="background-color: #47a3c2 ;">
                 © 2022 Empresa:
-                <a class="text-white" href="mailto:servisoft47@gmail.com">Servisoft srl</a>
+                <a class="text-white" href="mailto:servisoft47@gmail.com">Servisoft S.R.L.</a>
+                <p>Facultad de Ciencias y Tecnología (UMSS).</p>
+                <p>Cochabamba - Bolivia</p>
               </div>
         
             </footer>

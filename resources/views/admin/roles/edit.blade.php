@@ -17,7 +17,11 @@
 <div class="card col-md-8">
     <div class="card-body">
         {!! Form::model($role, ['route'=>['admin.roles.update',$role],'method'=>'put']) !!}
-        <label for=""  class="form-control">{{$role->name}}</label>
+        <input class="form-control @error('name') is-invalid @enderror" type="text" name="name"
+         value="{{old('name',$role->name)}}"  id="" aria-describedby="helpId" placeholder="" >
+         @error('name')
+             <div class="row"><small class="text-danger col-md" style="font-weight: bold;"">{{$message}}</small></div>
+         @enderror
     
         @include('admin.roles.partials.form')
         @error('permissions')

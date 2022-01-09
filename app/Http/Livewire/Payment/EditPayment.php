@@ -11,6 +11,9 @@ use Livewire\WithFileUploads;
 
 class EditPayment extends Component
 {
+
+
+    
     use WithFileUploads;
     public $project;
     public $enterprise;
